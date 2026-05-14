@@ -1,0 +1,158 @@
+/* BingX PH Design System — Global Styles */
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../../assets/fonts/Inter-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../../assets/fonts/Inter-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../../assets/fonts/Inter-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../../assets/fonts/Inter-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../../assets/fonts/Inter-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Brand */
+  --brand-primary: #0058FB;
+  --brand-primary-dark: #0046C9;
+  --brand-primary-light: #3A7BFC;
+
+  /* Surfaces */
+  --surface-base: #0B0E17;
+  --surface-elevated: #111827;
+  --surface-overlay: #1F2937;
+
+  /* Text */
+  --text-primary: #FFFFFF;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
+
+  /* Accents */
+  --accent-profit: #059669;
+  --accent-warning: #D97706;
+  --accent-loss: #DC2626;
+
+  /* Radii */
+  --radius-card: 16px;
+  --radius-button: 12px;
+  --radius-badge: 8px;
+
+  /* Typography scale (relative to 1080px canvas) */
+  --font-display: 96px;
+  --font-headline: 64px;
+  --font-subhead: 48px;
+  --font-body: 32px;
+  --font-caption: 24px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--surface-base);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Display text — for asset headlines */
+.display {
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+.headline {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.subhead {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.body {
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.caption {
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+/* Numbers — tabular for PnL, prices, percentages */
+.numeric {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* Standard card surface */
+.card {
+  background: var(--surface-elevated);
+  border-radius: var(--radius-card);
+  padding: 48px;
+}
+
+/* Primary CTA button */
+.btn-primary {
+  background: var(--brand-primary);
+  color: #FFFFFF;
+  font-weight: 700;
+  padding: 16px 32px;
+  border-radius: var(--radius-button);
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-primary:hover {
+  background: var(--brand-primary-dark);
+}
+
+/* Watermark logo placement */
+.watermark {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  opacity: 0.6;
+  height: 32px;
+  width: auto;
+}

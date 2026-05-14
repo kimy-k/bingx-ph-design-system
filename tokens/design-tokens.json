@@ -1,0 +1,58 @@
+{
+  "brand": {
+    "name": "BingX PH",
+    "description": "BingX cryptocurrency exchange affiliate program in the Philippines",
+    "primary": "#0058FB",
+    "primaryDark": "#0046C9",
+    "primaryLight": "#3A7BFC"
+  },
+  "surface": {
+    "base": "#0B0E17",
+    "elevated": "#111827",
+    "overlay": "#1F2937"
+  },
+  "text": {
+    "primary": "#FFFFFF",
+    "secondary": "#9CA3AF",
+    "muted": "#6B7280"
+  },
+  "accent": {
+    "profit": "#059669",
+    "warning": "#D97706",
+    "loss": "#DC2626"
+  },
+  "typography": {
+    "family": "Inter",
+    "weights": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700,
+      "black": 900
+    },
+    "scale": {
+      "display": "96px",
+      "headline": "64px",
+      "subhead": "48px",
+      "body": "32px",
+      "caption": "24px"
+    },
+    "tracking": {
+      "displayTight": "-0.03em",
+      "display": "-0.02em",
+      "body": "0"
+    }
+  },
+  "radius": {
+    "card": "16px",
+    "button": "12px",
+    "badge": "8px"
+  },
+  "assetDimensions": {
+    "educationCard": { "width": 1080, "height": 1080 },
+    "carouselSlide": { "width": 1080, "height": 1350 },
+    "story": { "width": 1080, "height": 1920 },
+    "videoThumbnail": { "width": 1280, "height": 720 },
+    "meme": { "width": 1080, "height": 1080 }
+  }
+}

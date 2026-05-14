@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BingX PH — Education Card Example</title>
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      src: url('../assets/fonts/Inter-Regular.otf') format('opentype');
+      font-weight: 400;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('../assets/fonts/Inter-Medium.otf') format('opentype');
+      font-weight: 500;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('../assets/fonts/Inter-Bold.otf') format('opentype');
+      font-weight: 700;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('../assets/fonts/Inter-Black.otf') format('opentype');
+      font-weight: 900;
+    }
+
+    body {
+      margin: 0;
+      padding: 40px;
+      background: #1a1a1a;
+      font-family: 'Inter', system-ui, sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Education Card — exact production dimensions */
+    .education-card {
+      width: 1080px;
+      height: 1080px;
+      background: #111827;
+      color: #FFFFFF;
+      padding: 80px;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+      transform-origin: top center;
+      /* Scale down for screen preview — remove for export */
+      transform: scale(0.5);
+      margin-bottom: -540px;
+    }
+
+    .top-strip {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 12px;
+      background: #0058FB;
+    }
+
+    .category-tag {
+      display: inline-block;
+      background: rgba(0, 88, 251, 0.15);
+      color: #0058FB;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: 0.1em;
+      margin-bottom: 48px;
+    }
+
+    .headline {
+      font-size: 88px;
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin: 0 0 56px 0;
+      max-width: 90%;
+    }
+
+    .bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .bullets li {
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      padding-left: 40px;
+      position: relative;
+    }
+
+    .bullets li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #0058FB;
+      font-weight: 700;
+    }
+
+    .cta {
+      position: absolute;
+      bottom: 80px;
+      left: 80px;
+      right: 80px;
+      font-size: 28px;
+      font-weight: 700;
+      color: #9CA3AF;
+    }
+
+    .cta-link {
+      color: #0058FB;
+    }
+
+    .watermark {
+      position: absolute;
+      bottom: 32px;
+      right: 80px;
+      height: 40px;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="education-card">
+    <div class="top-strip"></div>
+
+    <div class="category-tag">BASICS</div>
+
+    <h1 class="headline">Ano ang BingX?</h1>
+
+    <ul class="bullets">
+      <li>Global crypto exchange — 20M+ users worldwide</li>
+      <li>Top 10 sa CoinGecko at CoinMarketCap</li>
+      <li>Copy Trading — i-follow ang top traders</li>
+      <li>GCash at Maya deposit supported</li>
+      <li>50% commission para sa KOL partners</li>
+      <li>$300M+ Risk Protection Fund</li>
+    </ul>
+
+    <div class="cta">
+      Start trading: <span class="cta-link">[REFERRAL_LINK]</span>
+    </div>
+
+    <img src="../assets/logos/bingx-wordmark-white.svg" alt="BingX" class="watermark">
+  </div>
+</body>
+</html>

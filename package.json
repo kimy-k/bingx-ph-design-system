@@ -1,0 +1,23 @@
+{
+  "name": "bingx-ph-design-system",
+  "version": "1.0.0",
+  "description": "Design system for BingX PH KOL content production — branded social-media assets in Taglish for the Filipino crypto audience",
+  "private": true,
+  "type": "module",
+  "keywords": [
+    "design-system",
+    "bingx",
+    "crypto",
+    "philippines",
+    "kol",
+    "social-media",
+    "tailwindcss",
+    "react"
+  ],
+  "scripts": {
+    "preview": "echo 'Open examples/*.html in a browser to preview'"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}
