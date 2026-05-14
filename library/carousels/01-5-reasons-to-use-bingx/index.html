@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BingX PH — Carousel 01 · 5 Reasons to Use BingX</title>
+<link rel="stylesheet" href="../../../colors_and_type.css">
+<style>
+  body {
+    margin: 0;
+    padding: 24px 24px 28px;
+    background: var(--surface-base);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+  }
+  .meta { margin-bottom: 18px; }
+  .meta .eyebrow {
+    font-size: 11px; font-weight: 700; color: var(--brand-primary);
+    letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .meta h1 {
+    margin: 0 0 4px 0;
+    font-size: 22px; font-weight: 800;
+    letter-spacing: -0.02em; line-height: 1.1;
+  }
+  .meta p {
+    margin: 0; font-size: 12px; color: var(--text-secondary); font-weight: 500;
+  }
+  .meta p strong { color: var(--text-primary); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  .row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+  }
+
+  /* Each tile is a 4:5 (portrait) mini-slide that mirrors the real 1080×1350. */
+  .mini {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    background: var(--surface-elevated);
+    border-radius: 6px;
+    overflow: hidden;
+    padding: 14px 10px 10px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .mini.hook { background: var(--surface-base); }
+  .mini-strip {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--brand-primary);
+  }
+
+  /* Hook content */
+  .mini-eyebrow {
+    font-size: 5px; font-weight: 700;
+    color: var(--brand-primary);
+    letter-spacing: 0.2em;
+    margin-top: 18px;
+    margin-bottom: 4px;
+  }
+  .mini-hook-title {
+    font-size: 12px; font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+  .mini-hook-sub {
+    position: absolute;
+    bottom: 28px; left: 10px; right: 10px;
+    font-size: 6px; font-weight: 700;
+    color: var(--text-secondary); letter-spacing: 0.1em;
+  }
+
+  /* Content slide content */
+  .mini-num {
+    font-size: 30px; font-weight: 900;
+    color: var(--brand-primary);
+    line-height: 1; letter-spacing: -0.05em;
+    margin-top: 8px; margin-bottom: 3px;
+    font-variant-numeric: tabular-nums;
+  }
+  .mini-title {
+    font-size: 11px; font-weight: 800;
+    line-height: 1.05; letter-spacing: -0.02em;
+    margin: 0 0 6px 0;
+  }
+  .mini-body {
+    font-size: 6.5px; font-weight: 400;
+    line-height: 1.45;
+    color: #d1d5db;
+  }
+
+  /* CTA */
+  .mini-cta {
+    margin-top: 8px;
+    background: var(--brand-primary);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 6.5px; font-weight: 800;
+    text-align: center;
+    letter-spacing: -0.01em;
+  }
+
+  /* Footer chrome */
+  .mini-counter {
+    position: absolute;
+    bottom: 6px; left: 10px;
+    font-size: 5.5px; font-weight: 600;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.05em;
+  }
+  .mini-wm {
+    position: absolute;
+    bottom: 4px; right: 10px;
+    height: 6px;
+    opacity: 0.55;
+  }
+
+  .mini-label {
+    position: absolute;
+    top: -1px; right: 0;
+    background: var(--brand-primary);
+    color: #fff;
+    font-size: 7px; font-weight: 800;
+    padding: 2px 5px;
+    border-radius: 0 6px 0 6px;
+    letter-spacing: 0.08em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .footer {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+  .footer img { height: 14px; opacity: 0.6; }
+</style>
+</head>
+<body>
+  <div class="meta">
+    <div class="eyebrow">CAROUSEL · 6 SLIDES</div>
+    <h1>5 Reasons Filipinos Are Switching to BingX</h1>
+    <p><strong>1080 × 1350</strong> · IG / FB carousel · hook → 4 reasons → reason 5 + CTA</p>
+  </div>
+
+  <div class="row">
+    <!-- 01 Hook -->
+    <div class="mini hook">
+      <div class="mini-strip"></div>
+      <div class="mini-eyebrow">WHY BINGX</div>
+      <div class="mini-hook-title">5 Reasons<br>Filipinos<br>Are Switching<br>to BingX</div>
+      <div class="mini-hook-sub">SWIPE → →</div>
+      <div class="mini-counter">1 / 6</div>
+      <img class="mini-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+      <div class="mini-label">01</div>
+    </div>
+
+    <!-- 02 Copy Trading -->
+    <div class="mini">
+      <div class="mini-strip"></div>
+      <div class="mini-num">01</div>
+      <div class="mini-title">Copy Trading Built-In</div>
+      <div class="mini-body">Hindi mo kailangan maging expert. I-follow ang top traders at automatic na ma-copy.</div>
+      <div class="mini-counter">2 / 6</div>
+      <img class="mini-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+      <div class="mini-label">02</div>
+    </div>
+
+    <!-- 03 GCash -->
+    <div class="mini">
+      <div class="mini-strip"></div>
+      <div class="mini-num">02</div>
+      <div class="mini-title">GCash &amp; Maya Deposit</div>
+      <div class="mini-body">Native P2P. Deposit in under 5 minutes — walang hassle, walang bank fees.</div>
+      <div class="mini-counter">3 / 6</div>
+      <img class="mini-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+      <div class="mini-label">03</div>
+    </div>
+
+    <!-- 04 ₱500 -->
+    <div class="mini">
+      <div class="mini-strip"></div>
+      <div class="mini-num">03</div>
+      <div class="mini-title">₱500 Pang-Start</div>
+      <div class="mini-body">Stocks need ₱5K+. BingX = ₱500 min. Test, learn, scale up kapag handa.</div>
+      <div class="mini-counter">4 / 6</div>
+      <img class="mini-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+      <div class="mini-label">04</div>
+    </div>
+
+    <!-- 05 50% Commission -->
+    <div class="mini">
+      <div class="mini-strip"></div>
+      <div class="mini-num">04</div>
+      <div class="mini-title">50% KOL Commission</div>
+      <div class="mini-body">Highest sa industry. Binance: 20-30%. BingX: 50%. Earn for every referral.</div>
+      <div class="mini-counter">5 / 6</div>
+      <img class="mini-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+      <div class="mini-label">05</div>
+    </div>
+
+    <!-- 06 $300M + CTA -->
+    <div class="mini">
+      <div class="mini-strip"></div>
+      <div class="mini-num">05</div>
+      <div class="mini-title">$300M Risk Fund</div>
+      <div class="mini-body">20M+ users, top 10 sa CoinGecko, Proof of Reserves on-chain.</div>
+      <div class="mini-cta">Start Trading Now</div>
+      <div class="mini-counter">6 / 6</div>
+      <img class="mini-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+      <div class="mini-label">06</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>SWIPE LEFT → RIGHT · 6 SLIDES · 1080×1350</span>
+    <img src="../../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

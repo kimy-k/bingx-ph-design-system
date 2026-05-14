@@ -1,0 +1,293 @@
+/* ============================================================
+   BingX PH Design System — Colors & Typography
+   Dark mode by default. Never use a light background.
+   ============================================================ */
+
+/* ---------- Fonts ---------- */
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Tokens ---------- */
+:root {
+  /* -- Brand -- */
+  --brand-primary: #0058FB;
+  --brand-primary-dark: #0046C9;
+  --brand-primary-light: #3A7BFC;
+  --brand-primary-15: rgba(0, 88, 251, 0.15);   /* tint fills */
+  --brand-primary-30: rgba(0, 88, 251, 0.30);
+  --brand-primary-60: rgba(0, 88, 251, 0.60);
+
+  /* -- Surfaces (dark only) -- */
+  --surface-base: #0B0E17;       /* main background */
+  --surface-elevated: #111827;   /* cards, modals */
+  --surface-overlay: #1F2937;    /* hovered cards, secondary buttons */
+  --surface-line: #1F2937;       /* hairline borders */
+  --surface-meme: #000000;       /* meme/photo backgrounds */
+
+  /* -- Text -- */
+  --text-primary: #FFFFFF;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
+  --text-inverse: #0B0E17;
+
+  /* -- Accents (status / market signal) -- */
+  --accent-profit: #059669;     /* greens / "up" / long */
+  --accent-profit-15: rgba(5, 150, 105, 0.15);
+  --accent-warning: #D97706;    /* risk / stop-loss / orange */
+  --accent-warning-15: rgba(217, 119, 6, 0.15);
+  --accent-loss: #DC2626;       /* reds / "down" / short */
+  --accent-loss-15: rgba(220, 38, 38, 0.15);
+
+  /* -- Radii -- */
+  --radius-badge: 8px;
+  --radius-button: 12px;
+  --radius-card: 16px;
+  --radius-card-lg: 24px;
+  --radius-pill: 999px;
+
+  /* -- Spacing (multiples of 8) -- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 80px;
+  --space-10: 120px;
+
+  /* -- Shadows (used sparingly; brand prefers flat dark surfaces) -- */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 32px rgba(0, 88, 251, 0.35);
+  --shadow-meme: 4px 4px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+
+  /* -- Type scale (asset-canvas scale, designed for 1080px exports) -- */
+  --font-display: 120px;     /* hero carousel hooks */
+  --font-headline: 88px;     /* education card titles */
+  --font-title: 72px;        /* slide titles */
+  --font-subhead: 48px;      /* secondary heads */
+  --font-body-lg: 44px;      /* story body */
+  --font-body: 32px;         /* default body on canvas */
+  --font-caption: 24px;      /* metadata / counters */
+
+  /* -- Type scale (UI scale, for kit dashboards/web) -- */
+  --ui-display: 48px;
+  --ui-h1: 32px;
+  --ui-h2: 24px;
+  --ui-h3: 20px;
+  --ui-body: 16px;
+  --ui-small: 14px;
+  --ui-micro: 12px;
+
+  /* -- Tracking -- */
+  --track-display-tight: -0.03em;  /* Inter Black headlines */
+  --track-display: -0.02em;        /* Inter Bold headlines */
+  --track-tight: -0.01em;
+  --track-normal: 0;
+  --track-eyebrow: 0.15em;         /* uppercase eyebrows / badges */
+  --track-badge: 0.1em;            /* category tags */
+}
+
+/* ---------- Base ---------- */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: var(--surface-base);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------- Semantic type classes ---------- */
+.display {
+  font-weight: 900;
+  font-size: var(--font-display);
+  letter-spacing: var(--track-display-tight);
+  line-height: 0.95;
+}
+.headline {
+  font-weight: 900;
+  font-size: var(--font-headline);
+  letter-spacing: var(--track-display-tight);
+  line-height: 0.95;
+}
+.title {
+  font-weight: 700;
+  font-size: var(--font-title);
+  letter-spacing: var(--track-display);
+  line-height: 1.05;
+}
+.subhead {
+  font-weight: 600;
+  font-size: var(--font-subhead);
+  letter-spacing: var(--track-tight);
+  line-height: 1.2;
+}
+.body {
+  font-weight: 400;
+  font-size: var(--font-body);
+  line-height: 1.5;
+}
+.body-md { font-weight: 500; }
+.caption {
+  font-weight: 500;
+  font-size: var(--font-caption);
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+.eyebrow {
+  font-weight: 700;
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: var(--track-eyebrow);
+  color: var(--brand-primary);
+}
+.numeric {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--track-tight);
+}
+
+/* ---------- UI-scale type (for non-canvas surfaces) ---------- */
+h1.ui, .ui-h1 { font-size: var(--ui-h1); font-weight: 800; letter-spacing: var(--track-display); line-height: 1.1; }
+h2.ui, .ui-h2 { font-size: var(--ui-h2); font-weight: 700; letter-spacing: var(--track-tight); line-height: 1.2; }
+h3.ui, .ui-h3 { font-size: var(--ui-h3); font-weight: 600; line-height: 1.3; }
+.ui-body  { font-size: var(--ui-body); font-weight: 400; line-height: 1.5; }
+.ui-small { font-size: var(--ui-small); font-weight: 500; line-height: 1.4; color: var(--text-secondary); }
+.ui-micro { font-size: var(--ui-micro); font-weight: 600; letter-spacing: var(--track-badge); text-transform: uppercase; color: var(--text-secondary); }
+
+/* ---------- Patterns ---------- */
+/* Blue ▸ bullet — brand standard for lists, NEVER • or - */
+.bullets { list-style: none; padding: 0; margin: 0; }
+.bullets li {
+  position: relative;
+  padding-left: 1.25em;
+  margin-bottom: 0.5em;
+}
+.bullets li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--brand-primary);
+  font-weight: 700;
+}
+
+/* Card surface */
+.card {
+  background: var(--surface-elevated);
+  border-radius: var(--radius-card);
+  padding: var(--space-7);
+}
+.card-overlay {
+  background: var(--surface-overlay);
+  border-radius: var(--radius-card);
+  padding: var(--space-7);
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--brand-primary);
+  color: #FFFFFF;
+  font-weight: 700;
+  padding: 16px 32px;
+  border-radius: var(--radius-button);
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+  font-family: inherit;
+}
+.btn-primary:hover { background: var(--brand-primary-dark); }
+.btn-primary:active { transform: translateY(1px); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: var(--radius-button);
+  border: 1.5px solid var(--surface-overlay);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  font-family: inherit;
+}
+.btn-secondary:hover { background: var(--surface-overlay); border-color: #2D3748; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: 600;
+  padding: 14px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-button);
+}
+.btn-ghost:hover { color: var(--text-primary); background: rgba(255,255,255,0.04); }
+
+/* Category / status badges */
+.badge {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: var(--radius-badge);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: var(--track-badge);
+  text-transform: uppercase;
+}
+.badge-primary { background: var(--brand-primary-15); color: var(--brand-primary); }
+.badge-profit  { background: var(--accent-profit-15);  color: var(--accent-profit); }
+.badge-warning { background: var(--accent-warning-15); color: var(--accent-warning); }
+.badge-loss    { background: var(--accent-loss-15);    color: var(--accent-loss); }
+
+/* Top brand strip — used on education cards */
+.brand-strip {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 12px;
+  background: var(--brand-primary);
+}
+
+/* Watermark — bottom-right, white at 50–60% on all assets */
+.watermark {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  height: 32px;
+  opacity: 0.55;
+  width: auto;
+}

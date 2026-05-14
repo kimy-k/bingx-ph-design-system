@@ -1,0 +1,11 @@
+/* Carousel 05 — KOL story voice.
+   Numbers in body text get a subtle highlight: same size,
+   same color, but Inter SemiBold + tabular-nums + tight tracking.
+   Credibility hooks read as native body, not callouts. */
+
+.content-body .num {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.005em;
+  /* color stays inherited (#E5E7EB) — subtle by design */
+}
