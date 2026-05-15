@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BingX PH — Batch 3c Preview · Stories 07–10</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  body {
+    margin: 0;
+    padding: 28px 28px 32px;
+    background: var(--surface-base);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+  }
+  .meta { margin-bottom: 22px; }
+  .meta .eyebrow { font-size: 11px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+  .meta h1 { margin: 0 0 6px 0; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+  .meta p { margin: 0; font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+
+  .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .col h3 { margin: 0 0 8px 0; font-size: 12px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.18em; text-transform: uppercase; }
+  .col h3 .letter { color: var(--text-primary); font-weight: 800; margin-right: 6px; }
+  .col p { margin: 8px 0 0; font-size: 11px; color: var(--text-secondary); line-height: 1.45; }
+
+  .mini { position: relative; aspect-ratio: 9 / 16; background: var(--surface-base); border-radius: 8px; overflow: hidden; padding: 22px 18px 20px; border: 1px solid rgba(255,255,255,0.06); color: #fff; }
+  .mini.announcement { background: radial-gradient(ellipse at 50% 42%, rgba(0,88,251,0.20) 0%, rgba(0,88,251,0.06) 35%, transparent 65%), var(--surface-base); }
+  .mini.poll { background: linear-gradient(135deg, rgba(0,88,251,0.10) 0%, rgba(11,14,23,0) 55%, rgba(11,14,23,0) 100%), var(--surface-base); }
+  .mini.action::before { content: ""; position: absolute; top: 38%; left: 50%; width: 110%; height: 60%; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgba(0,88,251,0.22) 0%, transparent 70%); filter: blur(20px); pointer-events: none; }
+  .mini > * { position: relative; z-index: 1; }
+
+  .mini-wm-top { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); height: 9px; opacity: 0.6; z-index: 2; }
+  .mini-eyebrow { margin-top: 70px; font-size: 6.5px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.18em; text-transform: uppercase; text-align: center; }
+  .mini-eyebrow.left { text-align: left; }
+
+  /* Announcement big number */
+  .mini-milestone { text-align: center; margin-top: 18px; font-size: 44px; font-weight: 900; color: var(--brand-primary); line-height: 1; letter-spacing: -0.05em; font-variant-numeric: tabular-nums; text-shadow: 0 0 14px rgba(0,88,251,0.5); }
+  .mini-msub { margin-top: 6px; text-align: center; font-size: 10px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+  .mini-mbody { margin-top: 10px; font-size: 8px; font-weight: 500; line-height: 1.4; color: #d1d5db; text-align: center; padding: 0 6px; }
+  .mini-mbody .num { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  /* AMA poll boxes */
+  .mini-headline { margin-top: 8px; font-size: 18px; font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; }
+  .mini-ama-row { display: flex; gap: 8px; margin-top: 18px; }
+  .mini-ama { flex: 1; padding: 16px 4px 12px; border-radius: 7px; text-align: center; background: rgba(0,88,251,0.12); border: 1.5px solid var(--brand-primary); color: var(--brand-primary); }
+  .mini-ama .em { font-size: 18px; line-height: 1; }
+  .mini-ama .l { font-size: 9px; font-weight: 800; margin-top: 6px; line-height: 1.2; }
+
+  /* Action slot */
+  .mini-slot { margin-top: 14px; height: 130px; border: 1.5px dashed rgba(0,88,251,0.6); background: rgba(0,88,251,0.06); border-radius: 5px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 6px; }
+  .mini-slot .pt { font-size: 6.5px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.15em; text-transform: uppercase; text-align: center; line-height: 1.2; padding: 0 6px; }
+  .mini-caption-h { margin-top: 12px; font-size: 13px; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
+  .mini-caption-b { margin-top: 6px; font-size: 7.5px; font-weight: 500; line-height: 1.4; color: #d1d5db; }
+  .mini-caption-b .num { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .mini-caption-b .sent { color: var(--brand-primary); font-weight: 600; }
+
+  .mini-risk { position: absolute; bottom: 42px; left: 10px; right: 10px; text-align: center; font-size: 6px; color: var(--text-muted); font-weight: 500; line-height: 1.3; }
+  .mini-cue { position: absolute; bottom: 26px; left: 0; right: 0; text-align: center; font-size: 7.5px; font-weight: 600; color: var(--text-secondary); }
+  .mini-wm-bottom { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); height: 11px; opacity: 0.6; }
+  .mini-label { position: absolute; top: -1px; right: 0; background: var(--brand-primary); color: #fff; font-size: 8px; font-weight: 800; padding: 2px 6px; border-radius: 0 8px 0 8px; letter-spacing: 0.08em; font-variant-numeric: tabular-nums; z-index: 3; }
+
+  .footer { margin-top: 18px; display: flex; align-items: center; justify-content: space-between; font-size: 10px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.06em; }
+  .footer img { height: 14px; opacity: 0.6; }
+</style>
+</head>
+<body>
+  <div class="meta">
+    <div class="eyebrow">STORIES · BATCH 3c · 4 OF 10</div>
+    <h1>Stories 07 · 08 · 09 · 10</h1>
+    <p>Community milestone · Giveaway · AMA · Daily market update · all 1080 × 1920</p>
+  </div>
+
+  <div class="row">
+
+    <!-- 07 Community milestone -->
+    <div class="col">
+      <h3><span class="letter">07</span>MILESTONE</h3>
+      <div class="mini announcement">
+        <img class="mini-wm-top" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-eyebrow">MILESTONE</div>
+        <div class="mini-milestone">1,000+</div>
+        <div class="mini-msub">Filipino traders<br>na nag-sign up<br>via my link</div>
+        <div class="mini-mbody">Salamat sa lahat. <span class="num">6</span> months ago, <span class="num">0</span> ang community. Ngayon, isang grupo na.</div>
+        <div class="mini-cue">💬 DM me to join the group</div>
+        <img class="mini-wm-bottom" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-label">07</div>
+      </div>
+      <p>Sub-type D · radial brand-blue glow · big-number callout.</p>
+    </div>
+
+    <!-- 08 Giveaway -->
+    <div class="col">
+      <h3><span class="letter">08</span>GIVEAWAY</h3>
+      <div class="mini announcement">
+        <img class="mini-wm-top" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-eyebrow">🎁 GIVEAWAY</div>
+        <div class="mini-milestone">₱5,000</div>
+        <div class="mini-msub">Giveaway sa Top 3<br>Copy Traders</div>
+        <div class="mini-mbody">Sign up, copy any trader, post your PnL. Top <span class="num">3</span> win <span class="num">₱5K</span> each sa GCash.</div>
+        <div class="mini-cue">👆 Tap link in bio to join</div>
+        <img class="mini-wm-bottom" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-label">08</div>
+      </div>
+      <p>Sub-type D · ₱-prefix money milestone · promotional event.</p>
+    </div>
+
+    <!-- 09 AMA -->
+    <div class="col">
+      <h3><span class="letter">09</span>AMA</h3>
+      <div class="mini poll">
+        <img class="mini-wm-top" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-eyebrow left">💬 ASK ME ANYTHING</div>
+        <div class="mini-headline">Anong gusto<br>mong malaman<br>tungkol sa<br>crypto?</div>
+        <div class="mini-ama-row">
+          <div class="mini-ama"><div class="em">🟦</div><div class="l">Reply to<br>this story</div></div>
+          <div class="mini-ama"><div class="em">🟦</div><div class="l">DM me<br>sa IG</div></div>
+        </div>
+        <div class="mini-cue">I read every message — promise.</div>
+        <img class="mini-wm-bottom" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-label">09</div>
+      </div>
+      <p>Sub-type A reused · brand-blue boxes (override) · channel choice, not signal.</p>
+    </div>
+
+    <!-- 10 Market update -->
+    <div class="col">
+      <h3><span class="letter">10</span>MARKET UPDATE</h3>
+      <div class="mini action">
+        <img class="mini-wm-top" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-eyebrow left">📈 MARKET UPDATE — [DATE]</div>
+        <div class="mini-slot">
+          <div class="pt">DROP MARKET<br>CHART HERE</div>
+        </div>
+        <div class="mini-caption-h">Where's the market today?</div>
+        <div class="mini-caption-b">BTC sa <span class="num">[PRICE]</span>. ETH sa <span class="num">[PRICE]</span>. Sentiment: <span class="sent">[BULLISH / NEUTRAL / BEARISH]</span>.</div>
+        <div class="mini-risk">Market data updates daily.</div>
+        <div class="mini-cue">👆 Tap link for full analysis</div>
+        <img class="mini-wm-bottom" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-label">10</div>
+      </div>
+      <p>Sub-type C · default neutral .bg-action · direction selector documented inline.</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span>STORIES · BATCH 3c · 1080×1920 · finishes Batch 3 (10 of 10)</span>
+    <img src="../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

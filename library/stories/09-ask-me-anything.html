@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BingX PH — Story 09 · Ask Me Anything</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="_framework/styles.css">
+<style>
+  /* PER-STORY OVERRIDE — story 09 reuses the poll layout but recolors
+     both option boxes brand-blue, because this is a communication-channel
+     choice (Reply vs DM), not a bullish/bearish financial signal.
+     base-poll.html stays the green/red default — this override is local. */
+  .poll-opt.ama-channel {
+    background: rgba(0, 88, 251, 0.12);
+    border-color: var(--brand-primary);
+  }
+  .poll-label.ama {
+    color: var(--brand-primary);
+    font-size: 52px;
+    line-height: 1.15;
+  }
+</style>
+</head>
+<body class="preview-mode">
+  <div class="story-1080 bg-poll">
+    <img class="top-watermark" src="../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+
+    <div class="content-zone poll">
+      <div class="eyebrow" style="margin-bottom: 32px;">💬 ASK ME ANYTHING</div>
+      <h1 class="headline">Anong gusto<br>mong malaman<br>tungkol sa<br>crypto?</h1>
+
+      <div class="poll-row">
+        <div class="poll-opt ama-channel">
+          <div class="poll-emoji">🟦</div>
+          <div class="poll-label ama">Reply to<br>this story</div>
+        </div>
+        <div class="poll-opt ama-channel">
+          <div class="poll-emoji">🟦</div>
+          <div class="poll-label ama">DM me<br>sa IG</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cue">I read every message — promise.</div>
+    <img class="watermark-bottom" src="../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

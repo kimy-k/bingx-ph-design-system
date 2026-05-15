@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BingX PH — Story Framework · 4 Sub-Type Bases</title>
+<link rel="stylesheet" href="../../../colors_and_type.css">
+<style>
+  body {
+    margin: 0;
+    padding: 28px 28px 32px;
+    background: var(--surface-base);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+  }
+  .meta { margin-bottom: 22px; }
+  .meta .eyebrow {
+    font-size: 11px; font-weight: 700; color: var(--brand-primary);
+    letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .meta h1 {
+    margin: 0 0 6px 0;
+    font-size: 24px; font-weight: 800;
+    letter-spacing: -0.02em; line-height: 1.1;
+  }
+  .meta p { margin: 0; font-size: 13px; color: var(--text-secondary); font-weight: 500; line-height: 1.5; max-width: 720px; }
+  .meta p strong { color: var(--text-primary); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+
+  .col h3 {
+    margin: 0 0 8px 0;
+    font-size: 12px; font-weight: 700;
+    color: var(--brand-primary);
+    letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .col h3 .letter { color: var(--text-primary); font-weight: 800; margin-right: 6px; }
+  .col p { margin: 8px 0 12px; font-size: 11px; color: var(--text-secondary); line-height: 1.45; }
+
+  .mini {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    background: var(--surface-elevated);
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 18px 14px 16px;
+    border: 1px solid rgba(255,255,255,0.06);
+    color: #fff;
+  }
+
+  /* sub-type atmospheres in miniature */
+  .mini.poll { background: linear-gradient(135deg, rgba(0,88,251,0.10) 0%, rgba(11,14,23,0) 55%, rgba(11,14,23,0) 100%), var(--surface-base); }
+  .mini.tip  { background: linear-gradient(180deg, var(--surface-base) 0%, var(--surface-base) 35%, var(--surface-elevated) 100%); }
+  .mini.action { background: var(--surface-base); }
+  .mini.announcement { background: radial-gradient(ellipse at 50% 42%, rgba(0,88,251,0.20) 0%, rgba(0,88,251,0.06) 35%, transparent 65%), var(--surface-base); }
+
+  .mini-wm-top {
+    position: absolute;
+    top: 12px; left: 50%; transform: translateX(-50%);
+    height: 8px;
+    opacity: 0.6;
+  }
+  .mini-eyebrow {
+    margin-top: 60px;
+    font-size: 6.5px; font-weight: 700;
+    color: var(--brand-primary);
+    letter-spacing: 0.18em; text-transform: uppercase;
+    text-align: center;
+  }
+  .mini-headline {
+    margin-top: 10px;
+    font-size: 17px; font-weight: 900;
+    line-height: 1.05; letter-spacing: -0.03em;
+    text-align: center;
+  }
+  .mini-headline.left { text-align: left; }
+
+  /* Poll */
+  .mini-poll-row { display: flex; gap: 6px; margin-top: 18px; }
+  .mini-poll-opt {
+    flex: 1; padding: 14px 4px;
+    border-radius: 6px;
+    text-align: center;
+    border: 1.5px solid;
+    font-size: 9px; font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+  .mini-poll-opt .em { display: block; font-size: 16px; line-height: 1; margin-bottom: 2px; }
+  .mini-poll-long  { background: rgba(5,150,105,0.15);  border-color: var(--accent-profit); color: var(--accent-profit); }
+  .mini-poll-short { background: rgba(220,38,38,0.15);  border-color: var(--accent-loss);   color: var(--accent-loss); }
+
+  /* Tip */
+  .mini-tip-glyph { font-size: 18px; text-align: center; margin-top: 32px; line-height: 1; }
+  .mini-body {
+    margin-top: 10px;
+    font-size: 8px; font-weight: 500;
+    line-height: 1.4;
+    color: #d1d5db;
+    text-align: center;
+    padding: 0 8px;
+  }
+
+  /* Action */
+  .mini-slot {
+    margin-top: 14px;
+    height: 110px;
+    border: 1.5px dashed rgba(0,88,251,0.6);
+    background: rgba(0,88,251,0.06);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .mini-slot .ph { font-size: 18px; color: rgba(0,88,251,0.65); line-height: 1; }
+  .mini-slot .pt { font-size: 6.5px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.15em; text-transform: uppercase; }
+  .mini-caption {
+    margin-top: 12px;
+    font-size: 9.5px; font-weight: 700; line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  .mini-caption .pct { color: var(--accent-profit); font-variant-numeric: tabular-nums; }
+
+  /* Announcement */
+  .mini-milestone {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 56px; font-weight: 900;
+    color: var(--brand-primary);
+    line-height: 1; letter-spacing: -0.05em;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 16px rgba(0,88,251,0.5);
+  }
+  .mini-msub {
+    margin-top: 6px;
+    text-align: center;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .mini-cue {
+    position: absolute;
+    bottom: 26px; left: 0; right: 0;
+    text-align: center;
+    font-size: 7px; font-weight: 600;
+    color: var(--text-secondary);
+  }
+  .mini-wm-bottom {
+    position: absolute;
+    bottom: 10px; left: 50%; transform: translateX(-50%);
+    height: 10px; opacity: 0.6;
+  }
+  .mini-label {
+    position: absolute;
+    top: -1px; right: 0;
+    background: var(--brand-primary);
+    color: #fff;
+    font-size: 8px; font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 0 8px 0 8px;
+    letter-spacing: 0.08em;
+  }
+
+  .footer {
+    margin-top: 18px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 10px; color: var(--text-muted);
+    font-weight: 600; letter-spacing: 0.06em;
+  }
+  .footer img { height: 14px; opacity: 0.6; }
+</style>
+</head>
+<body>
+  <div class="meta">
+    <div class="eyebrow">STORIES · FRAMEWORK · 4 SUB-TYPES</div>
+    <h1>Vertical-native treatment for 1080×1920</h1>
+    <p>
+      Stories are consumed in 5-second taps, not scrolled. This framework drops carousel inheritance entirely: looser line-height (1.1), more breathing room, primary content lives in the middle 60%, watermark moves to bottom-center, footer is a text cue not a button. Subtle background atmospheres (5–10% opacity) signal sub-type without decoration. <strong>1080 × 1920</strong>
+    </p>
+  </div>
+
+  <div class="grid">
+
+    <!-- A · POLL -->
+    <div class="col">
+      <h3><span class="letter">A</span>POLL</h3>
+      <div class="mini poll">
+        <img class="mini-wm-top" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-eyebrow">DAILY POLL</div>
+        <div class="mini-headline">BTC: Long o<br>Short bukas?</div>
+        <div class="mini-poll-row">
+          <div class="mini-poll-opt mini-poll-long"><span class="em">📈</span>LONG</div>
+          <div class="mini-poll-opt mini-poll-short"><span class="em">📉</span>SHORT</div>
+        </div>
+        <div class="mini-cue">👆 Tap your answer</div>
+        <img class="mini-wm-bottom" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-label">A</div>
+      </div>
+      <p>Two-option boxes · profit-green vs loss-red borders · diagonal blue tint.</p>
+    </div>
+
+    <!-- B · TIP -->
+    <div class="col">
+      <h3><span class="letter">B</span>TIP</h3>
+      <div class="mini tip">
+        <img class="mini-wm-top" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-tip-glyph">💡</div>
+        <div class="mini-eyebrow" style="margin-top: 8px;">TIP OF THE DAY</div>
+        <div class="mini-headline" style="margin-top: 8px;">DCA bawat<br>sahod day.</div>
+        <div class="mini-body">Auto-buy 15th &amp; 30th. Time in market beats timing the market.</div>
+        <div class="mini-cue">👆 Tap link in bio</div>
+        <img class="mini-wm-bottom" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-label">B</div>
+      </div>
+      <p>Centered insight · top-to-bottom dark gradient · optional glyph above headline.</p>
+    </div>
+
+    <!-- C · ACTION -->
+    <div class="col">
+      <h3><span class="letter">C</span>ACTION</h3>
+      <div class="mini action">
+        <img class="mini-wm-top" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-eyebrow" style="text-align:left;">MY PnL TODAY</div>
+        <div class="mini-slot">
+          <div class="ph">▦</div>
+          <div class="pt">DROP PnL HERE</div>
+        </div>
+        <div class="mini-caption">BTC long → <span class="pct">+12.4%</span> in 2 days</div>
+        <div class="mini-cue">👆 Tap link in bio</div>
+        <img class="mini-wm-bottom" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-label">C</div>
+      </div>
+      <p>Image-slot drop target · caption below · subtle blue glow behind frame.</p>
+    </div>
+
+    <!-- D · ANNOUNCEMENT -->
+    <div class="col">
+      <h3><span class="letter">D</span>ANNOUNCEMENT</h3>
+      <div class="mini announcement">
+        <img class="mini-wm-top" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-eyebrow" style="margin-top: 24px;">MILESTONE</div>
+        <div class="mini-milestone">1,000+</div>
+        <div class="mini-msub">FOLLOWERS<br>thank you, kasama!</div>
+        <div class="mini-cue">💬 DM me to celebrate</div>
+        <img class="mini-wm-bottom" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-label">D</div>
+      </div>
+      <p>Big-number callout with blue glow shadow · radial brand-blue background.</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span>STORIES · 4 BASE TEMPLATES · 1080×1920 · Vertical-native</span>
+    <img src="../../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

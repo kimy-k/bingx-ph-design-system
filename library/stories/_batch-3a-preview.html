@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BingX PH — Batch 3a Preview · Stories 01–03</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  body {
+    margin: 0;
+    padding: 28px 28px 32px;
+    background: var(--surface-base);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+  }
+  .meta { margin-bottom: 22px; }
+  .meta .eyebrow { font-size: 11px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+  .meta h1 { margin: 0 0 6px 0; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+  .meta p { margin: 0; font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+
+  .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .col h3 { margin: 0 0 8px 0; font-size: 12px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.18em; text-transform: uppercase; }
+  .col h3 .letter { color: var(--text-primary); font-weight: 800; margin-right: 6px; }
+  .col p { margin: 8px 0 0; font-size: 11px; color: var(--text-secondary); line-height: 1.45; }
+
+  /* Mini story — 9:16 box rendering the actual story HTML inline (no iframes) */
+  .mini { position: relative; aspect-ratio: 9 / 16; background: var(--surface-elevated); border-radius: 8px; overflow: hidden; padding: 22px 18px 20px; border: 1px solid rgba(255,255,255,0.06); color: #fff; }
+  .mini.poll { background: linear-gradient(135deg, rgba(0,88,251,0.10) 0%, rgba(11,14,23,0) 55%, rgba(11,14,23,0) 100%), var(--surface-base); }
+  .mini.tip  { background: linear-gradient(180deg, var(--surface-base) 0%, var(--surface-base) 35%, var(--surface-elevated) 100%); }
+
+  .mini-wm-top { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); height: 10px; opacity: 0.6; }
+  .mini-eyebrow { margin-top: 84px; font-size: 7.5px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.18em; text-transform: uppercase; }
+  .mini-headline { margin-top: 10px; font-size: 22px; font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; }
+  .mini-headline.center { text-align: center; }
+  .mini-headline .hl { color: var(--brand-primary); font-variant-numeric: tabular-nums; }
+
+  /* Poll boxes */
+  .mini-poll-row { display: flex; gap: 8px; margin-top: 18px; }
+  .mini-poll-opt { flex: 1; padding: 18px 4px 12px; border-radius: 7px; text-align: center; border: 1.5px solid; }
+  .mini-poll-em { font-size: 22px; line-height: 1; }
+  .mini-poll-lbl { font-size: 13px; font-weight: 800; margin-top: 6px; letter-spacing: -0.01em; }
+  .mini-poll-sub { font-size: 8.5px; font-weight: 600; margin-top: 4px; opacity: 0.85; }
+  .mini-poll-long { background: rgba(5,150,105,0.15); border-color: var(--accent-profit); color: var(--accent-profit); }
+  .mini-poll-short { background: rgba(220,38,38,0.15); border-color: var(--accent-loss); color: var(--accent-loss); }
+
+  /* Tip */
+  .mini-tip-glyph { text-align: center; font-size: 22px; margin-top: 30px; line-height: 1; }
+  .mini-eyebrow.center { text-align: center; margin-top: 8px; }
+  .mini-body { margin-top: 14px; font-size: 9.5px; font-weight: 500; line-height: 1.4; color: #d1d5db; text-align: center; padding: 0 8px; }
+  .mini-body .num { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  .mini-risk { position: absolute; bottom: 44px; left: 12px; right: 12px; text-align: center; font-size: 6.5px; color: var(--text-muted); font-weight: 500; }
+  .mini-cue { position: absolute; bottom: 26px; left: 0; right: 0; text-align: center; font-size: 8px; font-weight: 600; color: var(--text-secondary); }
+  .mini-wm-bottom { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); height: 12px; opacity: 0.6; }
+  .mini-label { position: absolute; top: -1px; right: 0; background: var(--brand-primary); color: #fff; font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 0 8px 0 8px; letter-spacing: 0.08em; font-variant-numeric: tabular-nums; }
+
+  .footer { margin-top: 18px; display: flex; align-items: center; justify-content: space-between; font-size: 10px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.06em; }
+  .footer img { height: 14px; opacity: 0.6; }
+</style>
+</head>
+<body>
+  <div class="meta">
+    <div class="eyebrow">STORIES · BATCH 3a · 3 OF 10</div>
+    <h1>Stories 01 · 02 · 03</h1>
+    <p>Daily Poll · Tip of the Day · Did You Know · all 1080 × 1920</p>
+  </div>
+
+  <div class="row">
+
+    <div class="col">
+      <h3><span class="letter">01</span>POLL</h3>
+      <div class="mini poll">
+        <img class="mini-wm-top" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-eyebrow">DAILY POLL</div>
+        <div class="mini-headline">BTC bukas —<br>Long or Short?</div>
+        <div class="mini-poll-row">
+          <div class="mini-poll-opt mini-poll-long">
+            <div class="mini-poll-em">📈</div>
+            <div class="mini-poll-lbl">LONG</div>
+            <div class="mini-poll-sub">Tataas</div>
+          </div>
+          <div class="mini-poll-opt mini-poll-short">
+            <div class="mini-poll-em">📉</div>
+            <div class="mini-poll-lbl">SHORT</div>
+            <div class="mini-poll-sub">Bababa</div>
+          </div>
+        </div>
+        <div class="mini-risk">Not financial advice.</div>
+        <div class="mini-cue">👆 Tap your prediction</div>
+        <img class="mini-wm-bottom" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-label">01</div>
+      </div>
+      <p>Sub-type A · diagonal blue tint atmosphere · profit/loss option boxes.</p>
+    </div>
+
+    <div class="col">
+      <h3><span class="letter">02</span>TIP</h3>
+      <div class="mini tip">
+        <img class="mini-wm-top" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-tip-glyph">💡</div>
+        <div class="mini-eyebrow center">TIP OF THE DAY</div>
+        <div class="mini-headline center" style="margin-top:10px;">Always set a<br>stop-loss.</div>
+        <div class="mini-body"><span class="num">5–10%</span> below your entry. Pinipigilan ang big losses kahit tulog ka.</div>
+        <div class="mini-cue">👆 Tap link in bio for more tips</div>
+        <img class="mini-wm-bottom" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-label">02</div>
+      </div>
+      <p>Sub-type B · vertical surface gradient · centered insight + body.</p>
+    </div>
+
+    <div class="col">
+      <h3><span class="letter">03</span>DID YOU KNOW</h3>
+      <div class="mini tip">
+        <img class="mini-wm-top" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-tip-glyph">🤔</div>
+        <div class="mini-eyebrow center">DID YOU KNOW?</div>
+        <div class="mini-headline center" style="margin-top:10px;">Only <span class="hl">21 million</span><br>BTC will ever<br>exist.</div>
+        <div class="mini-body">Designed by Satoshi as digital scarcity. Yan ang dahilan kung bakit BTC = digital gold.</div>
+        <div class="mini-cue">👆 Tap link in bio</div>
+        <img class="mini-wm-bottom" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-label">03</div>
+      </div>
+      <p>Sub-type B (reused) · 🤔 glyph swap · brand-blue tabular-num emphasis.</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span>STORIES · BATCH 3a · 1080×1920 · Vertical-native</span>
+    <img src="../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

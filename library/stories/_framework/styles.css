@@ -1,0 +1,331 @@
+/* ============================================================
+   BingX PH · Stories Framework · Vertical-native shared styles
+   Production export: 1080 × 1920
+   Layered on top of /colors_and_type.css — does not redefine tokens.
+   ============================================================ */
+
+:root { --preview-scale: 0.32; }   /* 1080 × 0.32 ≈ 346px wide preview */
+
+html, body { margin: 0; padding: 0; }
+body { background: #050811; font-family: 'Inter', sans-serif; }
+
+body.preview-mode {
+  width: calc(1080px * var(--preview-scale));
+  height: calc(1920px * var(--preview-scale));
+  overflow: hidden;
+}
+body.preview-mode .story-1080 {
+  transform: scale(var(--preview-scale));
+  transform-origin: top left;
+}
+
+/* ---------- Base canvas ---------- */
+.story-1080 {
+  width: 1080px;
+  height: 1920px;
+  background: var(--surface-base);
+  color: var(--text-primary);
+  padding: 160px 96px 200px;        /* top breathing · sides · action zone */
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Sub-type background atmospheres (felt, not seen) ---------- */
+.story-1080.bg-poll {
+  background:
+    linear-gradient(135deg,
+      rgba(0,88,251,0.10) 0%,
+      rgba(11,14,23,0) 55%,
+      rgba(11,14,23,0) 100%
+    ),
+    var(--surface-base);
+}
+.story-1080.bg-tip {
+  background:
+    linear-gradient(180deg,
+      var(--surface-base) 0%,
+      var(--surface-base) 35%,
+      var(--surface-elevated) 100%
+    );
+}
+.story-1080.bg-action {
+  background: var(--surface-base);
+}
+/* PnL/screenshot glow lives behind the image-slot via ::before */
+.story-1080.bg-action::before {
+  content: "";
+  position: absolute;
+  top: 380px; left: 50%;
+  width: 1100px; height: 1100px;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(0,88,251,0.22) 0%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+.story-1080.bg-action-profit::before { background: radial-gradient(closest-side, rgba(5,150,105,0.22) 0%, transparent 70%); }
+.story-1080.bg-action-loss::before   { background: radial-gradient(closest-side, rgba(220,38,38,0.22) 0%, transparent 70%); }
+
+.story-1080.bg-announcement {
+  background:
+    radial-gradient(ellipse at 50% 42%,
+      rgba(0,88,251,0.18) 0%,
+      rgba(0,88,251,0.06) 35%,
+      transparent 65%
+    ),
+    var(--surface-base);
+}
+
+/* Ensure all positioned children render above the ::before atmosphere */
+.story-1080 > * { position: relative; z-index: 1; }
+
+/* ---------- Top watermark band (replaces bottom-right carousel mark) ---------- */
+.top-watermark {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 32px;
+  opacity: 0.6;
+  z-index: 2;
+}
+
+/* ---------- Eyebrow (optional, top of content zone) ---------- */
+.eyebrow {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--brand-primary);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ---------- Headline (story typography, looser lh than carousel) ---------- */
+.headline {
+  font-size: 110px;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: var(--track-display-tight);
+  margin: 0;
+}
+.headline.tip-large {                /* tips get a slightly larger headline */
+  font-size: 120px;
+}
+
+/* ---------- Body / insight ---------- */
+.body {
+  font-size: 44px;
+  font-weight: 500;                  /* Inter Medium */
+  line-height: 1.4;
+  color: #E5E7EB;
+}
+.body.tight { font-size: 36px; font-weight: 400; }
+
+/* Numbers — credibility hooks */
+.num {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--track-tight);
+}
+
+/* ---------- Sub-type A · Poll option boxes ---------- */
+.poll-row {
+  display: flex;
+  gap: 32px;
+  margin-top: 80px;
+}
+.poll-opt {
+  flex: 1;
+  border-radius: var(--radius-card-lg);
+  padding: 72px 32px;
+  text-align: center;
+  border: 4px solid;
+  background: rgba(255,255,255,0.02);
+}
+.poll-long  { background: rgba(5,150,105,0.15);  border-color: var(--accent-profit); }
+.poll-short { background: rgba(220,38,38,0.15);  border-color: var(--accent-loss);   }
+.poll-emoji { font-size: 96px; line-height: 1; margin-bottom: 16px; }
+.poll-label { font-size: 64px; font-weight: 800; letter-spacing: -0.01em; }
+.poll-label.profit { color: var(--accent-profit); }
+.poll-label.loss   { color: var(--accent-loss);   }
+
+/* ---------- Sub-type B · Tip glyph ---------- */
+.tip-glyph {
+  font-size: 88px;
+  line-height: 1;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+/* ---------- Sub-type C · Image slot ---------- */
+/* =============================================================
+   IMAGE-SLOT INTEGRATION (for sub-type C · Action stories)
+   -------------------------------------------------------------
+   The `<image-slot>` web component (./image-slot.js) is the
+   live drag-and-drop target. It has its own Shadow DOM, so
+   styling goes through ::part() selectors below.
+
+   Usage in an Action story (one line, after loading the script):
+
+     <image-slot
+        id="story-04-pnl"            ← REQUIRED unique id for persistence
+        shape="rounded" radius="16"  ← brand-card radius
+        placeholder="DROP YOUR PnL SCREENSHOT HERE"
+        style="width: 100%; height: 720px;">
+     </image-slot>
+
+   Behaviour:
+     · KOL drags a PNG/JPG/WebP onto the slot → image fills
+     · Or clicks the slot → opens file picker
+     · Double-click filled image → enters reframe mode
+       (drag to pan, corner handles to scale)
+     · Replace / Remove buttons appear on hover
+
+   Persistence:
+     · Drops auto-save to a sidecar `.image-slots.state.json` at
+       the project root — survives reload IF the host page lives
+       at project root. Stories live in /library/stories/, so the
+       sidecar write currently no-ops outside the omelette runtime.
+     · In production (phaffiliate.network) the backend handles
+       persistence; this prototype is in-session only.
+
+   Direction variants (.bg-action, .bg-action-profit, .bg-action-loss)
+   are applied on the .story-1080 wrapper based on content sentiment:
+     · Positive PnL, bullish signal     → .bg-action-profit (green glow)
+     · Negative PnL, bearish signal     → .bg-action-loss   (red glow)
+     · Neutral campaign / announcement  → .bg-action        (blue glow)
+   ============================================================= */
+
+/* Static fallback placeholder (used by base-action.html demo only) */
+.image-slot {
+  width: 100%;
+  height: 720px;
+  border-radius: 16px;
+  border: 4px dashed rgba(0,88,251,0.6);
+  background: rgba(0,88,251,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 24px;
+  text-align: center;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.image-slot.has-image { border: none; background: transparent; }
+.image-slot .ph-glyph {
+  font-size: 96px;
+  line-height: 1;
+  color: rgba(0,88,251,0.65);
+}
+.image-slot .ph-text {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--brand-primary);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+}
+.image-slot .ph-sub {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+}
+
+/* Live <image-slot> brand overrides — applied via ::part() */
+image-slot {
+  display: block;
+  border-radius: 16px;
+  overflow: visible;
+  /* placeholder caption color inherits from these */
+  --is-cap-color: var(--brand-primary);
+}
+image-slot::part(frame) {
+  background: rgba(0,88,251,0.06);
+  border-radius: 16px;
+}
+image-slot::part(ring) {
+  border: 4px dashed rgba(0,88,251,0.6);
+  border-radius: 16px;
+}
+image-slot::part(empty) {
+  /* The component renders an icon + cap + sub inside .empty */
+  color: var(--brand-primary);
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  gap: 18px;
+}
+
+/* ---------- Sub-type D · Announcement big-number callout ---------- */
+.milestone {
+  font-size: 280px;
+  font-weight: 900;
+  color: var(--brand-primary);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  text-shadow: 0 0 80px rgba(0,88,251,0.45);
+}
+.milestone-sub {
+  font-size: 72px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: var(--track-display);
+  line-height: 1.1;
+  margin-top: 24px;
+}
+
+/* ---------- Footer action cue ---------- */
+.cue {
+  position: absolute;
+  bottom: 110px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;                  /* Inter SemiBold */
+  color: var(--text-secondary);
+  letter-spacing: -0.005em;
+}
+.cue .glyph { margin-right: 12px; }
+
+/* Bottom-centered watermark (story-native placement) */
+.watermark-bottom {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 48px;
+  opacity: 0.6;
+}
+
+/* ---------- Risk disclaimer (financial stories only) ---------- */
+.risk {
+  position: absolute;
+  bottom: 170px;
+  left: 96px; right: 96px;
+  text-align: center;
+  font-size: 22px;
+  color: var(--text-muted);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* ---------- Layout helpers ---------- */
+.spacer-flex { flex: 1; }
+.content-zone {
+  margin-top: 240px;                /* push primary content ~1/3 down canvas */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.content-zone.centered { justify-content: center; align-items: center; text-align: center; }
+.content-zone.poll     { justify-content: flex-start; }
+.content-zone.action   { justify-content: flex-start; gap: 56px; }

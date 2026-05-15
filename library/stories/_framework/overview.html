@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BingX PH — Story Framework Overview</title>
+<link rel="stylesheet" href="../../../colors_and_type.css">
+<style>
+  body {
+    margin: 0;
+    padding: 24px 24px 28px;
+    background: var(--surface-base);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+  }
+  .meta { margin-bottom: 18px; }
+  .meta .eyebrow {
+    font-size: 11px; font-weight: 700; color: var(--brand-primary);
+    letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .meta h1 {
+    margin: 0 0 4px 0;
+    font-size: 22px; font-weight: 800;
+    letter-spacing: -0.02em; line-height: 1.1;
+  }
+  .meta p { margin: 0; font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+  .meta p strong { color: var(--text-primary); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  /* Each tile is a 9:16 mini-story */
+  .tile {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface-base);
+    padding: 22px 16px 24px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  /* Background atmospheres, mirrored from the real framework */
+  .tile.poll {
+    background:
+      linear-gradient(135deg, rgba(0,88,251,0.10) 0%, transparent 50%),
+      var(--surface-base);
+  }
+  .tile.tip {
+    background: linear-gradient(180deg, var(--surface-base) 0%, var(--surface-elevated) 100%);
+  }
+  .tile.action::before {
+    content: ""; position: absolute;
+    top: 30%; left: 50%; width: 80%; height: 36%;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse, rgba(0,88,251,0.30) 0%, transparent 60%);
+    filter: blur(20px); pointer-events: none;
+  }
+  .tile.announcement::before {
+    content: ""; position: absolute;
+    top: 50%; left: 50%; width: 110%; height: 80%;
+    transform: translate(-50%,-50%);
+    background: radial-gradient(circle, rgba(0,88,251,0.28) 0%, transparent 55%);
+    filter: blur(28px); pointer-events: none;
+  }
+  .tile > * { position: relative; z-index: 1; }
+
+  .tile-wm {
+    position: absolute;
+    top: 14px; left: 50%;
+    transform: translateX(-50%);
+    height: 10px; opacity: 0.6;
+    z-index: 3;
+  }
+  .tile-label {
+    position: absolute;
+    top: -1px; right: 0;
+    background: var(--brand-primary);
+    color: #fff;
+    font-size: 9px; font-weight: 800;
+    padding: 3px 7px;
+    border-radius: 0 10px 0 10px;
+    letter-spacing: 0.1em;
+    z-index: 3;
+  }
+
+  .eyebrow {
+    font-size: 7px; font-weight: 700;
+    color: var(--brand-primary);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 28px;
+    margin-bottom: 10px;
+  }
+  .headline {
+    font-size: 22px; font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  /* Poll */
+  .poll-row {
+    display: flex; gap: 6px;
+    margin-top: 22px;
+  }
+  .opt {
+    flex: 1; border-radius: 6px;
+    padding: 16px 4px;
+    text-align: center;
+    border: 1.5px solid;
+    font-size: 11px; font-weight: 800;
+  }
+  .opt.long  { background: rgba(5,150,105,0.15); border-color: #059669; color: #059669; }
+  .opt.short { background: rgba(220,38,38,0.15); border-color: #DC2626; color: #DC2626; }
+  .opt .em { font-size: 18px; margin-bottom: 4px; line-height: 1; }
+
+  /* Tip */
+  .tip-emoji { font-size: 22px; line-height: 1; margin-bottom: 6px; }
+  .tip-body {
+    font-size: 9px; font-weight: 500;
+    color: #d1d5db; line-height: 1.4;
+    margin-top: 8px;
+  }
+
+  /* Action */
+  .slot {
+    margin-top: 14px;
+    height: 110px;
+    border-radius: 6px;
+    border: 1.5px dashed rgba(0,88,251,0.65);
+    background: rgba(0,88,251,0.05);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    color: var(--brand-primary);
+    font-size: 7px; font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    gap: 4px;
+  }
+  .slot .icon {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(0,88,251,0.18);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+  }
+  .caption {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: -0.01em; line-height: 1.15;
+    margin-top: 12px;
+  }
+  .caption .up { color: #059669; font-variant-numeric: tabular-nums; }
+
+  /* Announcement */
+  .ann-wrap { margin-top: 80px; text-align: center; }
+  .ann-num {
+    font-size: 56px; font-weight: 900;
+    color: var(--brand-primary);
+    line-height: 1; letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 22px rgba(0,88,251,0.6);
+    margin-bottom: 8px;
+  }
+  .ann-title {
+    font-size: 14px; font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 6px;
+  }
+  .ann-body {
+    font-size: 9px; font-weight: 500;
+    color: #d1d5db; line-height: 1.4;
+  }
+
+  /* Footer cue + watermark */
+  .cue {
+    position: absolute;
+    bottom: 28px; left: 16px; right: 16px;
+    text-align: center;
+    font-size: 8px; font-weight: 600;
+    color: var(--text-secondary);
+  }
+  .tile-foot-wm {
+    position: absolute;
+    bottom: 12px; left: 50%;
+    transform: translateX(-50%);
+    height: 8px; opacity: 0.6;
+  }
+
+  .meta-row {
+    margin-top: 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 10px; color: var(--text-muted);
+    font-weight: 600; letter-spacing: 0.06em;
+  }
+  .meta-row img { height: 14px; opacity: 0.6; }
+</style>
+</head>
+<body>
+  <div class="meta">
+    <div class="eyebrow">STORY FRAMEWORK · 4 SUB-TYPES</div>
+    <h1>Vertical-native story templates</h1>
+    <p><strong>1080 × 1920</strong> · IG / FB Stories · Reels · TikTok · top watermark · bottom tap cue · 4 base sub-types map to 10 stories</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- A · POLL -->
+    <div class="tile poll">
+      <img class="tile-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+      <div class="tile-label">A · POLL</div>
+      <div class="eyebrow">DAILY POLL</div>
+      <h2 class="headline">BTC: Long<br>or Short?</h2>
+      <div class="poll-row">
+        <div class="opt long"><div class="em">📈</div>LONG</div>
+        <div class="opt short"><div class="em">📉</div>SHORT</div>
+      </div>
+      <div class="cue">👆 Tap your answer below</div>
+      <img class="tile-foot-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+    </div>
+
+    <!-- B · TIP -->
+    <div class="tile tip">
+      <img class="tile-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+      <div class="tile-label">B · TIP</div>
+      <div class="eyebrow">TIP OF THE DAY</div>
+      <div class="tip-emoji">💡</div>
+      <h2 class="headline">DCA ng BTC<br>bawat sahod day.</h2>
+      <p class="tip-body">Auto-buy every 15th &amp; 30th. Kahit ₱500 lang.</p>
+      <div class="cue">👆 Tap link in bio</div>
+      <img class="tile-foot-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+    </div>
+
+    <!-- C · ACTION -->
+    <div class="tile action">
+      <img class="tile-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+      <div class="tile-label">C · ACTION</div>
+      <div class="eyebrow">MY PnL TODAY</div>
+      <div class="slot">
+        <div class="icon">↑</div>
+        DROP IMAGE HERE
+      </div>
+      <div class="caption">Real talk: <span class="up">+42%</span> in 30 days</div>
+      <div class="cue">👆 Tap link in bio</div>
+      <img class="tile-foot-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+    </div>
+
+    <!-- D · ANNOUNCEMENT -->
+    <div class="tile announcement">
+      <img class="tile-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+      <div class="tile-label">D · ANNOUNCE</div>
+      <div class="ann-wrap">
+        <div class="ann-num">1,000+</div>
+        <div class="ann-title">Followers Strong</div>
+        <p class="ann-body">Salamat sa lahat. Giveaway later this week.</p>
+      </div>
+      <div class="cue">💬 DM me to join</div>
+      <img class="tile-foot-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+    </div>
+
+  </div>
+
+  <div class="meta-row">
+    <span>STORIES · 9:16 · 1080×1920 · 4 SUB-TYPES → 10 templates</span>
+    <img src="../../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

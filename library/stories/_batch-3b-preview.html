@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BingX PH — Batch 3b Preview · Stories 04–06</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  body {
+    margin: 0;
+    padding: 28px 28px 32px;
+    background: var(--surface-base);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+  }
+  .meta { margin-bottom: 22px; }
+  .meta .eyebrow { font-size: 11px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+  .meta h1 { margin: 0 0 6px 0; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+  .meta p { margin: 0; font-size: 12px; color: var(--text-secondary); font-weight: 500; line-height: 1.5; max-width: 720px; }
+  .meta strong { color: var(--text-primary); font-weight: 600; }
+
+  .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .col h3 { margin: 0 0 8px 0; font-size: 12px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.18em; text-transform: uppercase; }
+  .col h3 .letter { color: var(--text-primary); font-weight: 800; margin-right: 6px; }
+  .col p { margin: 8px 0 0; font-size: 11px; color: var(--text-secondary); line-height: 1.45; }
+
+  .mini { position: relative; aspect-ratio: 9 / 16; background: var(--surface-base); border-radius: 8px; overflow: hidden; padding: 22px 18px 20px; border: 1px solid rgba(255,255,255,0.06); color: #fff; }
+
+  /* Action atmospheres */
+  .mini.profit { background: var(--surface-base); }
+  .mini.profit::before { content: ""; position: absolute; top: 38%; left: 50%; width: 110%; height: 60%; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgba(5,150,105,0.22) 0%, transparent 70%); filter: blur(20px); pointer-events: none; }
+  .mini.neutral { background: var(--surface-base); }
+  .mini.neutral::before { content: ""; position: absolute; top: 38%; left: 50%; width: 110%; height: 60%; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgba(0,88,251,0.22) 0%, transparent 70%); filter: blur(20px); pointer-events: none; }
+
+  .mini > * { position: relative; z-index: 1; }
+
+  .mini-wm-top { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); height: 10px; opacity: 0.6; z-index: 2; }
+  .mini-eyebrow { margin-top: 76px; font-size: 7.5px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.18em; text-transform: uppercase; }
+
+  /* Image-slot placeholder rendering */
+  .mini-slot {
+    margin-top: 14px;
+    height: 142px;
+    border: 1.5px dashed rgba(0,88,251,0.6);
+    background: rgba(0,88,251,0.06);
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .mini-slot .ico { width: 22px; height: 22px; color: var(--brand-primary); opacity: 0.75; }
+  .mini-slot .pt { font-size: 7px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.15em; text-transform: uppercase; text-align: center; line-height: 1.2; padding: 0 6px; }
+  .mini-slot .sub { font-size: 6px; font-weight: 500; color: var(--text-secondary); }
+
+  .mini-caption-h {
+    margin-top: 12px;
+    font-size: 14px; font-weight: 700; line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .mini-caption-h.profit { color: var(--accent-profit); }
+  .mini-caption-h .num { color: var(--brand-primary); font-variant-numeric: tabular-nums; }
+  .mini-caption-b {
+    margin-top: 6px;
+    font-size: 8px; font-weight: 500; line-height: 1.4;
+    color: #d1d5db;
+  }
+  .mini-caption-b .num { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  .mini-risk { position: absolute; bottom: 44px; left: 12px; right: 12px; text-align: center; font-size: 6.5px; color: var(--text-muted); font-weight: 500; line-height: 1.4; }
+  .mini-cue { position: absolute; bottom: 26px; left: 0; right: 0; text-align: center; font-size: 8px; font-weight: 600; color: var(--text-secondary); }
+  .mini-wm-bottom { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); height: 12px; opacity: 0.6; }
+  .mini-label { position: absolute; top: -1px; right: 0; background: var(--brand-primary); color: #fff; font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 0 8px 0 8px; letter-spacing: 0.08em; font-variant-numeric: tabular-nums; z-index: 3; }
+
+  .footer { margin-top: 18px; display: flex; align-items: center; justify-content: space-between; font-size: 10px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.06em; }
+  .footer img { height: 14px; opacity: 0.6; }
+
+  .live-note {
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: var(--surface-elevated);
+    border: 1px solid rgba(0,88,251,0.3);
+    border-left: 3px solid var(--brand-primary);
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+  .live-note strong { color: var(--text-primary); font-weight: 700; }
+  .live-note .tag {
+    display: inline-block;
+    background: rgba(0,88,251,0.15);
+    color: var(--brand-primary);
+    font-size: 9px; font-weight: 700;
+    padding: 3px 6px;
+    border-radius: 4px;
+    margin-right: 6px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+  <div class="meta">
+    <div class="eyebrow">STORIES · BATCH 3b · ACTION SUB-TYPE</div>
+    <h1>Stories 04 · 05 · 06 — live image-slot</h1>
+    <p>
+      Each story uses a different <strong>.bg-action</strong> direction variant chosen from content sentiment. The image-slot rendered in these mini-previews is a <em>visual stand-in</em>; the actual story files load the live <strong>&lt;image-slot&gt;</strong> web component for drag-and-drop screenshot insertion. <strong>1080 × 1920</strong>
+    </p>
+  </div>
+
+  <div class="row">
+
+    <!-- 04 PnL · profit -->
+    <div class="col">
+      <h3><span class="letter">04</span>MY PnL TODAY</h3>
+      <div class="mini profit">
+        <img class="mini-wm-top" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-eyebrow">📊 MY PnL TODAY</div>
+        <div class="mini-slot">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <div class="pt">DROP YOUR PnL<br>SCREENSHOT HERE</div>
+          <div class="sub">or click to browse</div>
+        </div>
+        <div class="mini-caption-h profit">Another green day 🚀</div>
+        <div class="mini-caption-b">Real PnL, hindi paid promo. Copy Trading + <span class="num">₱500</span> lang, <span class="num">6</span> months ago.</div>
+        <div class="mini-risk">Past performance does not guarantee future results.</div>
+        <div class="mini-cue">👆 Tap link in bio to copy my trader</div>
+        <img class="mini-wm-bottom" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-label">04</div>
+      </div>
+      <p>Sub-type C · <strong>.bg-action-profit</strong> (green radial glow) · risk band on.</p>
+    </div>
+
+    <!-- 05 Campaign · neutral -->
+    <div class="col">
+      <h3><span class="letter">05</span>CAMPAIGN COUNTDOWN</h3>
+      <div class="mini neutral">
+        <img class="mini-wm-top" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-eyebrow">⏰ CAMPAIGN ALERT</div>
+        <div class="mini-slot">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <div class="pt">DROP CAMPAIGN<br>BANNER HERE</div>
+          <div class="sub">or click to browse</div>
+        </div>
+        <div class="mini-caption-h"><span class="num">3 Days</span> Left</div>
+        <div class="mini-caption-b">BingX deposit bonus campaign nag-eend ng <span class="num">[DATE]</span>. Tap to claim.</div>
+        <div class="mini-cue">👆 Tap to claim bonus</div>
+        <img class="mini-wm-bottom" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-label">05</div>
+      </div>
+      <p>Sub-type C · <strong>.bg-action</strong> (neutral blue glow) · no risk band — promotional.</p>
+    </div>
+
+    <!-- 06 Signal · profit -->
+    <div class="col">
+      <h3><span class="letter">06</span>NEW SIGNAL</h3>
+      <div class="mini profit">
+        <img class="mini-wm-top" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-eyebrow">🚨 NEW SIGNAL</div>
+        <div class="mini-slot">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <div class="pt">DROP CHART<br>SCREENSHOT HERE</div>
+          <div class="sub">or click to browse</div>
+        </div>
+        <div class="mini-caption-h">BTC breakout setup</div>
+        <div class="mini-caption-b">Entry, target, stop-loss laging may rationale. Copy traders ko na-replicate ito automatically.</div>
+        <div class="mini-risk">Signals are educational. Trade with stop-loss.</div>
+        <div class="mini-cue">👆 Tap link in bio to copy</div>
+        <img class="mini-wm-bottom" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-label">06</div>
+      </div>
+      <p>Sub-type C · <strong>.bg-action-profit</strong> (bullish signal default) · risk band on.</p>
+    </div>
+
+  </div>
+
+  <div class="live-note">
+    <span class="tag">LIVE</span>
+    <strong>The actual story files</strong> load <code>_framework/image-slot.js</code> and render a real <code>&lt;image-slot&gt;</code> drop target. Open <code>library/stories/04-my-pnl-today.html</code> directly to drag a PNG onto it. Reframe + Replace + Remove controls appear on hover when filled.
+  </div>
+
+  <div class="footer">
+    <span>STORIES · BATCH 3b · 1080×1920 · Action sub-type · live image-slot</span>
+    <img src="../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>
