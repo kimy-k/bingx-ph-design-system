@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BingX PH — Memes Capstone · 10 of 10 + Framework</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  body {
+    margin: 0;
+    padding: 28px 28px 36px;
+    background: var(--surface-base);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+  }
+  .meta { margin-bottom: 24px; }
+  .meta .eyebrow { font-size: 11px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+  .meta h1 { margin: 0 0 6px 0; font-size: 24px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+  .meta p { margin: 0; font-size: 13px; color: var(--text-secondary); font-weight: 500; line-height: 1.5; max-width: 800px; }
+  .meta p strong { color: var(--text-primary); font-weight: 600; }
+
+  section { margin-top: 30px; }
+  section h2 {
+    font-size: 12px; font-weight: 700; color: var(--brand-primary);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin: 0 0 14px 0;
+  }
+  section h2 .count { color: var(--text-muted); margin-left: 8px; font-variant-numeric: tabular-nums; }
+
+  .featured {
+    aspect-ratio: 1 / 1;
+    max-width: 380px;
+    background: #000;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .featured.meme-drake-mini { background: var(--surface-elevated); display: grid; grid-template-rows: 1fr 1fr; grid-template-columns: 1fr 1.1fr; }
+  .featured .cell { position: relative; overflow: hidden; border-right: 3px solid var(--surface-base); border-bottom: 3px solid var(--surface-base); }
+  .featured .cell.r2 { border-bottom: none; }
+  .featured .cell.c2 { border-right: none; }
+  .featured .cell.text { display: flex; align-items: center; padding: 20px 22px; background: var(--surface-elevated); }
+  .featured .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1F2937 0%, #0B0E17 100%); }
+  .featured .ph::before { content: "[ FACE ]"; color: rgba(255,255,255,0.18); font-size: 10px; font-weight: 700; letter-spacing: 0.2em; }
+  .featured .stmt { font-weight: 700; line-height: 1.18; letter-spacing: -0.015em; font-size: 14px; }
+  .featured .r1 .stmt { color: var(--text-muted); font-weight: 600; }
+  .featured .r1 .stmt::after { content: " ✗"; color: var(--accent-loss); font-weight: 800; }
+  .featured .r2 .stmt { color: var(--text-primary); }
+  .featured .r2 .stmt .accent { color: var(--brand-primary); font-weight: 800; }
+  .featured .r2 .stmt::after { content: " ✓"; color: var(--accent-profit); font-weight: 800; }
+  .featured .wm { position: absolute; bottom: 8px; right: 10px; height: 8px; opacity: 0.30; z-index: 7; }
+
+  .featured-row {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .featured-row .notes {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+  .featured-row .notes h3 { font-size: 18px; font-weight: 700; color: var(--text-primary); margin: 0 0 8px 0; letter-spacing: -0.01em; }
+  .featured-row .notes ul { margin: 12px 0 0; padding: 0 0 0 18px; }
+  .featured-row .notes li { margin-bottom: 6px; }
+  .featured-row .notes li strong { color: var(--text-primary); font-weight: 600; }
+
+  /* All-10 inventory grid */
+  .grid10 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  .tile {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: #000;
+    border-radius: 7px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+    color: #fff;
+  }
+  .tile .ph {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.16);
+    font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
+  }
+  .tile.standard .ph { background: linear-gradient(135deg, #1F2937 0%, #0B0E17 100%); }
+  .tile.standard .ph::before { content: "[ PHOTO ]"; }
+  .tile .cap {
+    position: absolute; left: 8px; right: 8px;
+    text-align: center;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1;
+    letter-spacing: -0.015em;
+    -webkit-text-stroke: 1.5px #000; paint-order: stroke fill;
+    text-shadow: 1.5px 1.5px 0 #000;
+    z-index: 2;
+  }
+  .tile .cap.top { top: 10px; font-size: 11px; }
+  .tile .cap.bottom { bottom: 14px; font-size: 14px; }
+
+  /* Split tiles */
+  .tile.split-tile { display: flex; padding: 0; }
+  .tile.split-tile .side { position: relative; flex: 1; }
+  .tile.split-tile .side-ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.16); font-size: 7px; font-weight: 700; letter-spacing: 0.15em; }
+  .tile.split-tile .side-ph::before { content: "[ PHOTO ]"; }
+  .tile.split-tile .side.l .side-ph { background: linear-gradient(135deg, #2a1a1a, #1F1F1F); }
+  .tile.split-tile .side.r .side-ph { background: linear-gradient(135deg, #1a2a1f, #0B0E17); }
+  .tile.split-tile .side.l.payday .side-ph { background: linear-gradient(135deg, #1a2030, #111827); }
+  .tile.split-tile .divider { position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 1.5px; background: var(--surface-base); z-index: 3; }
+  .tile.split-tile .lbl {
+    position: absolute; bottom: 10px; left: 4px; right: 4px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 12px;
+    text-transform: uppercase;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    -webkit-text-stroke: 1px #000; paint-order: stroke fill;
+    text-shadow: 1px 1px 0 #000;
+    z-index: 4;
+  }
+  .tile.split-tile .lbl.bad   { color: var(--accent-loss); }
+  .tile.split-tile .lbl.good  { color: var(--accent-profit); }
+  .tile.split-tile .lbl.brand { color: var(--brand-primary); }
+
+  /* Drake tile */
+  .tile.drake-tile { background: var(--surface-elevated); display: grid; grid-template-rows: 1fr 1fr; grid-template-columns: 1fr 1.1fr; }
+  .tile.drake-tile .cell { position: relative; overflow: hidden; border-right: 2px solid var(--surface-base); border-bottom: 2px solid var(--surface-base); }
+  .tile.drake-tile .cell.r2 { border-bottom: none; }
+  .tile.drake-tile .cell.c2 { border-right: none; }
+  .tile.drake-tile .cell.text { display: flex; align-items: center; padding: 6px 8px; background: var(--surface-elevated); }
+  .tile.drake-tile .ph { background: linear-gradient(135deg, #1F2937 0%, #0B0E17 100%); }
+  .tile.drake-tile .ph::before { content: "[ FACE ]"; font-size: 7px; }
+  .tile.drake-tile .stmt { font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; font-size: 8px; }
+  .tile.drake-tile .r1 .stmt { color: var(--text-muted); font-weight: 600; }
+  .tile.drake-tile .r1 .stmt::after { content: " ✗"; color: var(--accent-loss); font-weight: 800; }
+  .tile.drake-tile .r2 .stmt { color: var(--text-primary); }
+  .tile.drake-tile .r2 .stmt .accent { color: var(--brand-primary); font-weight: 800; }
+  .tile.drake-tile .r2 .stmt::after { content: " ✓"; color: var(--accent-profit); font-weight: 800; }
+
+  .tile .wm { position: absolute; bottom: 4px; right: 6px; height: 6px; opacity: 0.30; z-index: 7; }
+  .tile .num {
+    position: absolute; top: 0; left: 0;
+    background: var(--brand-primary); color: #fff;
+    font-size: 8px; font-weight: 800;
+    padding: 1px 5px;
+    border-radius: 0 0 5px 0;
+    letter-spacing: 0.06em;
+    font-variant-numeric: tabular-nums;
+    z-index: 9;
+  }
+  .tile .ttl {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 4px 6px;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.85) 60%);
+    font-size: 8px; font-weight: 700;
+    color: rgba(255,255,255,0.85);
+    text-align: center;
+    z-index: 10;
+    letter-spacing: 0.04em;
+  }
+  /* Disable bottom title on Standard memes (caption already at bottom) — pad more */
+  .tile.standard { padding-bottom: 0; }
+
+  .footer { margin-top: 26px; display: flex; align-items: center; justify-content: space-between; font-size: 10px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.06em; }
+  .footer img { height: 14px; opacity: 0.6; }
+</style>
+</head>
+<body>
+  <div class="meta">
+    <div class="eyebrow">MEMES · CAPSTONE · 10 OF 10 SHIPPED</div>
+    <h1>Meme batch complete</h1>
+    <p>
+      Final meme in Batch 4d is <strong>#10 · BingX No Exclusivity (Drake Format)</strong> — the only use of <strong>Base C · Drake</strong>. Highlighted below, with the full 10-meme inventory underneath.
+    </p>
+  </div>
+
+  <section>
+    <h2>Featured · Meme 10 · Drake (Approve / Reject)</h2>
+    <div class="featured-row">
+      <div class="featured meme-drake-mini">
+        <div class="cell r1 c1"><div class="ph"></div></div>
+        <div class="cell r1 c2 text"><div class="stmt">Other exchanges with 20% commission and exclusivity contracts</div></div>
+        <div class="cell r2 c1"><div class="ph"></div></div>
+        <div class="cell r2 c2 text"><div class="stmt">BingX: <span class="accent">50% commission</span>, <span class="accent">no exclusivity</span>, lifetime payouts</div></div>
+        <img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+      </div>
+      <div class="notes">
+        <h3>What's in the meme</h3>
+        Drake-format clap-back comparing competitor offers. Reject row dims to <code>--text-muted</code>, ends with red ✗. Approve row brightens to <code>--text-primary</code> with <strong>50% commission</strong> and <strong>no exclusivity</strong> highlighted in brand-blue, ends with green ✓.
+        <ul>
+          <li><strong>Image-slots:</strong> 2 — top-left "annoyed face", bottom-left "approving face"</li>
+          <li><strong>Override:</strong> approve-row statement font-size dropped <code>48 → 46px</code>, line-height tightened to <code>1.18</code> to breathe with two highlighted phrases</li>
+          <li><strong>Audience:</strong> recruitment — KOL's argument to other creators</li>
+          <li><strong>Data point:</strong> connects to Education Card #7 (the 20% vs 50% comparison table)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Inventory · All 10 memes <span class="count">10 / 10</span></h2>
+    <div class="grid10">
+
+      <div class="tile standard">
+        <div class="num">01</div>
+        <div class="ph"></div>
+        <div class="cap top">Me explaining crypto to parents</div>
+        <div class="cap bottom">They think it's scam</div>
+        <img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+      </div>
+
+      <div class="tile split-tile">
+        <div class="num">02</div>
+        <div class="side l"><div class="side-ph"></div><div class="lbl bad">Before<br>BingX</div></div>
+        <div class="side r"><div class="side-ph"></div><div class="lbl good">After<br>BingX</div></div>
+        <div class="divider"></div>
+        <img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+      </div>
+
+      <div class="tile standard">
+        <div class="num">03</div>
+        <div class="ph"></div>
+        <div class="cap top">Me at 3 AM</div>
+        <div class="cap bottom">"Isa na lang tingin"</div>
+        <img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+      </div>
+
+      <div class="tile standard">
+        <div class="num">04</div>
+        <div class="ph"></div>
+        <div class="cap top">When your stop-loss hits</div>
+        <div class="cap bottom">5% &gt; 50%</div>
+        <img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+      </div>
+
+      <div class="tile split-tile">
+        <div class="num">05</div>
+        <div class="side l payday"><div class="side-ph"></div><div class="lbl brand">Sahod<br>Day</div></div>
+        <div class="side r"><div class="side-ph"></div><div class="lbl good">After<br>₱500</div></div>
+        <div class="divider"></div>
+        <img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+      </div>
+
+      <div class="tile standard">
+        <div class="num">06</div>
+        <div class="ph"></div>
+        <div class="cap top">Me learning Copy Trading</div>
+        <div class="cap bottom">"Cheat code"</div>
+        <img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+      </div>
+
+      <div class="tile standard">
+        <div class="num">07</div>
+        <div class="ph"></div>
+        <div class="cap top">"Crypto is scam"</div>
+        <div class="cap bottom">Me showing my PnL</div>
+        <img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+      </div>
+
+      <div class="tile standard">
+        <div class="num">08</div>
+        <div class="ph"></div>
+        <div class="cap top">First profitable trade</div>
+        <div class="cap bottom">"Wall Street na ako"</div>
+        <img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+      </div>
+
+      <div class="tile standard">
+        <div class="num">09</div>
+        <div class="ph"></div>
+        <div class="cap top">Waiting for GCash</div>
+        <div class="cap bottom">P2P deposit</div>
+        <img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+      </div>
+
+      <div class="tile drake-tile">
+        <div class="num">10</div>
+        <div class="cell r1 c1"><div class="ph"></div></div>
+        <div class="cell r1 c2 text"><div class="stmt">Other 20%</div></div>
+        <div class="cell r2 c1"><div class="ph"></div></div>
+        <div class="cell r2 c2 text"><div class="stmt"><span class="accent">BingX 50%</span></div></div>
+        <img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Framework · 3 sub-type bases</h2>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+
+      <div>
+        <div class="tile standard" style="aspect-ratio: 1/1;">
+          <div class="ph"></div>
+          <div class="cap top">When you finally understand</div>
+          <div class="cap bottom">Copy Trading</div>
+          <img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        </div>
+        <div style="margin-top: 8px; font-size: 11px; color: var(--text-secondary); font-weight: 500;">
+          <strong style="color: var(--text-primary);">A · Standard</strong> — single image + top/bottom captions. 7 memes use this.
+        </div>
+      </div>
+
+      <div>
+        <div class="tile split-tile" style="aspect-ratio: 1/1;">
+          <div class="side l"><div class="side-ph"></div><div class="lbl bad">Before</div></div>
+          <div class="side r"><div class="side-ph"></div><div class="lbl good">After</div></div>
+          <div class="divider"></div>
+          <img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        </div>
+        <div style="margin-top: 8px; font-size: 11px; color: var(--text-secondary); font-weight: 500;">
+          <strong style="color: var(--text-primary);">B · Split</strong> — 50/50 with red/green labels. 2 memes use this.
+        </div>
+      </div>
+
+      <div>
+        <div class="tile drake-tile" style="aspect-ratio: 1/1;">
+          <div class="cell r1 c1"><div class="ph"></div></div>
+          <div class="cell r1 c2 text"><div class="stmt">Reject</div></div>
+          <div class="cell r2 c1"><div class="ph"></div></div>
+          <div class="cell r2 c2 text"><div class="stmt"><span class="accent">Approve</span></div></div>
+          <img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+        </div>
+        <div style="margin-top: 8px; font-size: 11px; color: var(--text-secondary); font-weight: 500;">
+          <strong style="color: var(--text-primary);">C · Drake</strong> — 2×2 reject/approve with ✗/✓. 1 meme uses this.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="footer">
+    <span>MEMES · BATCH 4 CAPSTONE · 10 / 10 · 3 sub-type bases · Light branding · 1080×1080</span>
+    <img src="../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

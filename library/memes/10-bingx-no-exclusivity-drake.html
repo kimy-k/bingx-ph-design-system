@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BingX PH — Meme 10 · BingX No Exclusivity (Drake Format)</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="_framework/styles.css">
+<script src="_framework/image-slot.js"></script>
+<style>
+  /* Per-meme override: this Drake meme uses richer statements than the
+     base placeholder, with key phrases highlighted in --brand-primary on
+     the approve row. The framework's .accent class already handles this. */
+  .meme-drake .row-2 .statement .accent {
+    color: var(--brand-primary);
+    font-weight: 800;
+  }
+  /* Tighten approve-row text so two highlighted phrases breathe */
+  .meme-drake .row-2 .statement {
+    font-size: 46px;
+    line-height: 1.18;
+  }
+</style>
+</head>
+<body class="preview-mode">
+  <div class="meme-1080 meme-drake">
+    <!-- Row 1: REJECT (dimmed) -->
+    <div class="cell row-1 col-1">
+      <image-slot
+        id="meme-10-reject"
+        shape="rect"
+        fit="cover"
+        placeholder="DROP YOUR ANNOYED/DISAPPROVAL PHOTO"></image-slot>
+    </div>
+    <div class="cell row-1 col-2 text">
+      <div class="statement">Other exchanges with 20% commission and exclusivity contracts</div>
+    </div>
+
+    <!-- Row 2: APPROVE (bright, brand-blue accents) -->
+    <div class="cell row-2 col-1">
+      <image-slot
+        id="meme-10-approve"
+        shape="rect"
+        fit="cover"
+        placeholder="DROP YOUR APPROVING/POINTING PHOTO"></image-slot>
+    </div>
+    <div class="cell row-2 col-2 text">
+      <div class="statement">
+        BingX: <span class="accent">50% commission</span>, <span class="accent">no exclusivity</span>, lifetime payouts
+      </div>
+    </div>
+
+    <img class="watermark-light" src="../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

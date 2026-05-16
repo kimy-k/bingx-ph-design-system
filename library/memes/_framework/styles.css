@@ -1,0 +1,250 @@
+/* ============================================================
+   BingX PH · Memes Framework · Light branding · 1080×1080
+   Layered on /colors_and_type.css — does not redefine tokens.
+
+   Voice principle: memes live or die by shareability.
+   Branding stays small + low-opacity. Captions dominate.
+   ============================================================ */
+
+:root { --preview-scale: 0.55; }
+
+html, body { margin: 0; padding: 0; }
+body { background: #050811; font-family: 'Inter', sans-serif; }
+
+body.preview-mode {
+  width: calc(1080px * var(--preview-scale));
+  height: calc(1080px * var(--preview-scale));
+  overflow: hidden;
+}
+body.preview-mode .meme-1080 {
+  transform: scale(var(--preview-scale));
+  transform-origin: top left;
+}
+
+/* ---------- Base canvas ---------- */
+.meme-1080 {
+  width: 1080px;
+  height: 1080px;
+  background: #000;                              /* black is meme-native */
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ---------- Image-slot integration ----------
+   Reuses /library/stories/_framework/image-slot.js (also copied locally
+   at _framework/image-slot.js for self-contained meme builds).
+
+   The Shadow-DOM <image-slot> uses ::part() selectors below. Each meme's
+   slot gets a unique id="" for persistence. Authors size via inline
+   width/height (full canvas for standard, 50% for split, quadrants for drake).
+*/
+image-slot {
+  display: block;
+  background: #1a1a1a;          /* dark fallback while empty */
+}
+image-slot::part(frame) {
+  background: #1a1a1a;
+  border-radius: 0;             /* memes are edge-to-edge — no rounding */
+}
+image-slot::part(ring) {
+  border: 3px dashed rgba(255,255,255,0.25);
+  border-radius: 0;
+}
+image-slot::part(empty) {
+  color: rgba(255,255,255,0.55);
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 24px;
+  gap: 14px;
+}
+
+/* ---------- Meme caption text overlay ---------- */
+/* The "Impact-style" treatment — Inter Black, white fill, black stroke. */
+.cap {
+  position: absolute;
+  left: 32px; right: 32px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;                              /* Inter Black */
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+  line-height: 1.0;
+  text-transform: uppercase;
+
+  /* Paint-order stroke — wider browser support than -webkit-text-stroke alone */
+  -webkit-text-stroke: 4px #000000;
+  paint-order: stroke fill;
+
+  /* Extra punch on busy backgrounds */
+  text-shadow: 4px 4px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+
+  z-index: 5;
+}
+.cap.top    { top: 48px; }
+.cap.bottom { bottom: 88px; }           /* lifts above watermark zone */
+
+/* Caption size variants — pick to taste based on copy length */
+.cap.sm { font-size: 40px; }
+.cap.md { font-size: 56px; }            /* default */
+.cap.lg { font-size: 72px; }
+.cap.xl { font-size: 88px; }
+
+/* ---------- Light watermark ---------- */
+.watermark-light {
+  position: absolute;
+  bottom: 16px;
+  right: 18px;
+  height: 18px;
+  opacity: 0.30;
+  z-index: 6;
+  /* Deliberate: visible if you look, ignorable in scroll */
+}
+
+/* ============================================================
+   BASE A · Standard meme (single image + top/bottom captions)
+   ============================================================ */
+.meme-standard image-slot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================================
+   BASE B · Split meme (50/50 vertical · before/after compare)
+   ============================================================ */
+.meme-split {
+  display: flex;
+}
+.meme-split .side {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+}
+.meme-split image-slot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.meme-split .divider {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  background: var(--surface-base);
+  z-index: 5;
+}
+.meme-split .side-label {
+  position: absolute;
+  bottom: 60px;
+  left: 32px; right: 32px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 56px;
+  letter-spacing: -0.02em;
+  line-height: 1.0;
+  text-transform: uppercase;
+  -webkit-text-stroke: 3px #000;
+  paint-order: stroke fill;
+  text-shadow: 3px 3px 0 #000;
+  color: #fff;
+  z-index: 5;
+}
+.meme-split .side-label.bad  { color: var(--accent-loss); }
+.meme-split .side-label.good { color: var(--accent-profit); }
+
+/* ============================================================
+   BASE C · Drake (approve/reject — 2 rows × 2 cols)
+   Left column: image-slot for KOL's reaction
+   Right column: text statement
+   Top row dims, bottom row brightens.
+   ============================================================ */
+.meme-drake {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1.1fr;       /* image | text — text gets slight extra */
+  height: 100%;
+  background: var(--surface-elevated);    /* dark gray base behind cells */
+}
+.meme-drake .cell {
+  position: relative;
+  overflow: hidden;
+  border-right: 4px solid var(--surface-base);
+  border-bottom: 4px solid var(--surface-base);
+}
+.meme-drake .cell.row-2 { border-bottom: none; }
+.meme-drake .cell.col-2 { border-right: none; }
+.meme-drake .cell.text {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 56px 64px;
+  background: var(--surface-elevated);
+}
+.meme-drake image-slot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.meme-drake .statement {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;                        /* Bold, NOT all caps for reading flow */
+  font-size: 48px;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+.meme-drake .row-1 .statement {
+  color: var(--text-muted);                /* dimmed for "reject" */
+  font-weight: 600;
+}
+.meme-drake .row-1 .statement::after {
+  content: "  ✗";
+  color: var(--accent-loss);
+  font-weight: 800;
+  margin-left: 6px;
+}
+.meme-drake .row-2 .statement {
+  color: var(--text-primary);              /* bright for "approve" */
+}
+.meme-drake .row-2 .statement .accent {
+  color: var(--brand-primary);             /* brand-blue accent on key term */
+  font-weight: 800;
+}
+.meme-drake .row-2 .statement::after {
+  content: "  ✓";
+  color: var(--accent-profit);
+  font-weight: 800;
+  margin-left: 6px;
+}
+
+/* ============================================================
+   PREVIEW MODE — image-slot fallback styling
+   In the actual rendered HTML, <image-slot> handles its own empty state.
+   But the static .meme-1080 in design-system thumbnails uses these:
+   ============================================================ */
+.static-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1F2937 0%, #0B0E17 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.static-photo::before {
+  content: "[ PHOTO ]";
+  color: rgba(255,255,255,0.18);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}

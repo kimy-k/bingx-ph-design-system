@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BingX PH — Meme Framework · 3 Sub-Type Bases</title>
+<link rel="stylesheet" href="../../../colors_and_type.css">
+<style>
+  body {
+    margin: 0;
+    padding: 28px 28px 32px;
+    background: var(--surface-base);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+  }
+  .meta { margin-bottom: 22px; }
+  .meta .eyebrow {
+    font-size: 11px; font-weight: 700; color: var(--brand-primary);
+    letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .meta h1 { margin: 0 0 6px 0; font-size: 24px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+  .meta p { margin: 0; font-size: 13px; color: var(--text-secondary); font-weight: 500; line-height: 1.5; max-width: 760px; }
+  .meta p strong { color: var(--text-primary); font-weight: 600; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .col h3 { margin: 0 0 8px 0; font-size: 12px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.18em; text-transform: uppercase; }
+  .col h3 .letter { color: var(--text-primary); font-weight: 800; margin-right: 6px; }
+  .col p { margin: 8px 0 0; font-size: 11px; color: var(--text-secondary); line-height: 1.45; }
+
+  .mini { position: relative; aspect-ratio: 1 / 1; background: #000; border-radius: 8px; overflow: hidden; color: #fff; }
+  .mini-photo {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #1F2937 0%, #0B0E17 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .mini-photo::before { content: "[ PHOTO ]"; color: rgba(255,255,255,0.18); font-size: 11px; font-weight: 700; letter-spacing: 0.25em; }
+
+  /* Standard captions */
+  .mini-cap {
+    position: absolute; left: 12px; right: 12px;
+    text-align: center;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    -webkit-text-stroke: 1.5px #000;
+    paint-order: stroke fill;
+    text-shadow: 1.5px 1.5px 0 #000;
+    z-index: 2;
+  }
+  .mini-cap.top    { top: 14px; font-size: 18px; }
+  .mini-cap.bottom { bottom: 28px; font-size: 24px; }
+
+  /* Split */
+  .mini-split { display: flex; height: 100%; }
+  .mini-split .side { position: relative; flex: 1; }
+  .mini-split .photo {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .mini-split .photo.l { background: linear-gradient(135deg, #2a1a1a, #1F1F1F); }
+  .mini-split .photo.r { background: linear-gradient(135deg, #1a2a1f, #0B0E17); }
+  .mini-split .photo::before { content: "[ PHOTO ]"; color: rgba(255,255,255,0.18); font-size: 10px; font-weight: 700; letter-spacing: 0.2em; }
+  .mini-split .divider { position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 2px; background: var(--surface-base); z-index: 3; }
+  .mini-split .lbl {
+    position: absolute; bottom: 18px; left: 6px; right: 6px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    -webkit-text-stroke: 1.5px #000; paint-order: stroke fill;
+    text-shadow: 1.5px 1.5px 0 #000;
+    z-index: 4;
+  }
+  .mini-split .lbl.bad  { color: var(--accent-loss); }
+  .mini-split .lbl.good { color: var(--accent-profit); }
+
+  /* Drake */
+  .mini-drake { display: grid; grid-template-rows: 1fr 1fr; grid-template-columns: 1fr 1.1fr; height: 100%; background: var(--surface-elevated); }
+  .mini-drake .cell { position: relative; overflow: hidden; border-right: 2px solid var(--surface-base); border-bottom: 2px solid var(--surface-base); }
+  .mini-drake .cell.r2 { border-bottom: none; }
+  .mini-drake .cell.c2 { border-right: none; }
+  .mini-drake .cell.text { display: flex; align-items: center; padding: 12px 14px; background: var(--surface-elevated); }
+  .mini-drake .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1F2937 0%, #0B0E17 100%); }
+  .mini-drake .ph::before { content: "[ FACE ]"; color: rgba(255,255,255,0.18); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; }
+  .mini-drake .stmt { font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; font-size: 12px; }
+  .mini-drake .r1 .stmt { color: var(--text-muted); font-weight: 600; }
+  .mini-drake .r1 .stmt::after { content: " ✗"; color: var(--accent-loss); font-weight: 800; }
+  .mini-drake .r2 .stmt { color: var(--text-primary); }
+  .mini-drake .r2 .stmt .accent { color: var(--brand-primary); font-weight: 800; }
+  .mini-drake .r2 .stmt::after { content: " ✓"; color: var(--accent-profit); font-weight: 800; }
+
+  /* Light wm on minis */
+  .mini-wm { position: absolute; bottom: 6px; right: 8px; height: 7px; opacity: 0.30; z-index: 7; }
+  .mini-label { position: absolute; top: -1px; right: 0; background: var(--brand-primary); color: #fff; font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 0 8px 0 8px; letter-spacing: 0.08em; z-index: 8; }
+
+  .footer { margin-top: 18px; display: flex; align-items: center; justify-content: space-between; font-size: 10px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.06em; }
+  .footer img { height: 14px; opacity: 0.6; }
+</style>
+</head>
+<body>
+  <div class="meta">
+    <div class="eyebrow">MEMES · FRAMEWORK · 3 SUB-TYPES</div>
+    <h1>Light branding · Image-driven · 1080×1080</h1>
+    <p>
+      Memes drop every chrome convention from carousels/stories — no brand strip, no eyebrow, no footer cue, no "tap link in bio." The KOL's image is the asset; captions overlay in <strong>Impact-style Inter Black</strong> with 4px black stroke. Watermark is bottom-right at <strong>0.30 opacity</strong> — visible if you look, ignorable in scroll. Image content comes from KOL drops via <strong>&lt;image-slot&gt;</strong>.
+    </p>
+  </div>
+
+  <div class="grid">
+
+    <!-- A · STANDARD -->
+    <div class="col">
+      <h3><span class="letter">A</span>STANDARD</h3>
+      <div class="mini">
+        <div class="mini-photo"></div>
+        <div class="mini-cap top">When you finally understand</div>
+        <div class="mini-cap bottom">Copy Trading</div>
+        <img class="mini-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-label">A</div>
+      </div>
+      <p>Single image fills canvas · top + bottom captions overlay · classic top-text/bottom-text meme.</p>
+    </div>
+
+    <!-- B · SPLIT -->
+    <div class="col">
+      <h3><span class="letter">B</span>SPLIT</h3>
+      <div class="mini">
+        <div class="mini-split">
+          <div class="side">
+            <div class="photo l"></div>
+            <div class="lbl bad">Before</div>
+          </div>
+          <div class="side">
+            <div class="photo r"></div>
+            <div class="lbl good">After</div>
+          </div>
+          <div class="divider"></div>
+        </div>
+        <img class="mini-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-label">B</div>
+      </div>
+      <p>50/50 vertical · two image-slots · BEFORE in --accent-loss · AFTER in --accent-profit.</p>
+    </div>
+
+    <!-- C · DRAKE -->
+    <div class="col">
+      <h3><span class="letter">C</span>DRAKE</h3>
+      <div class="mini">
+        <div class="mini-drake">
+          <div class="cell r1 c1"><div class="ph"></div></div>
+          <div class="cell r1 c2 text"><div class="stmt">Other exchanges with 20% commission</div></div>
+          <div class="cell r2 c1"><div class="ph"></div></div>
+          <div class="cell r2 c2 text"><div class="stmt"><span class="accent">BingX</span> with 50% commission lifetime</div></div>
+        </div>
+        <img class="mini-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+        <div class="mini-label">C</div>
+      </div>
+      <p>2 rows × 2 cols · reject row dimmed + ✗ · approve row bright + brand-blue accent + ✓.</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span>MEMES · 3 BASE TEMPLATES · 1080×1080 · Light branding · Image-driven</span>
+    <img src="../../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>
