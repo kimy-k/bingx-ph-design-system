@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BingX PH — Batch 6a Preview · Thumbnails 01 · 02 · 03</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  body {
+    margin: 0;
+    padding: 28px 28px 32px;
+    background: var(--surface-base);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+  }
+  .meta { margin-bottom: 22px; }
+  .meta .eyebrow { font-size: 11px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+  .meta h1 { margin: 0 0 6px 0; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+  .meta p { margin: 0; font-size: 12px; color: var(--text-secondary); font-weight: 500; line-height: 1.5; max-width: 800px; }
+  .meta strong { color: var(--text-primary); font-weight: 600; }
+
+  .stack { display: flex; flex-direction: column; gap: 20px; }
+  .row { display: flex; align-items: flex-end; gap: 18px; }
+  .row .col { flex: 1; }
+  .row .col h3 { margin: 0 0 8px 0; font-size: 12px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.18em; text-transform: uppercase; }
+  .row .col h3 .letter { color: var(--text-primary); font-weight: 800; margin-right: 6px; }
+  .row .col p { margin: 8px 0 0; font-size: 11px; color: var(--text-secondary); line-height: 1.45; }
+  .row .col p strong { color: var(--text-primary); font-weight: 600; }
+
+  .scale-row { display: flex; align-items: flex-end; gap: 14px; }
+  .scale-row .full { flex: 1; }
+  .scale-row .micro { width: 168px; flex-shrink: 0; }
+  .scale-row .caption { font-size: 9px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; text-align: center; }
+
+  /* Mini thumb base */
+  .mini { position: relative; aspect-ratio: 16 / 9; background: var(--surface-base); border-radius: 6px; overflow: hidden; color: #fff; border: 1px solid rgba(255,255,255,0.06); }
+  .mini.micro { border-radius: 3px; }
+
+  .ph { background: linear-gradient(135deg, #1F2937 0%, #0B0E17 100%); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.18); font-size: 10px; font-weight: 700; letter-spacing: 0.2em; }
+  .ph::before { content: "[ PHOTO ]"; }
+  .micro .ph { font-size: 5px; }
+
+  /* A · Text-Heavy mini */
+  .mini-a { display: grid; grid-template-columns: 65% 35%; }
+  .mini-a .tz { position: relative; padding: 16px 14px; display: flex; flex-direction: column; justify-content: center;
+    background: linear-gradient(135deg, rgba(0,88,251,0.18) 0%, transparent 60%), var(--surface-base); }
+  .mini-a .h { font-size: 22px; font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; text-transform: uppercase; }
+  .mini-a .h .hl { color: var(--brand-primary); }
+  .mini-a .s { margin-top: 5px; font-size: 8px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.06em; text-transform: uppercase; }
+  .mini-a .iz { position: relative; overflow: hidden; }
+  .mini-a .iz .p { position: absolute; inset: 0; }
+  .micro .mini-a .tz { padding: 8px 8px; }
+  .micro .mini-a .h { font-size: 11px; }
+
+  /* C · Numbers-Focused mini */
+  .mini-c { display: grid; grid-template-rows: 60% 40%; }
+  .mini-c .iz { position: relative; overflow: hidden; }
+  .mini-c .iz .p { position: absolute; inset: 0; }
+  .mini-c .nz { position: relative; padding: 8px 14px; background: var(--surface-elevated); display: flex; flex-direction: column; justify-content: center; }
+  .mini-c .num { font-size: 44px; font-weight: 900; color: var(--brand-primary); line-height: 1; letter-spacing: -0.05em; font-variant-numeric: tabular-nums; text-shadow: 1.5px 1.5px 0 rgba(0,0,0,0.4); white-space: nowrap; }
+  .mini-c .num .arrow { color: var(--text-muted); font-weight: 700; font-size: 30px; margin: 0 6px; }
+  .mini-c .num .end { color: var(--accent-profit); }
+  .mini-c .num.journey { font-size: 26px; display: flex; align-items: baseline; gap: 4px; }
+  .mini-c .cap { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 11px; font-weight: 700; color: var(--text-primary); line-height: 1.05; text-align: right; max-width: 48%; }
+  .mini-c .cap .hl { color: var(--brand-primary); }
+  .mini-c .badge { position: absolute; top: 8px; left: 10px; color: #fff; font-size: 8px; font-weight: 800; padding: 3px 6px; border-radius: 3px; letter-spacing: 0.12em; z-index: 15; }
+  .mini-c .badge.results { background: var(--brand-primary); }
+  .mini-c .badge.new { background: var(--accent-profit); }
+  .micro .mini-c .nz { padding: 4px 8px; }
+  .micro .mini-c .num { font-size: 20px; }
+  .micro .mini-c .num.journey { font-size: 14px; gap: 2px; }
+  .micro .mini-c .num .arrow { font-size: 13px; margin: 0 2px; }
+  .micro .mini-c .cap { font-size: 6px; right: 8px; }
+  .micro .mini-c .badge { font-size: 5px; padding: 2px 4px; top: 4px; left: 6px; }
+
+  .mini-wm { position: absolute; bottom: 6px; right: 10px; height: 9px; opacity: 0.40; z-index: 10; }
+  .micro .mini-wm { height: 5px; bottom: 3px; right: 5px; }
+  .mini-label { position: absolute; top: -1px; right: 0; background: var(--brand-primary); color: #fff; font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 0 8px 0 8px; letter-spacing: 0.08em; z-index: 25; }
+
+  .footer { margin-top: 22px; display: flex; align-items: center; justify-content: space-between; font-size: 10px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.06em; }
+  .footer img { height: 14px; opacity: 0.6; }
+</style>
+</head>
+<body>
+  <div class="meta">
+    <div class="eyebrow">THUMBNAILS · BATCH 6a · 3 OF 10</div>
+    <h1>Thumbnails 01 · 02 · 03 — full + 168px micro test</h1>
+    <p>
+      Three thumbnails covering both approved bases: <strong>A · Text-Heavy</strong> (question hook) and <strong>C · Numbers-Focused</strong> (transformation + speed hook). Each renders at <strong>full 1280×720</strong> and at <strong>168px YouTube micro size</strong> side-by-side. If text reads at micro, it'll click on mobile feeds.
+    </p>
+  </div>
+
+  <div class="stack">
+
+    <!-- 01 -->
+    <div class="row">
+      <div class="col">
+        <h3><span class="letter">01</span>PAANO MAG-START</h3>
+        <div class="scale-row">
+          <div class="full">
+            <div class="mini mini-a">
+              <div class="tz">
+                <div class="h">Paano mag-start sa <span class="hl">crypto</span>?</div>
+                <div class="s">Beginner guide · 5 min</div>
+              </div>
+              <div class="iz"><div class="p ph"></div></div>
+              <img class="mini-wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+              <div class="mini-label">01</div>
+            </div>
+            <div class="caption">FULL · 1280×720</div>
+          </div>
+          <div class="micro">
+            <div class="mini mini-a micro">
+              <div class="tz">
+                <div class="h">Paano mag-start sa <span class="hl">crypto</span>?</div>
+              </div>
+              <div class="iz"><div class="p ph"></div></div>
+              <img class="mini-wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+            </div>
+            <div class="caption">168px MICRO</div>
+          </div>
+        </div>
+        <p><strong>Base A · Text-Heavy.</strong> Question hook · CRYPTO highlighted brand-blue · subhead in subordinate position. No badge.</p>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="row">
+      <div class="col">
+        <h3><span class="letter">02</span>₱5K → ₱XX,XXX JOURNEY</h3>
+        <div class="scale-row">
+          <div class="full">
+            <div class="mini mini-c">
+              <div class="badge results">RESULTS</div>
+              <div class="iz"><div class="p ph"></div></div>
+              <div class="nz">
+                <div class="num journey"><span>₱5,000</span><span class="arrow">→</span><span class="end">₱XX,XXX</span></div>
+                <div class="cap">My <span class="hl">90-day</span><br>Copy Trading journey</div>
+              </div>
+              <img class="mini-wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+              <div class="mini-label">02</div>
+            </div>
+            <div class="caption">FULL · 1280×720</div>
+          </div>
+          <div class="micro">
+            <div class="mini mini-c micro">
+              <div class="badge results">RESULTS</div>
+              <div class="iz"><div class="p ph"></div></div>
+              <div class="nz">
+                <div class="num journey"><span>₱5K</span><span class="arrow">→</span><span class="end">₱XX,XXX</span></div>
+                <div class="cap">90-day</div>
+              </div>
+              <img class="mini-wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+            </div>
+            <div class="caption">168px MICRO</div>
+          </div>
+        </div>
+        <p><strong>Base C · Numbers-Focused.</strong> ₱5,000 (brand-blue) → ₱XX,XXX (profit green). Override: big-number dropped 240→200px to fit single line. Caption 90-DAY highlighted. RESULTS badge top-left.</p>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="row">
+      <div class="col">
+        <h3><span class="letter">03</span>GCASH → BINGX IN 5 MIN</h3>
+        <div class="scale-row">
+          <div class="full">
+            <div class="mini mini-c">
+              <div class="badge new">NEW</div>
+              <div class="iz"><div class="p ph"></div></div>
+              <div class="nz">
+                <div class="num">5 MIN</div>
+                <div class="cap">GCash → <span class="hl">BingX</span><br>deposit walkthrough</div>
+              </div>
+              <img class="mini-wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+              <div class="mini-label">03</div>
+            </div>
+            <div class="caption">FULL · 1280×720</div>
+          </div>
+          <div class="micro">
+            <div class="mini mini-c micro">
+              <div class="badge new">NEW</div>
+              <div class="iz"><div class="p ph"></div></div>
+              <div class="nz">
+                <div class="num">5 MIN</div>
+                <div class="cap">GCash → <span class="hl">BingX</span></div>
+              </div>
+              <img class="mini-wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+            </div>
+            <div class="caption">168px MICRO</div>
+          </div>
+        </div>
+        <p><strong>Base C · Numbers-Focused.</strong> Speed hook — "5 MIN" is the credibility. Caption with BingX highlighted brand-blue. NEW badge top-left (green).</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span>THUMBNAILS · BATCH 6a · 1280×720 · dual-scale (full + 168px micro) · 3 of 10 shipped</span>
+    <img src="../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

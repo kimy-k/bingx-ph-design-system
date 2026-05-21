@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BingX PH — Batch 6b Preview · Thumbnails 04 · 05 · 06 · 07</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  body {
+    margin: 0;
+    padding: 28px 28px 32px;
+    background: var(--surface-base);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+  }
+  .meta { margin-bottom: 22px; }
+  .meta .eyebrow { font-size: 11px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+  .meta h1 { margin: 0 0 6px 0; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+  .meta p { margin: 0; font-size: 12px; color: var(--text-secondary); font-weight: 500; line-height: 1.5; max-width: 800px; }
+  .meta strong { color: var(--text-primary); font-weight: 600; }
+
+  .stack { display: flex; flex-direction: column; gap: 20px; }
+  .row .col h3 { margin: 0 0 8px 0; font-size: 12px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.18em; text-transform: uppercase; }
+  .row .col h3 .letter { color: var(--text-primary); font-weight: 800; margin-right: 6px; }
+  .row .col p { margin: 8px 0 0; font-size: 11px; color: var(--text-secondary); line-height: 1.45; }
+  .row .col p strong { color: var(--text-primary); font-weight: 600; }
+
+  .scale-row { display: flex; align-items: flex-end; gap: 14px; }
+  .scale-row .full { flex: 1; }
+  .scale-row .micro { width: 168px; flex-shrink: 0; }
+  .scale-row .caption { font-size: 9px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; text-align: center; }
+
+  .mini { position: relative; aspect-ratio: 16 / 9; background: var(--surface-base); border-radius: 6px; overflow: hidden; color: #fff; border: 1px solid rgba(255,255,255,0.06); }
+  .mini.micro { border-radius: 3px; }
+
+  .ph { background: linear-gradient(135deg, #1F2937 0%, #0B0E17 100%); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.18); font-size: 10px; font-weight: 700; letter-spacing: 0.2em; }
+  .ph::before { content: "[ PHOTO ]"; }
+  .micro .ph { font-size: 5px; }
+
+  /* A · Text-Heavy mini */
+  .mini-a { display: grid; grid-template-columns: 65% 35%; }
+  .mini-a .tz { position: relative; padding: 16px 14px; display: flex; flex-direction: column; justify-content: center;
+    background: linear-gradient(135deg, rgba(0,88,251,0.18) 0%, transparent 60%), var(--surface-base); }
+  .mini-a .h { font-size: 22px; font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; text-transform: uppercase; }
+  .mini-a .h .hl { color: var(--brand-primary); }
+  .mini-a .s { margin-top: 5px; font-size: 8px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.06em; text-transform: uppercase; }
+  .mini-a .s.warning { color: var(--accent-loss); }
+  .mini-a .iz { position: relative; overflow: hidden; }
+  .mini-a .iz .p { position: absolute; inset: 0; }
+  .micro .mini-a .tz { padding: 8px 8px; }
+  .micro .mini-a .h { font-size: 11px; }
+  .micro .mini-a .s { font-size: 5px; margin-top: 3px; }
+
+  /* B · VS mini */
+  .mini-b { display: flex; position: relative; }
+  .mini-b .side { position: relative; flex: 1; overflow: hidden; }
+  .mini-b .side .p { position: absolute; inset: 0; }
+  .mini-b .side .p.l { background: linear-gradient(135deg, #1a2030, #111827); }
+  .mini-b .side .p.r { background: linear-gradient(135deg, #2a1a1a, #1F1F1F); }
+  .mini-b .side .p::before { content: "[ PHOTO ]"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.18); font-size: 9px; font-weight: 700; letter-spacing: 0.2em; }
+  .mini-b .div { position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 2px; background: var(--brand-primary); z-index: 5; }
+  .mini-b .vs { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-8deg); font-size: 38px; font-weight: 900; color: var(--brand-primary); letter-spacing: -0.02em; z-index: 20; -webkit-text-stroke: 2.5px #fff; paint-order: stroke fill; text-shadow: 2px 2px 0 rgba(0,0,0,0.5); line-height: 1; }
+  .mini-b .lbl { position: absolute; bottom: 14px; left: 8px; right: 8px; text-align: center; font-size: 16px; font-weight: 900; color: #fff; letter-spacing: -0.02em; text-transform: uppercase; line-height: 1; -webkit-text-stroke: 1.5px #000; paint-order: stroke fill; text-shadow: 1.5px 1.5px 0 #000; z-index: 15; }
+  .micro .mini-b .vs { font-size: 18px; -webkit-text-stroke: 1.5px #fff; }
+  .micro .mini-b .lbl { font-size: 8px; bottom: 8px; }
+  .micro .mini-b .side .p::before { font-size: 5px; }
+
+  /* C · Numbers mini */
+  .mini-c { display: grid; grid-template-rows: 60% 40%; }
+  .mini-c .iz { position: relative; overflow: hidden; }
+  .mini-c .iz .p { position: absolute; inset: 0; }
+  .mini-c .nz { position: relative; padding: 8px 14px; background: var(--surface-elevated); display: flex; flex-direction: column; justify-content: center; }
+  .mini-c .num { font-size: 44px; font-weight: 900; color: var(--brand-primary); line-height: 1; letter-spacing: -0.05em; font-variant-numeric: tabular-nums; text-shadow: 1.5px 1.5px 0 rgba(0,0,0,0.4); white-space: nowrap; }
+  .mini-c .num.live { color: var(--accent-loss); animation: live-glow 1.6s ease-in-out infinite; }
+  @keyframes live-glow {
+    0%, 100% { text-shadow: 1.5px 1.5px 0 rgba(0,0,0,0.4), 0 0 0 transparent; }
+    50%      { text-shadow: 1.5px 1.5px 0 rgba(0,0,0,0.4), 0 0 8px rgba(220,38,38,0.6); }
+  }
+  .mini-c .cap { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 11px; font-weight: 700; color: var(--text-primary); line-height: 1.05; text-align: right; max-width: 48%; }
+  .mini-c .cap .hl { color: var(--brand-primary); }
+  .mini-c .badge { position: absolute; top: 8px; left: 10px; color: #fff; font-size: 8px; font-weight: 800; padding: 3px 6px; border-radius: 3px; letter-spacing: 0.12em; z-index: 15; }
+  .mini-c .badge.live { background: var(--accent-loss); }
+  .mini-c .badge.live::before { content: "● "; color: #fff; }
+  .micro .mini-c .nz { padding: 4px 8px; }
+  .micro .mini-c .num { font-size: 22px; }
+  .micro .mini-c .cap { font-size: 6px; right: 8px; }
+  .micro .mini-c .badge { font-size: 5px; padding: 2px 4px; top: 4px; left: 6px; }
+
+  .mini-wm { position: absolute; bottom: 6px; right: 10px; height: 9px; opacity: 0.40; z-index: 10; }
+  .micro .mini-wm { height: 5px; bottom: 3px; right: 5px; }
+  .mini-label { position: absolute; top: -1px; right: 0; background: var(--brand-primary); color: #fff; font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 0 8px 0 8px; letter-spacing: 0.08em; z-index: 25; }
+
+  .footer { margin-top: 22px; display: flex; align-items: center; justify-content: space-between; font-size: 10px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.06em; }
+  .footer img { height: 14px; opacity: 0.6; }
+</style>
+</head>
+<body>
+  <div class="meta">
+    <div class="eyebrow">THUMBNAILS · BATCH 6b · 7 OF 10</div>
+    <h1>Thumbnails 04 · 05 · 06 · 07 — full + 168px micro</h1>
+    <p>
+      <strong>04</strong> Text-Heavy curiosity equation · <strong>05</strong> first production Base B (VS) · <strong>06</strong> Text-Heavy with red subhead override · <strong>07</strong> Numbers-Focused with red urgency + pulse animation.
+    </p>
+  </div>
+
+  <div class="stack">
+
+    <!-- 04 -->
+    <div class="row">
+      <div class="col">
+        <h3><span class="letter">04</span>PASSIVE INCOME?</h3>
+        <div class="scale-row">
+          <div class="full">
+            <div class="mini mini-a">
+              <div class="tz">
+                <div class="h">Copy Trading = <span class="hl">passive income</span>?</div>
+                <div class="s">Honest review · 30 days later</div>
+              </div>
+              <div class="iz"><div class="p ph"></div></div>
+              <img class="mini-wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+              <div class="mini-label">04</div>
+            </div>
+            <div class="caption">FULL · 1280×720</div>
+          </div>
+          <div class="micro">
+            <div class="mini mini-a micro">
+              <div class="tz">
+                <div class="h">Copy Trading = <span class="hl">passive income</span>?</div>
+                <div class="s">30 days later</div>
+              </div>
+              <div class="iz"><div class="p ph"></div></div>
+              <img class="mini-wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+            </div>
+            <div class="caption">168px MICRO</div>
+          </div>
+        </div>
+        <p><strong>Base A · Text-Heavy.</strong> Equation hook with "=" framing question. PASSIVE INCOME highlighted brand-blue. Subhead provides time-based credibility.</p>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="row">
+      <div class="col">
+        <h3><span class="letter">05</span>BINGX VS BINANCE</h3>
+        <div class="scale-row">
+          <div class="full">
+            <div class="mini mini-b">
+              <div class="side"><div class="p l"></div><div class="lbl">BingX</div></div>
+              <div class="side"><div class="p r"></div><div class="lbl">Binance</div></div>
+              <div class="div"></div>
+              <div class="vs">VS</div>
+              <img class="mini-wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+              <div class="mini-label">05</div>
+            </div>
+            <div class="caption">FULL · 1280×720</div>
+          </div>
+          <div class="micro">
+            <div class="mini mini-b micro">
+              <div class="side"><div class="p l"></div><div class="lbl">BingX</div></div>
+              <div class="side"><div class="p r"></div><div class="lbl">Binance</div></div>
+              <div class="div"></div>
+              <div class="vs">VS</div>
+              <img class="mini-wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+            </div>
+            <div class="caption">168px MICRO</div>
+          </div>
+        </div>
+        <p><strong>Base B · Comparison VS.</strong> First production use. Both labels white at equal weight (no winner declared visually). VS badge brand-blue, rotated -8°, white stroke + black drop-shadow.</p>
+      </div>
+    </div>
+
+    <!-- 06 -->
+    <div class="row">
+      <div class="col">
+        <h3><span class="letter">06</span>3 MISTAKES</h3>
+        <div class="scale-row">
+          <div class="full">
+            <div class="mini mini-a">
+              <div class="tz">
+                <div class="h">3 <span class="hl">mistakes</span> na ginawa ko</div>
+                <div class="s warning">Wag mo itong gawin</div>
+              </div>
+              <div class="iz"><div class="p ph"></div></div>
+              <img class="mini-wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+              <div class="mini-label">06</div>
+            </div>
+            <div class="caption">FULL · 1280×720</div>
+          </div>
+          <div class="micro">
+            <div class="mini mini-a micro">
+              <div class="tz">
+                <div class="h">3 <span class="hl">mistakes</span> na ginawa ko</div>
+                <div class="s warning">Wag mo itong gawin</div>
+              </div>
+              <div class="iz"><div class="p ph"></div></div>
+              <img class="mini-wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+            </div>
+            <div class="caption">168px MICRO</div>
+          </div>
+        </div>
+        <p><strong>Base A · Text-Heavy + warning override.</strong> Subhead in <code>--accent-loss</code> red (not brand-blue) — confession/warning hook. Only Text-Heavy thumbnail with non-blue subhead.</p>
+      </div>
+    </div>
+
+    <!-- 07 -->
+    <div class="row">
+      <div class="col">
+        <h3><span class="letter">07</span>LIVE TRADE</h3>
+        <div class="scale-row">
+          <div class="full">
+            <div class="mini mini-c">
+              <div class="badge live">LIVE</div>
+              <div class="iz"><div class="p ph"></div></div>
+              <div class="nz">
+                <div class="num live">LIVE</div>
+                <div class="cap"><span class="hl">Real-time</span><br>Copy Trading</div>
+              </div>
+              <img class="mini-wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+              <div class="mini-label">07</div>
+            </div>
+            <div class="caption">FULL · 1280×720</div>
+          </div>
+          <div class="micro">
+            <div class="mini mini-c micro">
+              <div class="badge live">LIVE</div>
+              <div class="iz"><div class="p ph"></div></div>
+              <div class="nz">
+                <div class="num live">LIVE</div>
+                <div class="cap"><span class="hl">Real-time</span></div>
+              </div>
+              <img class="mini-wm" src="../../assets/logos/bingx-wordmark-white.svg" alt="">
+            </div>
+            <div class="caption">168px MICRO</div>
+          </div>
+        </div>
+        <p><strong>Base C · Numbers-Focused + LIVE override.</strong> Hero "LIVE" in <code>--accent-loss</code> red (overrides brand-blue dominance — urgency wins). Subtle pulse animation on the hero text and red ●-prefix on badge. Pulse freezes on PNG export.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span>THUMBNAILS · BATCH 6b · 1280×720 · dual-scale · 7 of 10 shipped</span>
+    <img src="../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

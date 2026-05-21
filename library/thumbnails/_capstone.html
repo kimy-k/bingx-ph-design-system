@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BingX PH — Thumbnails Capstone · All 10</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  body {
+    margin: 0;
+    padding: 32px 32px 40px;
+    background: var(--surface-base);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+  }
+  .meta { margin-bottom: 26px; }
+  .meta .eyebrow { font-size: 11px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+  .meta h1 { margin: 0 0 6px 0; font-size: 26px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+  .meta p { margin: 0; font-size: 13px; color: var(--text-secondary); font-weight: 500; line-height: 1.55; max-width: 820px; }
+  .meta p strong { color: var(--text-primary); font-weight: 600; }
+
+  section { margin-top: 28px; }
+  section h2 {
+    font-size: 12px; font-weight: 700; color: var(--brand-primary);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin: 0 0 16px 0;
+  }
+  section h2 .count { color: var(--text-muted); margin-left: 8px; font-variant-numeric: tabular-nums; }
+
+  .row { display: grid; gap: 18px; margin-bottom: 14px; }
+  .row.full { grid-template-columns: repeat(2, 1fr); }
+  .row.micro { grid-template-columns: repeat(5, 1fr); }
+
+  .tile { position: relative; aspect-ratio: 16 / 9; background: var(--surface-base); border-radius: 6px; overflow: hidden; color: #fff; border: 1px solid rgba(255,255,255,0.06); }
+  .tile.full { border-radius: 8px; }
+  .tile.micro { border-radius: 4px; }
+
+  /* Placeholders */
+  .ph { background: linear-gradient(135deg, #1F2937 0%, #0B0E17 100%); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.18); font-size: 9px; font-weight: 700; letter-spacing: 0.2em; }
+  .ph::before { content: "[ PHOTO ]"; }
+  .tile.micro .ph { font-size: 4.5px; }
+  .ph.warm { background: linear-gradient(135deg, #2a1a1a, #1F1F1F); }
+  .ph.cool { background: linear-gradient(135deg, #1a2030, #111827); }
+
+  /* A · Text-Heavy */
+  .a { display: grid; grid-template-columns: 65% 35%; }
+  .a .tz { position: relative; padding: 22px 18px; display: flex; flex-direction: column; justify-content: center;
+    background: linear-gradient(135deg, rgba(0,88,251,0.18) 0%, transparent 60%), var(--surface-base); }
+  .a .h { font-size: 28px; font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; text-transform: uppercase; }
+  .a .h .hl { color: var(--brand-primary); }
+  .a .h .hl-warning { color: var(--accent-loss); }
+  .a .s { margin-top: 6px; font-size: 10px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.06em; text-transform: uppercase; }
+  .a .s.warning { color: var(--accent-loss); }
+  .a .iz { position: relative; overflow: hidden; }
+  .a .iz .p { position: absolute; inset: 0; }
+  .tile.micro .a .tz { padding: 6px 6px; }
+  .tile.micro .a .h { font-size: 9px; }
+  .tile.micro .a .s { font-size: 4.5px; margin-top: 2px; }
+
+  /* B · VS */
+  .b { display: flex; position: relative; }
+  .b .side { position: relative; flex: 1; overflow: hidden; }
+  .b .side .p { position: absolute; inset: 0; }
+  .b .div { position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 2px; background: var(--brand-primary); z-index: 5; }
+  .b .vs { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-8deg); font-size: 48px; font-weight: 900; color: var(--brand-primary); letter-spacing: -0.02em; z-index: 20; -webkit-text-stroke: 3px #fff; paint-order: stroke fill; text-shadow: 2px 2px 0 rgba(0,0,0,0.5); line-height: 1; }
+  .b .lbl { position: absolute; bottom: 18px; left: 8px; right: 8px; text-align: center; font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.02em; text-transform: uppercase; line-height: 1; -webkit-text-stroke: 1.5px #000; paint-order: stroke fill; text-shadow: 1.5px 1.5px 0 #000; z-index: 15; }
+  .tile.micro .b .vs { font-size: 16px; -webkit-text-stroke: 1.5px #fff; }
+  .tile.micro .b .lbl { font-size: 7px; bottom: 6px; -webkit-text-stroke: 1px #000; }
+
+  /* C · Numbers */
+  .c { display: grid; grid-template-rows: 60% 40%; }
+  .c.journey { grid-template-rows: 55% 45%; }
+  .c .iz { position: relative; overflow: hidden; }
+  .c .iz .p { position: absolute; inset: 0; }
+  .c .nz { position: relative; padding: 10px 18px; background: var(--surface-elevated); display: flex; flex-direction: column; justify-content: center; }
+  .c .num { font-size: 54px; font-weight: 900; color: var(--brand-primary); line-height: 1; letter-spacing: -0.05em; font-variant-numeric: tabular-nums; text-shadow: 1.5px 1.5px 0 rgba(0,0,0,0.4); white-space: nowrap; }
+  .c .num.live { color: var(--accent-loss); }
+  .c .num.journey { font-size: 32px; display: flex; align-items: baseline; gap: 6px; }
+  .c .num.journey .arrow { color: var(--text-muted); font-weight: 700; font-size: 24px; }
+  .c .num.journey .end { color: var(--accent-profit); }
+  .c .cap { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); font-size: 13px; font-weight: 700; color: var(--text-primary); line-height: 1.1; text-align: right; max-width: 48%; }
+  .c .cap .hl { color: var(--brand-primary); }
+  .c .cap .hl-profit { color: var(--accent-profit); }
+  .c.journey .cap { position: static; transform: none; text-align: left; max-width: 100%; margin-top: 4px; font-size: 10px; }
+  .c .badge { position: absolute; top: 8px; left: 10px; color: #fff; font-size: 8px; font-weight: 800; padding: 3px 6px; border-radius: 3px; letter-spacing: 0.12em; z-index: 15; }
+  .c .badge.live    { background: var(--accent-loss); }
+  .c .badge.new     { background: var(--accent-profit); }
+  .c .badge.hot     { background: var(--brand-primary); }
+  .c .badge.results { background: var(--brand-primary); }
+  .c .badge.live::before { content: "● "; color: #fff; }
+  .tile.micro .c .nz { padding: 5px 9px; }
+  .tile.micro .c .num { font-size: 24px; }
+  .tile.micro .c .num.journey { font-size: 14px; gap: 2px; }
+  .tile.micro .c .num.journey .arrow { font-size: 12px; }
+  .tile.micro .c .cap { font-size: 6px; right: 8px; max-width: 46%; }
+  .tile.micro .c.journey .cap { font-size: 5px; }
+  .tile.micro .c .badge { font-size: 5px; padding: 2px 4px; top: 4px; left: 6px; }
+
+  .wm { position: absolute; bottom: 6px; right: 10px; height: 9px; opacity: 0.40; z-index: 10; }
+  .tile.micro .wm { height: 5px; bottom: 3px; right: 5px; }
+  .lbl-num { position: absolute; top: -1px; right: 0; background: var(--brand-primary); color: #fff; font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 0 8px 0 8px; letter-spacing: 0.08em; z-index: 25; font-variant-numeric: tabular-nums; }
+  .tile.micro .lbl-num { font-size: 7px; padding: 1px 5px; }
+
+  .footer { margin-top: 28px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.06em; }
+  .footer img { height: 14px; opacity: 0.6; }
+</style>
+</head>
+<body>
+  <div class="meta">
+    <div class="eyebrow">THUMBNAILS · CAPSTONE · 10 OF 10 SHIPPED</div>
+    <h1>Thumbnail batch complete · 73-asset library finished</h1>
+    <p>
+      All 10 YouTube thumbnails (1280×720) at <strong>full</strong> and <strong>168px YouTube micro</strong> scales. 3 sub-types: <strong>A · Text-Heavy</strong> (01, 04, 06, 09), <strong>B · VS</strong> (05), <strong>C · Numbers-Focused</strong> (02, 03, 07, 08, 10). New highlight variants added to framework: <code>.hl-warning</code> (red, controversy/risk content) and <code>.hl-profit</code> (green, growth metrics). Both reusable for future thumbnails.
+    </p>
+  </div>
+
+  <section>
+    <h2>Full size <span class="count">1280 × 720 — pair view</span></h2>
+
+    <div class="row full">
+      <div class="tile full"><div class="a">
+        <div class="tz"><div class="h">Paano mag-start sa <span class="hl">crypto</span>?</div><div class="s">Beginner guide · 5 min</div></div>
+        <div class="iz"><div class="p ph"></div></div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">01</div></div>
+
+      <div class="tile full"><div class="c journey">
+        <div class="badge results">RESULTS</div>
+        <div class="iz"><div class="p ph"></div></div>
+        <div class="nz">
+          <div class="num journey"><span>₱5,000</span><span class="arrow">→</span><span class="end">₱XX,XXX</span></div>
+          <div class="cap">My <span class="hl">90-day</span> Copy Trading journey</div>
+        </div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">02</div></div>
+
+      <div class="tile full"><div class="c">
+        <div class="badge new">NEW</div>
+        <div class="iz"><div class="p ph"></div></div>
+        <div class="nz"><div class="num">5 MIN</div><div class="cap">GCash → <span class="hl">BingX</span><br>deposit walkthrough</div></div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">03</div></div>
+
+      <div class="tile full"><div class="a">
+        <div class="tz"><div class="h">Copy Trading = <span class="hl">passive income</span>?</div><div class="s">Honest review · 30 days later</div></div>
+        <div class="iz"><div class="p ph"></div></div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">04</div></div>
+
+      <div class="tile full"><div class="b">
+        <div class="side"><div class="p ph cool"></div><div class="lbl">BingX</div></div>
+        <div class="side"><div class="p ph warm"></div><div class="lbl">Binance</div></div>
+        <div class="div"></div><div class="vs">VS</div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">05</div></div>
+
+      <div class="tile full"><div class="a">
+        <div class="tz"><div class="h">3 <span class="hl">mistakes</span> na ginawa ko</div><div class="s warning">Wag mo itong gawin</div></div>
+        <div class="iz"><div class="p ph"></div></div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">06</div></div>
+
+      <div class="tile full"><div class="c">
+        <div class="badge live">LIVE</div>
+        <div class="iz"><div class="p ph"></div></div>
+        <div class="nz"><div class="num live">LIVE</div><div class="cap"><span class="hl">Real-time</span><br>Copy Trading</div></div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">07</div></div>
+
+      <div class="tile full"><div class="c">
+        <div class="badge results">RESULTS</div>
+        <div class="iz"><div class="p ph"></div></div>
+        <div class="nz"><div class="num">MONTH 1</div><div class="cap">First 30 days<br>copy trading sa <span class="hl">BingX</span></div></div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">08</div></div>
+
+      <div class="tile full"><div class="a">
+        <div class="tz"><div class="h"><span class="hl-warning">Scam</span> ba ang BingX?</div><div class="s">Honest review · walang bias</div></div>
+        <div class="iz"><div class="p ph"></div></div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">09</div></div>
+
+      <div class="tile full"><div class="c">
+        <div class="badge hot">🔥 CHALLENGE</div>
+        <div class="iz"><div class="p ph"></div></div>
+        <div class="nz"><div class="num">₱500</div><div class="cap">Can ₱500 turn<br>into <span class="hl-profit">₱5,000</span>?</div></div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">10</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>168px YouTube micro <span class="count">CTR test scale</span></h2>
+
+    <div class="row micro">
+      <div class="tile micro"><div class="a">
+        <div class="tz"><div class="h">Paano mag-start sa <span class="hl">crypto</span>?</div></div>
+        <div class="iz"><div class="p ph"></div></div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">01</div></div>
+
+      <div class="tile micro"><div class="c journey">
+        <div class="badge results">RESULTS</div>
+        <div class="iz"><div class="p ph"></div></div>
+        <div class="nz"><div class="num journey"><span>₱5K</span><span class="arrow">→</span><span class="end">₱XX,XXX</span></div></div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">02</div></div>
+
+      <div class="tile micro"><div class="c">
+        <div class="badge new">NEW</div>
+        <div class="iz"><div class="p ph"></div></div>
+        <div class="nz"><div class="num">5 MIN</div><div class="cap">GCash → <span class="hl">BingX</span></div></div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">03</div></div>
+
+      <div class="tile micro"><div class="a">
+        <div class="tz"><div class="h"><span class="hl">passive</span>?</div></div>
+        <div class="iz"><div class="p ph"></div></div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">04</div></div>
+
+      <div class="tile micro"><div class="b">
+        <div class="side"><div class="p ph cool"></div><div class="lbl">BingX</div></div>
+        <div class="side"><div class="p ph warm"></div><div class="lbl">Binance</div></div>
+        <div class="div"></div><div class="vs">VS</div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">05</div></div>
+
+      <div class="tile micro"><div class="a">
+        <div class="tz"><div class="h">3 <span class="hl">mistakes</span></div></div>
+        <div class="iz"><div class="p ph"></div></div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">06</div></div>
+
+      <div class="tile micro"><div class="c">
+        <div class="badge live">LIVE</div>
+        <div class="iz"><div class="p ph"></div></div>
+        <div class="nz"><div class="num live">LIVE</div></div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">07</div></div>
+
+      <div class="tile micro"><div class="c">
+        <div class="badge results">RESULTS</div>
+        <div class="iz"><div class="p ph"></div></div>
+        <div class="nz"><div class="num">M1</div><div class="cap"><span class="hl">BingX</span></div></div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">08</div></div>
+
+      <div class="tile micro"><div class="a">
+        <div class="tz"><div class="h"><span class="hl-warning">Scam</span>?</div></div>
+        <div class="iz"><div class="p ph"></div></div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">09</div></div>
+
+      <div class="tile micro"><div class="c">
+        <div class="badge hot">🔥</div>
+        <div class="iz"><div class="p ph"></div></div>
+        <div class="nz"><div class="num">₱500</div><div class="cap">→ <span class="hl-profit">₱5K</span>?</div></div>
+      </div><img class="wm" src="../../assets/logos/bingx-wordmark-white.svg" alt=""><div class="lbl-num">10</div></div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <span>THUMBNAILS · 10 / 10 · 3 SUB-TYPES · 1280×720 · CTR-optimized · LIBRARY COMPLETE</span>
+    <img src="../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

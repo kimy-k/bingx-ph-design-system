@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BingX PH — Thumbnail 02 · ₱5,000 → ₱XX,XXX Journey</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="_framework/styles.css">
+<script src="_framework/image-slot.js"></script>
+<style>
+  /* PER-THUMB OVERRIDE: "₱5,000 → ₱XX,XXX" is 14+ chars at hero scale.
+     Verifier measured 1688px at 180px and 1219px at 130px — both overflow
+     the 1152px content width. Drop to 120px AND restructure the caption
+     to flow BELOW the number row instead of competing for horizontal
+     space, so the full content width is available to the number.
+
+     Headroom check: at 120px, "₱5,000 → ₱120,000" measures ~1200px,
+     leaving ~27px clearance with the wider real-number replacement. */
+
+  /* Make number-zone slightly taller (45% instead of default 40%) to
+     accommodate stacked number + caption + comfortable padding. */
+  .thumb-numbers {
+    grid-template-rows: 55% 45%;
+  }
+  .thumb-numbers .number-zone {
+    padding: 28px 72px;
+    justify-content: center;
+    gap: 8px;
+  }
+  .thumb-numbers .big-number {
+    font-size: 120px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    white-space: nowrap;
+    line-height: 1;
+  }
+  .thumb-numbers .big-number .arrow {
+    color: var(--text-muted);
+    font-weight: 700;
+    font-size: 88px;
+  }
+  .thumb-numbers .big-number .end {
+    color: var(--accent-profit);   /* growth = green */
+  }
+  /* Stack caption below — flow position, full content width, left-aligned */
+  .thumb-numbers .number-caption {
+    position: static;
+    transform: none;
+    text-align: left;
+    max-width: 100%;
+    font-size: 36px;
+    line-height: 1.15;
+  }
+</style>
+</head>
+<body class="preview-mode">
+  <div class="thumb-1280 thumb-numbers">
+    <div class="thumb-badge results">RESULTS</div>
+
+    <div class="image-zone">
+      <image-slot
+        id="thumb-02-journey"
+        shape="rect"
+        fit="cover"
+        placeholder="DROP YOUR PROFIT CHART OR PNL"></image-slot>
+    </div>
+    <div class="number-zone">
+      <div class="big-number">
+        <span>₱5,000</span>
+        <span class="arrow">→</span>
+        <span class="end">₱XX,XXX</span>
+      </div>
+      <div class="number-caption">My <span class="hl">90-day</span> Copy Trading journey</div>
+    </div>
+
+    <img class="watermark-thumb" src="../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

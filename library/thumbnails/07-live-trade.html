@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BingX PH — Thumbnail 07 · LIVE Trade</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="_framework/styles.css">
+<script src="_framework/image-slot.js"></script>
+<style>
+  /* PER-THUMB OVERRIDE: red urgency on hero number.
+     "LIVE" overrides brand-blue dominance — red signals real-time, time-
+     sensitive, watch-now. Subtle pulse in preview to communicate liveness;
+     freeze frame at full opacity on export (browsers ignore animation
+     when rendering to static PNG). */
+  .thumb-numbers .big-number.live {
+    color: var(--accent-loss);
+    animation: live-pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes live-pulse {
+    0%, 100% { text-shadow: 4px 4px 0 rgba(0,0,0,0.4), 0 0 0 transparent; }
+    50%      { text-shadow: 4px 4px 0 rgba(0,0,0,0.4), 0 0 40px rgba(220,38,38,0.55); }
+  }
+  /* Badge also pulses red (more emphatically) */
+  .thumb-badge.live::before {
+    content: "● ";
+    color: #fff;
+  }
+</style>
+</head>
+<body class="preview-mode">
+  <div class="thumb-1280 thumb-numbers">
+    <div class="thumb-badge live">LIVE</div>
+
+    <div class="image-zone">
+      <image-slot
+        id="thumb-07-live-trade"
+        shape="rect"
+        fit="cover"
+        placeholder="DROP YOUR LIVE TRADING SCREEN OR FACE"></image-slot>
+    </div>
+    <div class="number-zone">
+      <div class="big-number live">LIVE</div>
+      <div class="number-caption"><span class="hl">Real-time</span><br>Copy Trading</div>
+    </div>
+
+    <img class="watermark-thumb" src="../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BingX PH — Thumbnail Framework · 3 Sub-Type Bases</title>
+<link rel="stylesheet" href="../../../colors_and_type.css">
+<style>
+  body {
+    margin: 0;
+    padding: 28px 28px 32px;
+    background: var(--surface-base);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+  }
+  .meta { margin-bottom: 22px; }
+  .meta .eyebrow { font-size: 11px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+  .meta h1 { margin: 0 0 6px 0; font-size: 24px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+  .meta p { margin: 0; font-size: 13px; color: var(--text-secondary); font-weight: 500; line-height: 1.55; max-width: 800px; }
+  .meta p strong { color: var(--text-primary); font-weight: 600; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .col h3 { margin: 0 0 8px 0; font-size: 12px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.18em; text-transform: uppercase; }
+  .col h3 .letter { color: var(--text-primary); font-weight: 800; margin-right: 6px; }
+  .col p { margin: 10px 0 0; font-size: 11px; color: var(--text-secondary); line-height: 1.45; }
+  .col p strong { color: var(--text-primary); font-weight: 600; }
+
+  /* Mini thumb: 16:9 */
+  .mini {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--surface-base);
+    border-radius: 8px;
+    overflow: hidden;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* Photo placeholder */
+  .ph { background: linear-gradient(135deg, #1F2937 0%, #0B0E17 100%); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.18); font-size: 10px; font-weight: 700; letter-spacing: 0.2em; }
+  .ph::before { content: "[ PHOTO ]"; }
+
+  /* A · Text-Heavy */
+  .mini-a { display: grid; grid-template-columns: 65% 35%; }
+  .mini-a .tz { position: relative; padding: 16px 14px; display: flex; flex-direction: column; justify-content: center;
+    background: linear-gradient(135deg, rgba(0,88,251,0.18) 0%, transparent 60%), var(--surface-base); }
+  .mini-a .h { font-size: 22px; font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; text-transform: uppercase; }
+  .mini-a .h .hl { color: var(--brand-primary); }
+  .mini-a .s { margin-top: 5px; font-size: 8px; font-weight: 700; color: var(--brand-primary); letter-spacing: 0.06em; text-transform: uppercase; }
+  .mini-a .iz { position: relative; overflow: hidden; }
+  .mini-a .iz .p { position: absolute; inset: 0; }
+
+  /* B · VS */
+  .mini-b { display: flex; position: relative; }
+  .mini-b .side { position: relative; flex: 1; overflow: hidden; }
+  .mini-b .side .p { position: absolute; inset: 0; }
+  .mini-b .side .p.l { background: linear-gradient(135deg, #1a2030, #111827); }
+  .mini-b .side .p.r { background: linear-gradient(135deg, #2a1a1a, #1F1F1F); }
+  .mini-b .side .p::before { content: "[ PHOTO ]"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.18); font-size: 9px; font-weight: 700; letter-spacing: 0.2em; }
+  .mini-b .div { position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 2px; background: var(--brand-primary); z-index: 5; }
+  .mini-b .vs { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-8deg); font-size: 38px; font-weight: 900; color: var(--brand-primary); letter-spacing: -0.02em; z-index: 20; -webkit-text-stroke: 2.5px #fff; paint-order: stroke fill; text-shadow: 2px 2px 0 rgba(0,0,0,0.5); line-height: 1; }
+  .mini-b .lbl { position: absolute; bottom: 14px; left: 8px; right: 8px; text-align: center; font-size: 16px; font-weight: 900; color: #fff; letter-spacing: -0.02em; text-transform: uppercase; line-height: 1; -webkit-text-stroke: 1.5px #000; paint-order: stroke fill; text-shadow: 1.5px 1.5px 0 #000; z-index: 15; }
+
+  /* C · Numbers */
+  .mini-c { display: grid; grid-template-rows: 60% 40%; }
+  .mini-c .iz { position: relative; overflow: hidden; }
+  .mini-c .iz .p { position: absolute; inset: 0; }
+  .mini-c .nz { position: relative; padding: 8px 14px; background: var(--surface-elevated); display: flex; flex-direction: column; justify-content: center; }
+  .mini-c .num { font-size: 44px; font-weight: 900; color: var(--brand-primary); line-height: 1; letter-spacing: -0.05em; font-variant-numeric: tabular-nums; text-shadow: 1.5px 1.5px 0 rgba(0,0,0,0.4); }
+  .mini-c .cap { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 12px; font-weight: 700; color: var(--text-primary); line-height: 1.05; text-align: right; max-width: 50%; }
+  .mini-c .cap .hl { color: var(--brand-primary); }
+  .mini-c .badge { position: absolute; top: 8px; left: 10px; background: var(--brand-primary); color: #fff; font-size: 8px; font-weight: 800; padding: 3px 6px; border-radius: 3px; letter-spacing: 0.12em; z-index: 15; }
+
+  /* Light watermark on each */
+  .mini-wm { position: absolute; bottom: 6px; right: 10px; height: 9px; opacity: 0.40; z-index: 10; }
+  .mini-label { position: absolute; top: -1px; right: 0; background: var(--brand-primary); color: #fff; font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 0 8px 0 8px; letter-spacing: 0.08em; z-index: 25; }
+
+  /* CTR-test row — render minis at TWO scales side by side */
+  .scale-row { display: flex; align-items: flex-end; gap: 16px; margin-top: 14px; }
+  .scale-row .full { flex: 1; }
+  .scale-row .micro { width: 168px; flex-shrink: 0; }
+  .scale-row .micro .mini { border-radius: 4px; }
+  .scale-row .caption { font-size: 9px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; text-align: center; }
+
+  .footer { margin-top: 22px; display: flex; align-items: center; justify-content: space-between; font-size: 10px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.06em; }
+  .footer img { height: 14px; opacity: 0.6; }
+</style>
+</head>
+<body>
+  <div class="meta">
+    <div class="eyebrow">THUMBNAILS · FRAMEWORK · 3 SUB-TYPES</div>
+    <h1>YouTube native · 1280 × 720 · designed for tiny preview</h1>
+    <p>
+      Thumbnails live or die by CTR at <strong>~168×94px</strong> in mobile YouTube grids. Text gets huge weights and black stroke, image-slots host KOL reaction faces / charts / screenshots, brand-blue handles emphasis. Watermark at <strong>0.40 opacity</strong> — between meme-light (0.30) and standard (0.55). Each sub-type below shows the design at <strong>full preview</strong> and <strong>YouTube micro size</strong> side-by-side.
+    </p>
+  </div>
+
+  <div class="grid">
+
+    <!-- A · TEXT-HEAVY -->
+    <div class="col">
+      <h3><span class="letter">A</span>TEXT-HEAVY</h3>
+      <div class="scale-row">
+        <div class="full">
+          <div class="mini mini-a">
+            <div class="tz">
+              <div class="h">Paano<br>mag-start sa<br><span class="hl">crypto</span>?</div>
+              <div class="s">Beginner guide · 5 min</div>
+            </div>
+            <div class="iz"><div class="p ph"></div></div>
+            <img class="mini-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+            <div class="mini-label">A</div>
+          </div>
+          <div class="caption">FULL · 1280×720</div>
+        </div>
+        <div class="micro">
+          <div class="mini mini-a">
+            <div class="tz">
+              <div class="h" style="font-size:11px;">Paano<br>mag-start sa<br><span class="hl">crypto</span>?</div>
+            </div>
+            <div class="iz"><div class="p ph" style="font-size:5px;"></div></div>
+            <img class="mini-wm" style="height:5px;" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+          </div>
+          <div class="caption">168px</div>
+        </div>
+      </div>
+      <p>65% text / 35% image right. <strong>Question hooks, list reveals, dramatic hooks.</strong> Headline 104px Inter Black ALL CAPS, optional brand-blue highlight word, subhead 32px Inter Bold brand-blue uppercase. Diagonal blue tint behind text.</p>
+    </div>
+
+    <!-- B · VS -->
+    <div class="col">
+      <h3><span class="letter">B</span>COMPARISON VS</h3>
+      <div class="scale-row">
+        <div class="full">
+          <div class="mini mini-b">
+            <div class="side"><div class="p l"></div><div class="lbl">BingX</div></div>
+            <div class="side"><div class="p r"></div><div class="lbl">Binance</div></div>
+            <div class="div"></div>
+            <div class="vs">VS</div>
+            <img class="mini-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+            <div class="mini-label">B</div>
+          </div>
+          <div class="caption">FULL · 1280×720</div>
+        </div>
+        <div class="micro">
+          <div class="mini mini-b">
+            <div class="side"><div class="p l"></div><div class="lbl" style="font-size:8px;">BingX</div></div>
+            <div class="side"><div class="p r"></div><div class="lbl" style="font-size:8px;">Binance</div></div>
+            <div class="div"></div>
+            <div class="vs" style="font-size:18px; -webkit-text-stroke: 1.5px #fff;">VS</div>
+            <img class="mini-wm" style="height:5px;" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+          </div>
+          <div class="caption">168px</div>
+        </div>
+      </div>
+      <p>50/50 split · brand-blue 4px center divider · "VS" badge rotated <strong>-8°</strong> · 96px Inter Black with 6px white stroke + black drop-shadow. Each half: 56px label with 3px black stroke.</p>
+    </div>
+
+    <!-- C · NUMBERS-FOCUSED -->
+    <div class="col">
+      <h3><span class="letter">C</span>NUMBERS-FOCUSED</h3>
+      <div class="scale-row">
+        <div class="full">
+          <div class="mini mini-c">
+            <div class="badge">RESULTS</div>
+            <div class="iz"><div class="p ph"></div></div>
+            <div class="nz">
+              <div class="num">₱5,000</div>
+              <div class="cap">in <span class="hl">7 days</span><br>Copy Trading</div>
+            </div>
+            <img class="mini-wm" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+            <div class="mini-label">C</div>
+          </div>
+          <div class="caption">FULL · 1280×720</div>
+        </div>
+        <div class="micro">
+          <div class="mini mini-c">
+            <div class="badge" style="font-size:5px; padding:2px 4px;">RESULTS</div>
+            <div class="iz"><div class="p ph" style="font-size:5px;"></div></div>
+            <div class="nz">
+              <div class="num" style="font-size:18px;">₱5,000</div>
+              <div class="cap" style="font-size:6px;">in <span class="hl">7 days</span></div>
+            </div>
+            <img class="mini-wm" style="height:5px;" src="../../../assets/logos/bingx-wordmark-white.svg" alt="">
+          </div>
+          <div class="caption">168px</div>
+        </div>
+      </div>
+      <p>Image top 60% · big number bottom 40%. <strong>Result reveals, challenges, profit screenshots.</strong> 240px Inter Black brand-blue (or .profit green / .loss red), 48px Inter Bold caption right-aligned. Optional badge top-left: LIVE / NEW / 🔥 HOT / RESULTS.</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span>THUMBNAILS · 3 BASE TEMPLATES · 1280×720 · YouTube native · CTR-optimized</span>
+    <img src="../../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

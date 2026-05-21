@@ -1,0 +1,300 @@
+/* ============================================================
+   BingX PH · Thumbnails Framework · 1280×720 horizontal · YouTube native
+
+   Designed for CTR at small preview scale (~168×94px on mobile YouTube
+   grids). Text uses huge weights + black stroke so it reads at thumbnail
+   AND full size. Brand watermark at 0.4 opacity (between meme-light 0.30
+   and standard 0.55) — visible but not dominant.
+   ============================================================ */
+
+:root { --preview-scale: 0.55; }   /* 1280 × 0.55 ≈ 704 wide preview */
+
+html, body { margin: 0; padding: 0; }
+body { background: #050811; font-family: 'Inter', sans-serif; }
+
+body.preview-mode {
+  width: calc(1280px * var(--preview-scale));
+  height: calc(720px * var(--preview-scale));
+  overflow: hidden;
+}
+body.preview-mode .thumb-1280 {
+  transform: scale(var(--preview-scale));
+  transform-origin: top left;
+}
+
+/* ---------- Canvas ---------- */
+.thumb-1280 {
+  width: 1280px;
+  height: 720px;
+  background: var(--surface-base);
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ---------- Brand watermark ---------- */
+.watermark-thumb {
+  position: absolute;
+  bottom: 20px;
+  right: 24px;
+  height: 24px;
+  opacity: 0.40;
+  z-index: 10;
+}
+
+/* ---------- Image-slot brand styling (via ::part) ---------- */
+image-slot {
+  display: block;
+  background: #1a1a1a;
+}
+image-slot::part(frame) {
+  background: #1a1a1a;
+  border-radius: 0;
+}
+image-slot::part(ring) {
+  border: 3px dashed rgba(0,88,251,0.5);
+  border-radius: 0;
+}
+image-slot::part(empty) {
+  color: rgba(255,255,255,0.55);
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 22px;
+  gap: 12px;
+}
+
+/* ============================================================
+   BADGE SYSTEM (optional · top-left · urgency / freshness)
+   ============================================================ */
+.thumb-badge {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  z-index: 15;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+.thumb-badge.live    { background: var(--accent-loss); }
+.thumb-badge.new     { background: var(--accent-profit); }
+.thumb-badge.hot     { background: var(--brand-primary); }
+.thumb-badge.results { background: var(--brand-primary); }
+
+/* ============================================================
+   A · TEXT-HEAVY (65% text · 35% image · right)
+   Widened text zone from 60→65% so Taglish headlines breathe.
+   ============================================================ */
+.thumb-text-heavy {
+  display: grid;
+  grid-template-columns: 65% 35%;
+}
+.thumb-text-heavy .text-zone {
+  position: relative;
+  padding: 80px 56px 80px 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:
+    linear-gradient(135deg, rgba(0,88,251,0.15) 0%, transparent 60%),
+    var(--surface-base);
+}
+.thumb-text-heavy .headline {
+  font-size: 104px;
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  text-transform: uppercase;             /* YouTube thumbnail convention */
+}
+.thumb-text-heavy .headline .hl {
+  color: var(--brand-primary);
+}
+/* HIGHLIGHT VARIANTS for headline emphasis words.
+   .hl          (default) brand-blue · standard product/concept emphasis
+   .hl-warning  red       · ONLY for content questioning legitimacy,
+                            exposing risks, or warning viewers.
+                            Never use for promotional content.
+   .hl-profit   green     · profit numbers, growth metrics, positive outcomes.
+                            Pairs well with brand-blue starting numbers to tell
+                            a transformation story. */
+.headline .hl-warning,
+.number-caption .hl-warning {
+  color: var(--accent-loss);
+}
+.headline .hl-profit,
+.number-caption .hl-profit {
+  color: var(--accent-profit);
+}
+.thumb-text-heavy .subhead {
+  margin-top: 20px;
+  font-size: 32px;                       /* dropped from 36 — supports, doesn't compete */
+  font-weight: 700;
+  color: var(--brand-primary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.thumb-text-heavy .image-zone {
+  position: relative;
+  overflow: hidden;
+}
+.thumb-text-heavy image-slot {
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================================
+   B · COMPARISON VS (50/50 horizontal · center VS badge)
+   ============================================================ */
+.thumb-vs {
+  display: flex;
+  position: relative;
+}
+.thumb-vs .vs-side {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+}
+.thumb-vs image-slot {
+  width: 100%;
+  height: 100%;
+}
+.thumb-vs .vs-divider {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  background: var(--brand-primary);
+  z-index: 5;
+}
+.thumb-vs .vs-badge {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(-8deg);
+  font-size: 96px;
+  font-weight: 900;
+  color: var(--brand-primary);
+  letter-spacing: -0.02em;
+  z-index: 20;
+  /* White outline + black drop-shadow for readability over any image */
+  -webkit-text-stroke: 6px #FFFFFF;
+  paint-order: stroke fill;
+  text-shadow: 6px 6px 0 rgba(0,0,0,0.5);
+  line-height: 1;
+}
+.thumb-vs .vs-label {
+  position: absolute;
+  bottom: 48px;
+  left: 32px; right: 32px;
+  text-align: center;
+  font-size: 56px;
+  font-weight: 900;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1.0;
+  -webkit-text-stroke: 3px #000;
+  paint-order: stroke fill;
+  text-shadow: 3px 3px 0 #000;
+  z-index: 15;
+}
+
+/* ============================================================
+   C · NUMBERS-FOCUSED (image 60% · big number 40%)
+   ============================================================ */
+.thumb-numbers {
+  display: grid;
+  grid-template-rows: 60% 40%;
+}
+.thumb-numbers .image-zone {
+  position: relative;
+  overflow: hidden;
+}
+.thumb-numbers image-slot {
+  width: 100%;
+  height: 100%;
+}
+.thumb-numbers .number-zone {
+  position: relative;
+  padding: 32px 56px 32px 72px;
+  background: var(--surface-elevated);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.thumb-numbers .big-number {
+  font-size: 240px;
+  font-weight: 900;
+  color: var(--brand-primary);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 4px 4px 0 rgba(0,0,0,0.4);
+}
+/* Hero number size scale — pick by character count.
+
+   ⚠ HOWEVER: the default .number-caption sits absolute-positioned at
+   right:56px with max-width:50%, competing with the .big-number for
+   the right half of the canvas. Even at .hero-md / .hero-sm sizes,
+   numbers wider than ~500px of TEXT will visually overlap the caption.
+
+   Rule of thumb based on rendered TEXT width (not character count
+   alone — Inter Black has wide caps):
+     default (240px) · text ≤ ~500px · e.g. "5 MIN", "LIVE", "₱500"
+                                       Caption on right works fine.
+     .hero-md (200px) · text 500–700px · e.g. "MONTH 1", "DAY 30"
+                                       REQUIRES stacking the caption
+                                       below — add .caption-below to
+                                       .number-zone (see modifier below).
+     .hero-sm (180px) · text 700px+   · e.g. "₱5,000 → ₱120,000"
+                                       ALWAYS requires .caption-below.
+
+   ALWAYS measure at full 1280×720 before shipping. */
+.thumb-numbers .big-number.hero-md { font-size: 200px; }
+.thumb-numbers .big-number.hero-sm { font-size: 180px; }
+
+/* .caption-below modifier — restructure caption to flow under the
+   number row instead of competing for horizontal space. Stacks
+   vertically, left-aligned, full content width available to both. */
+.thumb-numbers .number-zone.caption-below {
+  justify-content: center;
+  gap: 12px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+.thumb-numbers .number-zone.caption-below .number-caption {
+  position: static;
+  transform: none;
+  text-align: left;
+  max-width: 100%;
+  font-size: 36px;
+  line-height: 1.15;
+}
+.thumb-numbers .number-zone.caption-below .big-number { line-height: 1; }
+
+.thumb-numbers .big-number.profit { color: var(--accent-profit); }
+.thumb-numbers .big-number.loss   { color: var(--accent-loss); }
+.thumb-numbers .number-caption {
+  position: absolute;
+  right: 56px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  text-align: right;
+  max-width: 50%;
+}
+.thumb-numbers .number-caption .hl { color: var(--brand-primary); }
