@@ -1,0 +1,15 @@
+{
+  "template": "base-competition-card",
+  "format": "1080x1350",
+  "slots": [
+    {"id": "campaign-type", "default": "TRADING COMPETITION", "max-length": 24, "transform": "uppercase"},
+    {"id": "comp-name", "default": "Top Copy Trader of the Month", "max-length": 48},
+    {"id": "prize-1", "default": "₱10,000", "max-length": 10},
+    {"id": "prize-2", "default": "₱5,000", "max-length": 10},
+    {"id": "prize-3", "default": "₱2,500", "max-length": 10},
+    {"id": "step-1", "default": "Sign up at BingX via [REFERRAL_LINK]", "max-length": 60},
+    {"id": "step-2", "default": "Start Copy Trading any verified trader", "max-length": 60},
+    {"id": "step-3", "default": "Top 3 highest ROI by month-end win prizes", "max-length": 60},
+    {"id": "deadline", "default": "ENDS DEC 31 · 5 DAYS LEFT", "max-length": 32, "transform": "uppercase"}
+  ]
+}

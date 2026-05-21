@@ -1,0 +1,15 @@
+{
+  "template": "base-holiday-campaign",
+  "format": "1080x1080",
+  "theme-classes": [
+    {"class": "holiday-christmas", "label": "Pasko / Christmas", "tones": "red + green radial"},
+    {"class": "holiday-cny", "label": "Chinese New Year", "tones": "red + gold radial"},
+    {"class": "holiday-independence-day", "label": "Philippine Independence Day", "tones": "blue + warm-orange radial"}
+  ],
+  "slots": [
+    {"id": "holiday-name", "default": "PASKO 2026", "max-length": 20, "transform": "uppercase"},
+    {"id": "greeting", "default": "Maligayang Pasko, ka-BingX!", "max-length": 40},
+    {"id": "promo-line", "default": "₱500 BONUS FOR PASKO", "max-length": 28, "transform": "uppercase"},
+    {"id": "mechanics", "default": "Deposit anytime sa December at makakatanggap ka ng ₱500 holiday bonus. One-time gift mula sa BingX PH family.", "max-length": 140, "multiline": true}
+  ]
+}

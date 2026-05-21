@@ -1,0 +1,455 @@
+/* ============================================================
+   BingX PH · Campaigns Framework · Editable monthly templates
+   Layered on /colors_and_type.css — does not redefine tokens.
+
+   Campaign assets are TEMPLATES, not finished creative. Each carries
+   editable slots that BingX PH marketing fills per campaign (prize
+   amount, end date, mechanics line, etc).
+
+   ============================================================
+   EDIT MODE
+   Add class="editable-mode" to <body> to show editable slot
+   underlines + edit-mode badge. Remove for export-ready render.
+   Default state in saved files: edit mode visible.
+   ============================================================ */
+
+:root {
+  --preview-scale-sq: 0.6;    /* 1080² → 648 */
+  --preview-scale-pt: 0.55;   /* 1080×1350 → 594×743 */
+}
+
+html, body { margin: 0; padding: 0; }
+body { background: #050811; font-family: 'Inter', sans-serif; }
+
+body.preview-mode.sq {
+  width: calc(1080px * var(--preview-scale-sq));
+  height: calc(1080px * var(--preview-scale-sq));
+  overflow: hidden;
+}
+body.preview-mode.sq .campaign-canvas { transform: scale(var(--preview-scale-sq)); transform-origin: top left; }
+
+body.preview-mode.pt {
+  width: calc(1080px * var(--preview-scale-pt));
+  height: calc(1350px * var(--preview-scale-pt));
+  overflow: hidden;
+}
+body.preview-mode.pt .campaign-canvas { transform: scale(var(--preview-scale-pt)); transform-origin: top left; }
+
+/* ---------- Canvas ---------- */
+.campaign-canvas {
+  background: var(--surface-elevated);
+  color: var(--text-primary);
+  padding: 96px 88px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.campaign-canvas.sq { width: 1080px; height: 1080px; }
+.campaign-canvas.pt { width: 1080px; height: 1350px; }
+
+/* Brand strip top — heavier branding for campaigns */
+.brand-strip-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 14px;
+  background: var(--brand-primary);
+}
+
+/* Standard watermark — 0.55 opacity (NOT meme-light 0.30) */
+.watermark {
+  position: absolute;
+  bottom: 48px;
+  right: 88px;
+  height: 40px;
+  opacity: 0.55;
+}
+
+/* ---------- Editable slot system ---------- */
+/* Default state: clean text. .editable-mode toggles the dashed underline. */
+.edit-slot {
+  position: relative;
+  display: inline;
+  color: inherit;
+}
+body.editable-mode .edit-slot {
+  border-bottom: 2px dashed var(--brand-primary);
+  padding-bottom: 2px;
+}
+/* Multiline slots — span the full line */
+.edit-slot.block {
+  display: block;
+}
+body.editable-mode .edit-slot.block {
+  border-bottom: 2px dashed var(--brand-primary);
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+}
+
+/* EDIT-MODE badge (top-right corner) */
+.edit-mode-badge {
+  display: none;
+  position: absolute;
+  top: 36px;
+  right: 88px;
+  background: var(--brand-primary);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+  padding: 8px 14px;
+  border-radius: 6px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  z-index: 20;
+  box-shadow: 0 0 24px rgba(0,88,251,0.4);
+}
+body.editable-mode .edit-mode-badge { display: block; }
+
+/* ---------- Shared typography ---------- */
+.eyebrow {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--brand-primary);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  line-height: 1;
+}
+.category-tag {
+  display: inline-block;
+  background: var(--brand-primary-15);
+  color: var(--brand-primary);
+  padding: 14px 26px;
+  border-radius: var(--radius-badge);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: var(--track-eyebrow);
+}
+.cta-button {
+  display: inline-block;
+  background: var(--brand-primary);
+  color: #fff;
+  padding: 26px 56px;
+  border-radius: 16px;
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  box-shadow: 0 0 32px rgba(0,88,251,0.35);
+}
+
+/* ============================================================
+   A · BONUS BANNER (1080×1080)
+   ============================================================ */
+.campaign-bonus .hero-amount {
+  font-size: 240px;
+  font-weight: 900;
+  color: var(--brand-primary);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 60px rgba(0,88,251,0.4);
+  margin: 56px 0 36px;
+  display: block;
+}
+.campaign-bonus .mechanics {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #E5E7EB;
+  max-width: 90%;
+  margin: 0 0 48px 0;
+}
+.campaign-bonus .deadline {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  font-weight: 700;
+  margin-bottom: 32px;
+}
+.campaign-bonus .deadline .end-date {
+  font-size: 36px;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+.campaign-bonus .deadline .days-left {
+  font-size: 28px;
+  color: var(--accent-warning);
+  letter-spacing: var(--track-badge);
+  text-transform: uppercase;
+}
+.campaign-bonus .cta-footer {
+  position: absolute;
+  bottom: 120px;
+  left: 88px;
+  right: 88px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.campaign-bonus .cta-link-text {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* ============================================================
+   B · COMPETITION CARD (1080×1350)
+   ============================================================ */
+.campaign-competition .comp-name {
+  font-size: 88px;
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: var(--track-display-tight);
+  margin: 36px 0 48px;
+}
+.campaign-competition .tiers {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 48px;
+}
+.campaign-competition .tier {
+  display: flex;
+  align-items: baseline;
+  gap: 28px;
+  padding: 20px 28px;
+  background: var(--surface-base);
+  border-radius: 12px;
+  border-left: 4px solid var(--brand-primary);
+}
+.campaign-competition .tier.gold   { border-left-color: #D4AF37; }
+.campaign-competition .tier.silver { border-left-color: #C0C0C0; }
+.campaign-competition .tier.bronze { border-left-color: #CD7F32; }
+.campaign-competition .tier-rank {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  min-width: 140px;
+}
+.campaign-competition .tier-prize {
+  font-size: 44px;
+  font-weight: 900;
+  color: var(--brand-primary);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+.campaign-competition .mechanics-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 48px 0;
+}
+.campaign-competition .mechanics-list li {
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.4;
+  margin-bottom: 14px;
+  padding-left: 36px;
+  position: relative;
+  color: #E5E7EB;
+}
+.campaign-competition .mechanics-list li::before {
+  content: counter(step) ".";
+  counter-increment: step;
+  position: absolute;
+  left: 0;
+  color: var(--brand-primary);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.campaign-competition .mechanics-list { counter-reset: step; }
+.campaign-competition .deadline-banner {
+  position: absolute;
+  bottom: 200px;
+  left: 88px;
+  right: 88px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent-warning);
+  letter-spacing: var(--track-badge);
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   C · WEEKLY RECAP (1080×1350)
+   ============================================================ */
+.campaign-recap .week-range {
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: var(--track-display-tight);
+  margin: 28px 0 56px;
+}
+.campaign-recap .callouts {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 56px;
+}
+.campaign-recap .callout {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 28px;
+  background: var(--surface-base);
+  border-radius: 14px;
+}
+.campaign-recap .callout-label {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: var(--track-badge);
+  text-transform: uppercase;
+  flex-shrink: 0;
+  min-width: 180px;
+}
+.campaign-recap .callout-ticker {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  flex: 1;
+}
+.campaign-recap .callout-price {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+.campaign-recap .callout-change {
+  font-size: 32px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  min-width: 140px;
+  text-align: right;
+}
+.campaign-recap .callout-change.up   { color: var(--accent-profit); }
+.campaign-recap .callout-change.down { color: var(--accent-loss); }
+.campaign-recap .footer-link {
+  position: absolute;
+  bottom: 130px;
+  left: 88px;
+  right: 88px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+.campaign-recap .footer-link .read-full { color: var(--brand-primary); }
+
+/* ============================================================
+   D · HOLIDAY CAMPAIGN (1080×1080)
+   ============================================================ */
+.campaign-holiday {
+  background: var(--surface-elevated);   /* overridden by .holiday-* below */
+}
+/* Holiday gradient overrides — subtle, never over-decorative */
+.campaign-holiday.holiday-christmas {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(220,38,38,0.20) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(5,150,105,0.18) 0%, transparent 50%),
+    var(--surface-elevated);
+}
+.campaign-holiday.holiday-cny {
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(220,38,38,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 70%, rgba(212,175,55,0.18) 0%, transparent 55%),
+    var(--surface-elevated);
+}
+.campaign-holiday.holiday-independence-day {
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(0,88,251,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 70%, rgba(217,119,6,0.16) 0%, transparent 55%),
+    var(--surface-elevated);
+}
+.campaign-holiday .greeting {
+  font-size: 96px;
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: var(--track-display-tight);
+  margin: 48px 0 36px;
+}
+.campaign-holiday .promo-line {
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--brand-primary);
+  margin-bottom: 40px;
+}
+.campaign-holiday .body {
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #E5E7EB;
+  max-width: 88%;
+  margin-bottom: 48px;
+}
+
+/* ============================================================
+   E · REFERRAL PUSH (1080×1080)
+   ============================================================ */
+.campaign-referral .hero {
+  font-size: 76px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: var(--track-display-tight);
+  margin: 32px 0 48px;
+}
+.campaign-referral .split-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 48px;
+}
+.campaign-referral .split-side {
+  background: var(--surface-base);
+  border-radius: 16px;
+  padding: 36px 28px;
+  text-align: center;
+}
+.campaign-referral .split-label {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.campaign-referral .split-amount {
+  font-size: 88px;
+  font-weight: 900;
+  color: var(--accent-profit);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.campaign-referral .split-divider {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-muted);
+}
+.campaign-referral .steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 56px 0;
+}
+.campaign-referral .steps li {
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.4;
+  padding-left: 32px;
+  position: relative;
+  margin-bottom: 12px;
+  color: #E5E7EB;
+}
+.campaign-referral .steps li::before {
+  content: counter(step) ".";
+  counter-increment: step;
+  position: absolute;
+  left: 0;
+  color: var(--brand-primary);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.campaign-referral .steps { counter-reset: step; }

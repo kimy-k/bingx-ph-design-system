@@ -1,0 +1,11 @@
+{
+  "template": "base-bonus-banner",
+  "format": "1080x1080",
+  "slots": [
+    {"id": "campaign-type", "default": "DEPOSIT BONUS", "max-length": 24, "transform": "uppercase"},
+    {"id": "prize-amount", "default": "₱5,000", "max-length": 10},
+    {"id": "mechanics", "default": "Deposit ₱500+, claim 100% bonus on first trade.", "max-length": 80, "multiline": true},
+    {"id": "end-date", "default": "ENDS DEC 31", "max-length": 14, "transform": "uppercase"},
+    {"id": "days-left", "default": "5 DAYS LEFT", "max-length": 14, "transform": "uppercase"}
+  ]
+}

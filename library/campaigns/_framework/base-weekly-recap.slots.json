@@ -1,0 +1,16 @@
+{
+  "template": "base-weekly-recap",
+  "format": "1080x1350",
+  "slots": [
+    {"id": "week-range", "default": "Dec 18 — 24", "max-length": 18},
+    {"id": "mover-ticker", "default": "BTC", "max-length": 6, "transform": "uppercase"},
+    {"id": "mover-price", "default": "$98,420", "max-length": 12},
+    {"id": "mover-change", "default": "+8.4%", "max-length": 8, "type": "signed-percent"},
+    {"id": "gainer-ticker", "default": "SOL", "max-length": 6, "transform": "uppercase"},
+    {"id": "gainer-price", "default": "$246", "max-length": 12},
+    {"id": "gainer-change", "default": "+22.6%", "max-length": 8, "type": "signed-percent"},
+    {"id": "event-text", "default": "Fed rate cut — bullish sentiment", "max-length": 56},
+    {"id": "link", "default": "[REFERRAL_LINK]", "max-length": 64}
+  ],
+  "notes": "Change cells auto-color via .up / .down class. Marketing toggles class manually on signed-percent slot rendering."
+}

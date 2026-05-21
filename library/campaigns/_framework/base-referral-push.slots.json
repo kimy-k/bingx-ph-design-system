@@ -1,0 +1,12 @@
+{
+  "template": "base-referral-push",
+  "format": "1080x1080",
+  "slots": [
+    {"id": "hero", "default": "Both of you earn — both ways", "max-length": 38},
+    {"id": "amount-you", "default": "₱500", "max-length": 8},
+    {"id": "amount-friend", "default": "₱500", "max-length": 8},
+    {"id": "step-1", "default": "Share your link via DM, chat, or post", "max-length": 56},
+    {"id": "step-2", "default": "Friend signs up + completes first trade", "max-length": 56},
+    {"id": "step-3", "default": "Both get ₱500 credited to GCash", "max-length": 56}
+  ]
+}
