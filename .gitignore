@@ -6,3 +6,9 @@ dist/
 .env.local
 .vscode/
 .idea/
+
+# AI persona experiments — local only
+ai-persona-ines-archive/
+ai-persona-*/
+library-ai/
+library-ai-exports/

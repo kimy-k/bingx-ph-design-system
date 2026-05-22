@@ -19,5 +19,8 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.4.0"
+  },
+  "dependencies": {
+    "puppeteer": "^25.0.4"
   }
 }
