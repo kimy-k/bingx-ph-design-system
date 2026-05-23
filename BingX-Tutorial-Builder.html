@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BingX Tutorial Builder — BD Team Tool</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════
+   TOOL UI — form, layout, controls (NOT printed)
+   ═══════════════════════════════════════════════════ */
+:root {
+  --brand: #0047FF;
+  --brand-dim: #0038CC;
+  --bg: #0B0E17;
+  --surface: #111827;
+  --card: #1A2032;
+  --text: #FFFFFF;
+  --text2: #9CA3AF;
+  --text3: #6B7280;
+  --green: #059669;
+  --orange: #D97706;
+  --red: #DC2626;
+  --border: rgba(255,255,255,0.08);
+  --border-m: rgba(255,255,255,0.12);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { font-family:'Inter',-apple-system,sans-serif; background:#0a0a0f; color:#e0e0e0; }
+
+/* === TOOL CHROME === */
+.tool-header {
+  background: linear-gradient(135deg, #0B0E17 0%, #111827 100%);
+  border-bottom: 1px solid rgba(0,71,255,0.3);
+  padding: 20px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top:0; z-index:100;
+}
+.tool-header h1 { font-size:20px; font-weight:800; letter-spacing:-0.02em; }
+.tool-header h1 span { color: var(--brand); }
+.tool-header .actions { display:flex; gap:10px; }
+
+.btn {
+  padding: 10px 20px; border-radius:8px; font-weight:700; font-size:14px;
+  cursor:pointer; border:none; font-family:inherit; transition: all 0.2s;
+}
+.btn-primary { background:var(--brand); color:#fff; }
+.btn-primary:hover { background:#0055ff; transform:translateY(-1px); }
+.btn-outline { background:transparent; color:var(--brand); border:1px solid var(--brand); }
+.btn-outline:hover { background:rgba(0,71,255,0.1); }
+
+.tool-body { display:flex; min-height:calc(100vh - 68px); }
+
+/* === FORM PANEL === */
+.form-panel {
+  width: 380px; flex-shrink:0; background:#0d0f18;
+  border-right:1px solid rgba(255,255,255,0.06);
+  overflow-y:auto; padding:24px;
+}
+.form-section { margin-bottom:28px; }
+.form-section-title {
+  font-size:11px; font-weight:700; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--brand); margin-bottom:14px;
+  padding-bottom:8px; border-bottom:1px solid rgba(0,71,255,0.2);
+}
+.field { margin-bottom:14px; }
+.field label {
+  display:block; font-size:12px; font-weight:600; color:var(--text2);
+  margin-bottom:5px; letter-spacing:0.02em;
+}
+.field input, .field textarea, .field select {
+  width:100%; background:#111827; border:1px solid rgba(255,255,255,0.1);
+  border-radius:8px; padding:10px 12px; color:#fff; font-family:inherit;
+  font-size:13px; outline:none; transition: border-color 0.2s;
+}
+.field input:focus, .field textarea:focus { border-color: var(--brand); }
+.field textarea { resize:vertical; min-height:60px; }
+.field .hint { font-size:11px; color:var(--text3); margin-top:4px; }
+
+.payment-grid-edit { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.payment-grid-edit .pm-item {
+  background:#111827; border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px;
+}
+.payment-grid-edit .pm-item input {
+  width:100%; background:transparent; border:none; color:#fff;
+  font-size:12px; font-weight:600; text-align:center; outline:none; padding:2px;
+}
+.payment-grid-edit .pm-item input.pm-type {
+  font-weight:400; color:var(--text2); font-size:11px;
+}
+
+.id-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+.id-tag {
+  background:rgba(0,71,255,0.15); border:1px solid rgba(0,71,255,0.3);
+  color:#93C5FD; padding:4px 10px; border-radius:6px; font-size:11px; font-weight:600;
+}
+
+/* Preset selector */
+.presets { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px; }
+.preset-btn {
+  padding:6px 12px; border-radius:6px; font-size:11px; font-weight:700;
+  cursor:pointer; border:1px solid rgba(255,255,255,0.1); background:#111827;
+  color:var(--text2); transition: all 0.2s;
+}
+.preset-btn:hover, .preset-btn.active { border-color:var(--brand); color:var(--brand); background:rgba(0,71,255,0.1); }
+
+/* === PREVIEW PANEL === */
+.preview-panel { flex:1; padding:24px; overflow-y:auto; background:#08090e; }
+.preview-nav {
+  display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:20px;
+  position:sticky; top:0; z-index:50; background:rgba(8,9,14,0.95); padding:12px; border-radius:10px;
+  backdrop-filter: blur(10px);
+}
+.preview-nav .page-btn {
+  width:36px; height:36px; border-radius:8px; border:1px solid rgba(255,255,255,0.1);
+  background:#111827; color:var(--text2); cursor:pointer; font-weight:700; font-size:13px;
+  transition: all 0.15s;
+}
+.preview-nav .page-btn.active { background:var(--brand); color:#fff; border-color:var(--brand); }
+.preview-nav .page-btn:hover:not(.active) { border-color:var(--brand); color:var(--brand); }
+
+.page-frame {
+  max-width: 720px; margin:0 auto;
+  background: var(--bg); border-radius:12px; overflow:hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  aspect-ratio: 1080/1620;
+}
+
+/* ═══════════════════════════════════════════════════
+   TUTORIAL PAGE STYLES — these match the original brand exactly
+   ═══════════════════════════════════════════════════ */
+.page {
+  width:100%; height:100%; display:flex; flex-direction:column;
+  font-family:'Inter',-apple-system,sans-serif;
+  background:var(--bg); color:var(--text); position:relative;
+  -webkit-font-smoothing:antialiased;
+}
+
+.hdr {
+  background:var(--brand); padding:2% 5%; display:flex;
+  align-items:center; justify-content:space-between; flex-shrink:0;
+  position:relative; overflow:hidden;
+}
+.hdr::after {
+  content:''; position:absolute; right:-3%; top:-50%; width:15%;
+  height:200%; background:rgba(255,255,255,0.06); border-radius:50%;
+}
+.hdr-brand { display:flex; align-items:center; gap:1em; z-index:1; }
+.hdr-logo { font-size:1.4em; font-weight:900; letter-spacing:-0.03em; }
+.hdr-tag {
+  background:rgba(255,255,255,0.18); padding:0.3em 0.8em; border-radius:2em;
+  font-size:0.6em; font-weight:700; letter-spacing:0.08em;
+}
+.hdr-meta { font-size:0.7em; font-weight:500; opacity:0.85; z-index:1; }
+
+.cnt { flex:1; padding:4% 6% 2.5%; display:flex; flex-direction:column; overflow:hidden; }
+
+.sec-label {
+  font-size:0.7em; font-weight:700; letter-spacing:0.18em;
+  text-transform:uppercase; color:var(--brand); margin-bottom:0.8em;
+}
+.ttl { font-size:2.8em; font-weight:800; line-height:1.05; letter-spacing:-0.025em; margin-bottom:0.3em; }
+.ttl .hl { color:var(--brand); }
+.sub { font-size:1.1em; color:var(--text2); line-height:1.45; margin-bottom:1.5em; max-width:90%; }
+
+/* Steps */
+.steps { display:flex; flex-direction:column; gap:1.2em; }
+.step { display:flex; gap:1em; align-items:flex-start; }
+.step-n {
+  flex-shrink:0; width:2.4em; height:2.4em; background:var(--brand); color:#fff;
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:1em;
+}
+.step-b { flex:1; padding-top:0.2em; }
+.step-t { font-size:1.05em; font-weight:700; line-height:1.25; margin-bottom:0.25em; }
+.step-d { font-size:0.85em; color:var(--text2); line-height:1.5; }
+.step-d strong { color:var(--text); font-weight:600; }
+
+/* Callouts */
+.co {
+  border-radius:0.7em; padding:1em 1.2em; display:flex; gap:0.8em;
+  align-items:flex-start; margin-top:1.2em;
+}
+.co-icon {
+  flex-shrink:0; width:1.8em; height:1.8em; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:900; font-size:0.85em; color:#fff;
+}
+.co-body { flex:1; }
+.co-title { font-size:0.78em; font-weight:700; margin-bottom:0.15em; }
+.co-text { font-size:0.75em; line-height:1.5; }
+.co-text strong { color:var(--text); font-weight:600; }
+
+.co.warn { background:rgba(217,119,6,0.1); border:1px solid rgba(217,119,6,0.3); }
+.co.warn .co-icon { background:var(--orange); }
+.co.warn .co-title { color:var(--orange); }
+.co.warn .co-text { color:#FCD9A8; }
+
+.co.danger { background:rgba(220,38,38,0.1); border:1px solid rgba(220,38,38,0.3); }
+.co.danger .co-icon { background:var(--red); }
+.co.danger .co-title { color:var(--red); }
+.co.danger .co-text { color:#FCA5A5; }
+
+.co.tip { background:rgba(5,150,105,0.1); border:1px solid rgba(5,150,105,0.3); }
+.co.tip .co-icon { background:var(--green); }
+.co.tip .co-title { color:var(--green); }
+.co.tip .co-text { color:#6EE7B7; }
+
+.co.info { background:rgba(0,71,255,0.1); border:1px solid rgba(0,71,255,0.3); }
+.co.info .co-icon { background:var(--brand); }
+.co.info .co-title { color:#60A5FA; }
+.co.info .co-text { color:#BFDBFE; }
+
+/* Payment grid */
+.pm-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:0.6em; margin-top:0.6em; margin-bottom:0.8em;
+}
+.pm-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:0.6em; padding:0.8em 0.6em; text-align:center;
+}
+.pm-name { font-weight:700; font-size:0.82em; margin-bottom:0.1em; }
+.pm-type { color:var(--text2); font-size:0.62em; font-weight:500; }
+
+/* Code inline */
+.cd {
+  font-family:'Inter',monospace; background:var(--card); padding:0.1em 0.4em;
+  border-radius:0.3em; font-size:0.9em; font-weight:600; color:#93C5FD;
+  border:1px solid var(--border);
+}
+
+/* Number cards */
+.num-row { display:flex; gap:0.7em; margin-top:1em; }
+.num-card {
+  flex:1; background:var(--card); border:1px solid var(--border);
+  border-radius:0.7em; padding:0.9em 0.6em; text-align:center;
+}
+.num-card .num { font-size:1.5em; font-weight:900; color:var(--brand); display:block; margin-bottom:0.1em; }
+.num-card .lbl { font-size:0.55em; font-weight:600; color:var(--text2); letter-spacing:0.04em; text-transform:uppercase; }
+
+/* Mockup row */
+.mock-row { display:flex; gap:0.8em; margin-top:0.8em; }
+.mock {
+  flex:1; background:var(--card); border:1px solid var(--border);
+  border-radius:0.7em; padding:1em;
+}
+.mock-label { font-size:0.6em; color:var(--text2); font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:0.4em; }
+.mock-text { font-size:0.8em; color:var(--text); font-weight:500; line-height:1.5; }
+.mock-text strong { color:var(--brand); font-weight:700; }
+
+/* Checklist */
+.chk-list { display:flex; flex-direction:column; gap:0.6em; }
+.chk {
+  display:flex; gap:0.7em; align-items:flex-start;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:0.6em; padding:0.7em 0.9em;
+}
+.chk-mark {
+  flex-shrink:0; width:1.3em; height:1.3em; border-radius:50%; color:#fff;
+  display:flex; align-items:center; justify-content:center; font-weight:900; font-size:0.7em;
+}
+.chk-mark.ok { background:var(--green); }
+.chk-mark.no { background:var(--red); }
+.chk-body { flex:1; padding-top:0.05em; }
+.chk-title { font-size:0.82em; font-weight:700; margin-bottom:0.1em; }
+.chk-desc { font-size:0.7em; color:var(--text2); line-height:1.4; }
+
+/* Footer */
+.ftr {
+  flex-shrink:0; padding:1.2em 5%; border-top:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center; background:var(--surface);
+}
+.ftr-l { font-size:0.6em; color:var(--text3); font-weight:500; }
+.ftr-l .bp { color:var(--brand); font-weight:700; }
+.ftr-r { font-size:0.6em; color:var(--text3); font-weight:600; letter-spacing:0.06em; }
+
+/* Cover page */
+.page.cover { background: linear-gradient(160deg, var(--bg) 0%, #0a0d1a 50%, #050810 100%); }
+.page.cover .cnt { justify-content:center; padding:6% 6%; }
+.cov-tag {
+  display:inline-flex; align-items:center; gap:0.5em;
+  background:rgba(0,71,255,0.12); border:1px solid rgba(0,71,255,0.3);
+  color:#93C5FD; padding:0.5em 1em; border-radius:100px;
+  font-size:0.65em; font-weight:700; letter-spacing:0.08em; margin-bottom:1.4em; width:fit-content;
+}
+.cov-tag .dot { width:0.5em; height:0.5em; border-radius:50%; background:var(--brand); box-shadow:0 0 8px var(--brand); }
+.cov-title { font-size:4.2em; font-weight:900; line-height:0.98; letter-spacing:-0.04em; margin-bottom:0.3em; }
+.cov-title .hl { color:var(--brand); display:block; }
+.cov-sub { font-size:1.2em; color:var(--text2); line-height:1.5; margin-bottom:2em; max-width:90%; }
+.flow { display:flex; align-items:center; gap:0.7em; flex-wrap:wrap; margin-top:1em; }
+.flow-chip {
+  background:var(--card); border:1px solid var(--border-m); padding:0.7em 1em;
+  border-radius:0.6em; font-weight:700; font-size:0.85em;
+}
+.flow-chip.start { background:var(--brand); color:#fff; border-color:var(--brand); }
+.flow-arr { color:var(--brand); font-weight:900; font-size:1em; }
+.cov-ftr {
+  position:absolute; bottom:5%; left:6%; right:6%;
+  display:flex; justify-content:space-between; font-size:0.65em; color:var(--text3);
+}
+.cov-ftr .bp { color:var(--brand); font-weight:700; }
+
+/* Closing mark */
+.closing { margin-top:1.5em; display:flex; align-items:center; gap:1em; padding:0 0.4em; }
+.closing-line { flex:1; height:1px; background:linear-gradient(to right, transparent, var(--brand), transparent); }
+.closing-center { text-align:center; }
+.closing-title { font-size:1em; font-weight:800; color:var(--brand); margin-bottom:0.15em; }
+.closing-sub { font-size:0.6em; color:var(--text2); font-weight:500; }
+
+/* Network tags */
+.net-tags { display:flex; gap:0.4em; margin:0.3em 0; }
+.net-tag { background:var(--card); border:1px solid var(--border-m); padding:0.2em 0.5em; border-radius:0.3em; font-size:0.75em; font-weight:600; color:#93C5FD; }
+
+/* ═══════════════════════════════════════════════════
+   PRINT STYLES — exports clean tutorial pages
+   ═══════════════════════════════════════════════════ */
+@media print {
+  .tool-header, .form-panel, .preview-nav, .no-print { display:none !important; }
+  html, body { background:#fff !important; }
+  .tool-body { display:block !important; }
+  .preview-panel { padding:0 !important; background:#fff !important; overflow:visible !important; }
+  .page-frame {
+    max-width:none !important; width:1080px !important; height:1620px !important;
+    border-radius:0 !important; box-shadow:none !important;
+    page-break-after: always; margin:0 auto;
+    aspect-ratio:auto !important;
+  }
+  .page-frame:last-child { page-break-after:auto; }
+  .page-frame.hidden-page { display:block !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="tool-header">
+  <h1><span>BingX</span> Tutorial Builder</h1>
+  <div class="actions">
+    <button class="btn btn-outline" onclick="showAllPages()">Show All Pages</button>
+    <button class="btn btn-primary" onclick="exportPDF()">⬇ Export PDF</button>
+  </div>
+</div>
+
+<div class="tool-body">
+  <!-- ═══ FORM PANEL ═══ -->
+  <div class="form-panel">
+    <div class="form-section">
+      <div class="form-section-title">Market Presets</div>
+      <div class="presets">
+        <button class="preset-btn active" onclick="loadPreset('global')">🌐 Global</button>
+        <button class="preset-btn" onclick="loadPreset('ph')">🇵🇭 Philippines</button>
+        <button class="preset-btn" onclick="loadPreset('id')">🇮🇩 Indonesia</button>
+        <button class="preset-btn" onclick="loadPreset('br')">🇧🇷 Brazil</button>
+        <button class="preset-btn" onclick="loadPreset('ng')">🇳🇬 Nigeria</button>
+        <button class="preset-btn" onclick="loadPreset('vn')">🇻🇳 Vietnam</button>
+        <button class="preset-btn" onclick="loadPreset('in')">🇮🇳 India</button>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Market Identity</div>
+      <div class="field">
+        <label>Edition Tag</label>
+        <input type="text" id="f-tag" value="GLOBAL TEMPLATE" oninput="render()">
+        <div class="hint">e.g. "PH EDITION", "ID EDITION"</div>
+      </div>
+      <div class="field">
+        <label>Market Name</label>
+        <input type="text" id="f-market" value="your market" oninput="render()">
+      </div>
+      <div class="field">
+        <label>Cover Subtitle</label>
+        <textarea id="f-covsub" oninput="render()">Download to first trade — a step-by-step onboarding template for BingX BD teams worldwide. Localize the highlighted sections for your market.</textarea>
+      </div>
+      <div class="field">
+        <label>Currency Symbol</label>
+        <input type="text" id="f-currency" value="$" oninput="render()">
+        <div class="hint">₱, Rp, R$, ₦, ₫, ₹, etc.</div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Referral & Welcome</div>
+      <div class="field">
+        <label>Referral Code</label>
+        <input type="text" id="f-referral" value="[YOUR_REFERRAL_CODE]" oninput="render()">
+      </div>
+      <div class="field">
+        <label>Welcome Gift Text</label>
+        <input type="text" id="f-welcome" value="Welcome Gift up to 7,000+ USDT available for new users with valid referral code." oninput="render()">
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Payment Methods (P2P)</div>
+      <div class="payment-grid-edit">
+        <div class="pm-item"><input id="pm1" value="[Method 1]" oninput="render()"><input class="pm-type" id="pm1t" value="E-wallet" oninput="render()"></div>
+        <div class="pm-item"><input id="pm2" value="[Method 2]" oninput="render()"><input class="pm-type" id="pm2t" value="E-wallet" oninput="render()"></div>
+        <div class="pm-item"><input id="pm3" value="[Method 3]" oninput="render()"><input class="pm-type" id="pm3t" value="Bank Transfer" oninput="render()"></div>
+        <div class="pm-item"><input id="pm4" value="[Method 4]" oninput="render()"><input class="pm-type" id="pm4t" value="Bank Transfer" oninput="render()"></div>
+        <div class="pm-item"><input id="pm5" value="[Method 5]" oninput="render()"><input class="pm-type" id="pm5t" value="Bank Transfer" oninput="render()"></div>
+        <div class="pm-item"><input id="pm6" value="[Method 6]" oninput="render()"><input class="pm-type" id="pm6t" value="Bank Transfer" oninput="render()"></div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">KYC — Accepted IDs</div>
+      <div class="field">
+        <label>Accepted ID Types</label>
+        <textarea id="f-ids" oninput="render()">National ID, Passport, Driver's License</textarea>
+        <div class="hint">Comma-separated. e.g. PhilSys, UMID, SSS ID, PRC ID, Passport</div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Scam Warning Channels</div>
+      <div class="field">
+        <label>Messaging Platforms to Warn About</label>
+        <input type="text" id="f-channels" value="Telegram, WhatsApp, Facebook, or SMS" oninput="render()">
+        <div class="hint">Localize to common scam channels in your market</div>
+      </div>
+      <div class="field">
+        <label>ID Scam Channels</label>
+        <input type="text" id="f-idchannels" value="Telegram, Facebook, Viber, or any messaging app" oninput="render()">
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">Local Minimum</div>
+      <div class="field">
+        <label>Suggested Start Amount (with currency)</label>
+        <input type="text" id="f-minamount" value="$20-50" oninput="render()">
+        <div class="hint">e.g. ₱500, Rp 300,000, ₦15,000</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PREVIEW PANEL ═══ -->
+  <div class="preview-panel">
+    <div class="preview-nav no-print">
+      <button class="page-btn active" onclick="goPage(0)">1</button>
+      <button class="page-btn" onclick="goPage(1)">2</button>
+      <button class="page-btn" onclick="goPage(2)">3</button>
+      <button class="page-btn" onclick="goPage(3)">4</button>
+      <button class="page-btn" onclick="goPage(4)">5</button>
+      <button class="page-btn" onclick="goPage(5)">6</button>
+      <button class="page-btn" onclick="goPage(6)">7</button>
+      <button class="page-btn" onclick="goPage(7)">8</button>
+      <button class="page-btn" onclick="goPage(8)">9</button>
+      <button class="page-btn" onclick="goPage(9)">10</button>
+      <button class="page-btn" onclick="goPage(10)">11</button>
+    </div>
+    <div id="pages-container"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+// MARKET PRESETS
+// ═══════════════════════════════════════════════════
+const presets = {
+  global: {
+    tag:'GLOBAL TEMPLATE', market:'your market', currency:'$',
+    covsub:'Download to first trade — a step-by-step onboarding template for BingX BD teams worldwide. Localize the highlighted sections for your market.',
+    referral:'[YOUR_REFERRAL_CODE]', welcome:'Welcome Gift up to 7,000+ USDT available for new users with valid referral code.',
+    pm:[['[Method 1]','E-wallet'],['[Method 2]','E-wallet'],['[Method 3]','Bank Transfer'],['[Method 4]','Bank Transfer'],['[Method 5]','Bank Transfer'],['[Method 6]','Bank Transfer']],
+    ids:'National ID, Passport, Driver\'s License',
+    channels:'Telegram, WhatsApp, Facebook, or SMS',
+    idchannels:'Telegram, Facebook, Viber, or any messaging app',
+    minamount:'$20-50'
+  },
+  ph: {
+    tag:'PH EDITION', market:'Filipino traders', currency:'₱',
+    covsub:'Mula sa pag-download hanggang sa unang trade — step-by-step guide na ginawa para sa Filipino crypto community. GCash, Maya, PhilSys ID, Taglish.',
+    referral:'[YOUR_REFERRAL_CODE]', welcome:'May Welcome Gift hanggang 7,000+ USDT. Available para sa new users na may valid referral code.',
+    pm:[['GCash','E-wallet'],['Maya','E-wallet'],['BPI','Bank Transfer'],['BDO','Bank Transfer'],['UnionBank','Bank Transfer'],['Metrobank','Bank Transfer']],
+    ids:'PhilSys (National ID), Passport, Driver\'s License, UMID, SSS ID, PRC ID',
+    channels:'Telegram, Facebook, o text',
+    idchannels:'Telegram, FB Messenger, o Viber',
+    minamount:'₱500'
+  },
+  id: {
+    tag:'ID EDITION', market:'Indonesian traders', currency:'Rp',
+    covsub:'Dari download sampai trade pertama — panduan langkah demi langkah untuk komunitas crypto Indonesia. OVO, GoPay, Dana, KTP.',
+    referral:'[YOUR_REFERRAL_CODE]', welcome:'Welcome Gift hingga 7,000+ USDT untuk pengguna baru dengan kode referral valid.',
+    pm:[['OVO','E-wallet'],['GoPay','E-wallet'],['Dana','E-wallet'],['BCA','Bank Transfer'],['Mandiri','Bank Transfer'],['BNI','Bank Transfer']],
+    ids:'KTP (National ID), Passport, SIM (Driver\'s License)',
+    channels:'Telegram, WhatsApp, atau SMS',
+    idchannels:'Telegram, WhatsApp, atau aplikasi chat lainnya',
+    minamount:'Rp 300.000'
+  },
+  br: {
+    tag:'BR EDITION', market:'Brazilian traders', currency:'R$',
+    covsub:'Do download até o primeiro trade — guia passo a passo para a comunidade crypto brasileira. PIX, Mercado Pago, CPF.',
+    referral:'[YOUR_REFERRAL_CODE]', welcome:'Welcome Gift de até 7.000+ USDT para novos usuários com código de referência válido.',
+    pm:[['PIX','Instant'],['Mercado Pago','E-wallet'],['Nubank','Bank Transfer'],['Bradesco','Bank Transfer'],['Itaú','Bank Transfer'],['Banco do Brasil','Bank Transfer']],
+    ids:'CPF + CNH (Driver\'s License), RG (National ID), Passport',
+    channels:'Telegram, WhatsApp, ou SMS',
+    idchannels:'Telegram, WhatsApp, ou qualquer aplicativo de mensagens',
+    minamount:'R$ 100'
+  },
+  ng: {
+    tag:'NG EDITION', market:'Nigerian traders', currency:'₦',
+    covsub:'From download to first trade — step-by-step guide for the Nigerian crypto community. OPay, Kuda, NIN, Naira deposits.',
+    referral:'[YOUR_REFERRAL_CODE]', welcome:'Welcome Gift up to 7,000+ USDT available for new users with valid referral code.',
+    pm:[['OPay','Mobile Money'],['Kuda','Bank Transfer'],['GTBank','Bank Transfer'],['Access Bank','Bank Transfer'],['Zenith Bank','Bank Transfer'],['UBA','Bank Transfer']],
+    ids:'NIN (National ID), International Passport, Driver\'s License, Voter\'s Card',
+    channels:'Telegram, WhatsApp, or SMS',
+    idchannels:'Telegram, WhatsApp, or any messaging app',
+    minamount:'₦15,000'
+  },
+  vn: {
+    tag:'VN EDITION', market:'Vietnamese traders', currency:'₫',
+    covsub:'Từ tải app đến giao dịch đầu tiên — hướng dẫn từng bước cho cộng đồng crypto Việt Nam. MoMo, ZaloPay, CCCD.',
+    referral:'[YOUR_REFERRAL_CODE]', welcome:'Quà chào mừng lên đến 7.000+ USDT cho người dùng mới có mã giới thiệu hợp lệ.',
+    pm:[['MoMo','E-wallet'],['ZaloPay','E-wallet'],['VietQR','Bank Transfer'],['Vietcombank','Bank Transfer'],['Techcombank','Bank Transfer'],['MB Bank','Bank Transfer']],
+    ids:'CCCD (Citizen ID), Passport, Driver\'s License',
+    channels:'Telegram, Zalo, hoặc SMS',
+    idchannels:'Telegram, Zalo, Facebook, hoặc ứng dụng nhắn tin',
+    minamount:'500.000₫'
+  },
+  in: {
+    tag:'IN EDITION', market:'Indian traders', currency:'₹',
+    covsub:'From download to first trade — step-by-step guide for the Indian crypto community. UPI, Paytm, PhonePe, Aadhaar KYC.',
+    referral:'[YOUR_REFERRAL_CODE]', welcome:'Welcome Gift up to 7,000+ USDT available for new users with valid referral code.',
+    pm:[['UPI','Instant'],['Paytm','E-wallet'],['PhonePe','E-wallet'],['IMPS','Bank Transfer'],['NEFT','Bank Transfer'],['Google Pay','E-wallet']],
+    ids:'Aadhaar Card, PAN Card, Passport, Driver\'s License, Voter ID',
+    channels:'Telegram, WhatsApp, or SMS',
+    idchannels:'Telegram, WhatsApp, or any messaging app',
+    minamount:'₹1,500'
+  }
+};
+
+function loadPreset(key) {
+  const p = presets[key];
+  document.getElementById('f-tag').value = p.tag;
+  document.getElementById('f-market').value = p.market;
+  document.getElementById('f-covsub').value = p.covsub;
+  document.getElementById('f-currency').value = p.currency;
+  document.getElementById('f-referral').value = p.referral;
+  document.getElementById('f-welcome').value = p.welcome;
+  document.getElementById('f-ids').value = p.ids;
+  document.getElementById('f-channels').value = p.channels;
+  document.getElementById('f-idchannels').value = p.idchannels;
+  document.getElementById('f-minamount').value = p.minamount;
+  for(let i=0;i<6;i++){
+    document.getElementById('pm'+(i+1)).value = p.pm[i][0];
+    document.getElementById('pm'+(i+1)+'t').value = p.pm[i][1];
+  }
+  document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  render();
+}
+
+// ═══════════════════════════════════════════════════
+// GET FORM VALUES
+// ═══════════════════════════════════════════════════
+function F() {
+  return {
+    tag: document.getElementById('f-tag').value,
+    market: document.getElementById('f-market').value,
+    covsub: document.getElementById('f-covsub').value,
+    currency: document.getElementById('f-currency').value,
+    referral: document.getElementById('f-referral').value,
+    welcome: document.getElementById('f-welcome').value,
+    ids: document.getElementById('f-ids').value,
+    channels: document.getElementById('f-channels').value,
+    idchannels: document.getElementById('f-idchannels').value,
+    minamount: document.getElementById('f-minamount').value,
+    pm: [
+      [document.getElementById('pm1').value, document.getElementById('pm1t').value],
+      [document.getElementById('pm2').value, document.getElementById('pm2t').value],
+      [document.getElementById('pm3').value, document.getElementById('pm3t').value],
+      [document.getElementById('pm4').value, document.getElementById('pm4t').value],
+      [document.getElementById('pm5').value, document.getElementById('pm5t').value],
+      [document.getElementById('pm6').value, document.getElementById('pm6t').value],
+    ]
+  };
+}
+
+// ═══════════════════════════════════════════════════
+// PAGE RENDERERS
+// ═══════════════════════════════════════════════════
+function hdr(f, stepLabel, pageNum) {
+  return `<div class="hdr"><div class="hdr-brand"><div class="hdr-logo">Bing<span style="font-weight:400">X</span></div><span class="hdr-tag">${f.tag}</span></div><div class="hdr-meta">${stepLabel} · ${String(pageNum).padStart(2,'0')} / 11</div></div>`;
+}
+function ftr(f, pageNum) {
+  return `<div class="ftr"><div class="ftr-l"><span class="bp">BingX ${f.tag}</span> · Localized for ${f.market}</div><div class="ftr-r">${String(pageNum).padStart(2,'0')} / 11</div></div>`;
+}
+
+function pg01(f) {
+  return `<div class="page cover">${hdr(f,'Cover',1)}<div class="cnt"><div class="cov-tag"><span class="dot"></span>BD TEAM ONBOARDING KIT</div><h1 class="cov-title">New User Tutorial<span class="hl">For Every Market</span></h1><p class="cov-sub">${f.covsub}</p><div class="flow"><div class="flow-chip start">Download</div><span class="flow-arr">→</span><div class="flow-chip">Account</div><span class="flow-arr">→</span><div class="flow-chip">KYC</div><span class="flow-arr">→</span><div class="flow-chip">Deposit</div><span class="flow-arr">→</span><div class="flow-chip">Trade</div></div></div><div class="cov-ftr"><div>11 PAGES · APP VERSION · ENGLISH BASELINE</div><div><span class="bp">BingX</span> · BD TEAM</div></div></div>`;
+}
+
+function pg02(f) {
+  return `<div class="page">${hdr(f,'Step 1',2)}<div class="cnt"><div class="sec-label">Step 1 — Download</div><h2 class="ttl">Download the <span class="hl">BingX App</span></h2><p class="sub">Avoid fake apps. Use only the official channels below.</p><div class="steps"><div class="step"><div class="step-n">A</div><div class="step-b"><div class="step-t">Android — Google Play or APK</div><div class="step-d">Search <strong>"BingX: Buy BTC Crypto"</strong> on Google Play. If your region blocks the listing, visit <span class="cd">bingx.com/download</span> and download the official APK.</div></div></div><div class="step"><div class="step-n">B</div><div class="step-b"><div class="step-t">iOS — App Store or TestFlight</div><div class="step-d">Search <strong>"BingX"</strong> in the App Store. If unavailable, install <strong>TestFlight</strong> first, then use the invite link from <span class="cd">bingx.com/download</span>.</div></div></div></div><div class="co danger"><div class="co-icon">!</div><div class="co-body"><div class="co-title">SCAM WARNING — Stay Vigilant</div><div class="co-text">If anyone DMs you a "BingX download link" via <strong>${f.channels}</strong> — <strong>it's a scam.</strong> Always type <span class="cd">bingx.com</span> into your browser directly. Official BingX staff will never message you first.</div></div></div><div class="co info"><div class="co-icon">i</div><div class="co-body"><div class="co-title">Why TestFlight / APK?</div><div class="co-text">Some regions have strict rules for crypto apps. This isn't a red flag — it's normal for all global exchanges. As long as your source is <strong>bingx.com</strong>, you're safe.</div></div></div></div>${ftr(f,2)}</div>`;
+}
+
+function pg03(f) {
+  return `<div class="page">${hdr(f,'Step 2',3)}<div class="cnt"><div class="sec-label">Step 2 — Account</div><h2 class="ttl">Create Your <span class="hl">BingX Account</span></h2><p class="sub">5 minutes. Use your email or phone number.</p><div class="steps"><div class="step"><div class="step-n">1</div><div class="step-b"><div class="step-t">Open BingX app, tap "Get Started"</div><div class="step-d">You'll see the big blue button on the home screen.</div></div></div><div class="step"><div class="step-n">2</div><div class="step-b"><div class="step-t">Sign up via email or phone number</div><div class="step-d">You can also use your <strong>Google</strong> account. Create a <strong>strong password</strong> (minimum 8 characters, include a number and symbol).</div></div></div><div class="step"><div class="step-n">3</div><div class="step-b"><div class="step-t">Enter the Referral Code</div><div class="step-d">In the <strong>"Referrer's Referral Code or UID"</strong> field, enter: <span class="cd">${f.referral}</span>. Important for claiming welcome bonuses and trading fee discounts.</div></div></div><div class="step"><div class="step-n">4</div><div class="step-b"><div class="step-t">Verify your email / phone</div><div class="step-d">A 6-digit code will be sent to your email or SMS. Enter it in the app. Done — account created.</div></div></div></div><div class="co tip"><div class="co-icon">$</div><div class="co-body"><div class="co-title">Welcome Bonus</div><div class="co-text">${f.welcome}</div></div></div></div>${ftr(f,3)}</div>`;
+}
+
+function pg04(f) {
+  return `<div class="page">${hdr(f,'Step 3',4)}<div class="cnt"><div class="sec-label">Step 3 — KYC</div><h2 class="ttl">Complete <span class="hl">Identity Verification</span></h2><p class="sub">2-10 minutes. Required to deposit and trade.</p><div class="steps"><div class="step"><div class="step-n">1</div><div class="step-b"><div class="step-t">Go to Sidebar — Tap "Verification"</div><div class="step-d">Tap your avatar at the top-left of the app. Find <strong>"Verification"</strong> in Settings (shows "Unverified" if new).</div></div></div><div class="step"><div class="step-n">2</div><div class="step-b"><div class="step-t">Tap "Verify Now" → Advanced Verification</div><div class="step-d">Skip Basic — go straight to <strong>Advanced</strong>. Unlocks higher deposit and withdrawal limits.</div></div></div><div class="step"><div class="step-n">3</div><div class="step-b"><div class="step-t">Select your country + ID type</div><div class="step-d">Accepted IDs: <strong>${f.ids}.</strong> Take a clear photo (front + back if applicable).</div></div></div><div class="step"><div class="step-n">4</div><div class="step-b"><div class="step-t">Selfie while holding your ID</div><div class="step-d">Good lighting, no glare. Make sure both your face and the ID are clearly visible.</div></div></div></div><div class="co danger"><div class="co-icon">!</div><div class="co-body"><div class="co-title">Protect Your ID — Never Share It</div><div class="co-text">Only upload your ID inside the BingX KYC flow. <strong>Never send ID photos via ${f.idchannels}</strong> — even if someone claims to be "BingX support." All official verification happens inside the app only.</div></div></div></div>${ftr(f,4)}</div>`;
+}
+
+function pg05(f) {
+  const pmHtml = f.pm.map(p=>`<div class="pm-card"><div class="pm-name">${p[0]}</div><div class="pm-type">${p[1]}</div></div>`).join('');
+  return `<div class="page">${hdr(f,'Step 4A',5)}<div class="cnt"><div class="sec-label">Step 4A — Deposit via P2P</div><h2 class="ttl">Buy <span class="hl">USDT via Local Payment</span></h2><p class="sub">Most popular method. Local currency → USDT direct.</p><div class="pm-grid">${pmHtml}</div><div class="steps"><div class="step"><div class="step-n">1</div><div class="step-b"><div class="step-t">Go to Assets → Deposit → P2P Trading</div><div class="step-d">Select <strong>USDT</strong>, set the amount in your local currency, and choose your payment method.</div></div></div><div class="step"><div class="step-n">2</div><div class="step-b"><div class="step-t">Pick a Verified Merchant</div><div class="step-d">Look for <strong>99%+</strong> completion rate and high completed orders. Tap <strong>"Buy"</strong>.</div></div></div><div class="step"><div class="step-n">3</div><div class="step-b"><div class="step-t">Pay via your local method</div><div class="step-d">Copy the merchant's account number. Transfer from your payment app. Then <strong>tap "Transferred, notify seller"</strong> in BingX.</div></div></div><div class="step"><div class="step-n">4</div><div class="step-b"><div class="step-t">Wait for USDT release</div><div class="step-d">Usually 5-15 minutes. USDT goes to your <strong>Fund Account</strong> once the merchant confirms.</div></div></div></div><div class="co danger"><div class="co-icon">!</div><div class="co-body"><div class="co-title">P2P Scam Protection — Three Rules</div><div class="co-text"><strong>1.</strong> Never release USDT before payment confirms in your BANK APP — fake SMS notifications exist. <strong>2.</strong> Use BingX built-in chat only — never move to ${f.channels}. <strong>3.</strong> If someone offers a "better rate" outside the app, it's a scam.</div></div></div></div>${ftr(f,5)}</div>`;
+}
+
+function pg06(f) {
+  return `<div class="page">${hdr(f,'Step 4B',6)}<div class="cnt"><div class="sec-label">Step 4B — Deposit On-Chain</div><h2 class="ttl">Transfer <span class="hl">crypto from another exchange</span></h2><p class="sub">If you already have crypto on Binance, Coinbase, or a wallet — send it to BingX.</p><div class="steps"><div class="step"><div class="step-n">1</div><div class="step-b"><div class="step-t">Get your deposit address in BingX</div><div class="step-d">Go to <strong>Assets → Deposit → Crypto</strong>. Select the coin (e.g. USDT, BTC, ETH).</div></div></div><div class="step"><div class="step-n">2</div><div class="step-b"><div class="step-t">Select the correct network</div><div class="step-d">USDT supports multiple networks:</div></div></div></div><div class="net-tags"><span class="net-tag">TRC20</span><span class="net-tag">ERC20</span><span class="net-tag">BEP20</span><span class="net-tag">Solana</span></div><div class="steps" style="margin-top:0.6em"><div class="step"><div class="step-n">3</div><div class="step-b"><div class="step-t">Copy the deposit address</div><div class="step-d">Tap "Copy". You can also scan the QR code from your sender app.</div></div></div><div class="step"><div class="step-n">4</div><div class="step-b"><div class="step-t">Withdraw from your other platform</div><div class="step-d">Paste the address. <strong>Confirm same network.</strong> Submit and wait for confirmation (1-15 mins).</div></div></div></div><div class="co danger"><div class="co-icon">!</div><div class="co-body"><div class="co-title">WRONG NETWORK = LOST FUNDS</div><div class="co-text">If you send USDT-TRC20 to a USDT-ERC20 address, <strong>your funds are gone permanently</strong>. No support can help. Network mismatch = permanent loss. Double-check before sending.</div></div></div><div class="co tip"><div class="co-icon">✓</div><div class="co-body"><div class="co-title">Test First with a Small Amount</div><div class="co-text">First time transferring from a platform? Send <strong>$5-10 USDT first</strong>. Once it arrives, send the full amount. Cheaper than losing everything.</div></div></div></div>${ftr(f,6)}</div>`;
+}
+
+function pg07(f) {
+  return `<div class="page">${hdr(f,'Step 5A',7)}<div class="cnt"><div class="sec-label">Step 5A — Futures Trading</div><h2 class="ttl">Open a <span class="hl">Futures Trade</span></h2><p class="sub">For beginners — start small, set risk limits.</p><div class="steps"><div class="step"><div class="step-n">1</div><div class="step-b"><div class="step-t">Go to Futures, select a pair</div><div class="step-d">Bottom nav → <strong>Futures</strong>. Default is <span class="cd">BTCUSDT</span>. You can also trade ETH/USDT, SOL/USDT, etc.</div></div></div><div class="step"><div class="step-n">2</div><div class="step-b"><div class="step-t">Margin Mode → Isolated</div><div class="step-d">Choose <strong>Isolated Mode</strong>. Only the margin for this specific trade is at risk — not your entire account balance.</div></div></div><div class="step"><div class="step-n">3</div><div class="step-b"><div class="step-t">Leverage → 2x to 5x maximum</div><div class="step-d">Higher leverage = higher liquidation risk. Beginners: <strong>never exceed 5x</strong>. 100x is for content, not sustainable trading.</div></div></div><div class="step"><div class="step-n">4</div><div class="step-b"><div class="step-t">Position Size → max 10% of balance</div><div class="step-d">Never go all-in. Use <strong>5-10% of total account</strong> per trade. Keep 90% in reserve.</div></div></div><div class="step"><div class="step-n">5</div><div class="step-b"><div class="step-t">Set TP / SL before opening</div><div class="step-d"><strong>Take Profit + Stop Loss = required</strong>, not optional. Click "TP/SL" before tapping Open Long/Short.</div></div></div></div><div class="co danger"><div class="co-icon">!</div><div class="co-body"><div class="co-title">LEVERAGE = AMPLIFIED LOSSES</div><div class="co-text">At <strong>5x leverage</strong>, a 20% price drop = 100% loss (liquidation). At <strong>10x</strong>, 10% drop = total loss. At <strong>20x</strong>, 5% drop = total loss. Crypto can move 5-10% in minutes. Trade only money you can afford to lose entirely.</div></div></div></div>${ftr(f,7)}</div>`;
+}
+
+function pg08(f) {
+  return `<div class="page">${hdr(f,'Step 5B',8)}<div class="cnt"><div class="sec-label">Step 5B — Close Trade</div><h2 class="ttl">Close your <span class="hl">trade</span></h2><p class="sub">Two ways: manual close, or automatic via TP/SL.</p><div class="mock-row"><div class="mock"><div class="mock-label">Option 1 · Manual Close</div><div class="mock-text"><strong>Position</strong> → tap Close → choose amount → OK<br><br>You decide when. Good for cutting losses or taking profits early.</div></div><div class="mock"><div class="mock-label">Option 2 · Automatic</div><div class="mock-text"><strong>TP/SL</strong> triggers automatically when price hits target<br><br>Hands-off. Required if you can't monitor 24/7.</div></div></div><div class="steps"><div class="step"><div class="step-n">1</div><div class="step-b"><div class="step-t">After Close — Check Trade History</div><div class="step-d">Go to <strong>Orders → Order History</strong>. Verify PnL (profit/loss), fees, and filled price. Important for record-keeping and tax purposes.</div></div></div><div class="step"><div class="step-n">2</div><div class="step-b"><div class="step-t">Profit/Loss → returns to your balance</div><div class="step-d">Realized PnL goes back to your <strong>Perpetual Futures Account</strong> balance. You can transfer to Fund Account anytime.</div></div></div></div><div class="co warn"><div class="co-icon">!</div><div class="co-body"><div class="co-title">Avoid These Emotional Traps</div><div class="co-text"><strong>1.</strong> Don't add to a losing trade ("averaging down") — you're throwing money away. <strong>2.</strong> Don't remove your Stop Loss to "extend" — that destroys accounts. <strong>3.</strong> Don't revenge trade after a loss — take a break, walk away.</div></div></div><div class="co info"><div class="co-icon">i</div><div class="co-body"><div class="co-title">Funding Rate Matters</div><div class="co-text">If positive: longs pay shorts (you pay if you're long). If negative: shorts pay longs. Holding trades for days? <strong>Check funding rate every 8 hours.</strong></div></div></div></div>${ftr(f,8)}</div>`;
+}
+
+function pg09(f) {
+  return `<div class="page">${hdr(f,'Step 6A',9)}<div class="cnt"><div class="sec-label">Step 6A — Copy Trading</div><h2 class="ttl">Choose a <span class="hl">Trader to Copy</span></h2><p class="sub">For those who want to trade but lack time or experience.</p><div class="steps"><div class="step"><div class="step-n">1</div><div class="step-b"><div class="step-t">Go to "Copy Trading Plaza" → Futures</div><div class="step-d">Browse recommended traders. Tap <strong>"Smart Ranking"</strong> for a filtered list by performance.</div></div></div><div class="step"><div class="step-n">2</div><div class="step-b"><div class="step-t">Pick "Conservative Traders" tab</div><div class="step-d">Stable returns with lower volatility. <strong>Avoid "Soaring ROI"</strong> at first — high recent returns often mean high recent risk.</div></div></div><div class="step"><div class="step-n">3</div><div class="step-b"><div class="step-t">Check the Trader's Stats — 4 Things</div><div class="step-d"><strong>a)</strong> Positive 30D ROI &nbsp; <strong>b)</strong> Max Drawdown within tolerance (ideally <span class="cd">&lt; 30%</span>) &nbsp; <strong>c)</strong> Copy days <span class="cd">&gt; 30</span> (proven track record) &nbsp; <strong>d)</strong> Cumulative copier earnings <span class="cd">&gt; 0</span></div></div></div><div class="step"><div class="step-n">4</div><div class="step-b"><div class="step-t">Tap their avatar → Review Performance</div><div class="step-d">Check their <strong>trading history, win rate, and active positions</strong>. If they only went long during a bull market, they're untested in a bear market.</div></div></div></div><div class="co danger"><div class="co-icon">!</div><div class="co-body"><div class="co-title">Past Performance ≠ Future Returns</div><div class="co-text">Even Conservative Traders <strong>can and do lose</strong>. Crypto markets are unpredictable — even pros lose. Copy Trading is NOT passive income. Only copy with money <strong>you can afford to lose completely</strong>.</div></div></div></div>${ftr(f,9)}</div>`;
+}
+
+function pg10(f) {
+  return `<div class="page">${hdr(f,'Step 6B',10)}<div class="cnt"><div class="sec-label">Step 6B — Set Up Copy</div><h2 class="ttl">Start <span class="hl">Copy Trading</span></h2><p class="sub">Configure your copy mode + amount + risk limits.</p><div class="steps"><div class="step"><div class="step-n">1</div><div class="step-b"><div class="step-t">Tap "Copy Now"</div><div class="step-d">Default mode is <strong>Fixed Ratio</strong> — when the trader opens a 10% position, you also open 10% of your available copy amount.</div></div></div><div class="step"><div class="step-n">2</div><div class="step-b"><div class="step-t">Select Source Account</div><div class="step-d">Choose where the copy funds come from: Fund Account, Spot Account, or Perpetual Futures Account. Recommended: dedicated copy trading sub-account.</div></div></div><div class="step"><div class="step-n">3</div><div class="step-b"><div class="step-t">Set Copy Amount + TP/SL</div><div class="step-d"><strong>Start small</strong> — try with ${f.minamount} for the first month. Set TP/SL as a safety net even when the trader has their own strategy.</div></div></div><div class="step"><div class="step-n">4</div><div class="step-b"><div class="step-t">Tap "Copy Now" → Done</div><div class="step-d">From this point on, it's automatic. Monitor your performance in the <strong>"My Data"</strong> tab.</div></div></div></div><div class="num-row"><div class="num-card"><span class="num">$20</span><span class="lbl">Suggested Start</span></div><div class="num-card"><span class="num">30d</span><span class="lbl">Min Test Period</span></div><div class="num-card"><span class="num">&lt;30%</span><span class="lbl">Max Drawdown OK</span></div></div><div class="co tip"><div class="co-icon">✓</div><div class="co-body"><div class="co-title">Diversify Across Traders</div><div class="co-text">Don't copy just one trader. <strong>Spread across 2-3 traders</strong> with different strategies (conservative + balanced) so you don't lose everything if one trader fails. Allocate equal amounts.</div></div></div></div>${ftr(f,10)}</div>`;
+}
+
+function pg11(f) {
+  return `<div class="page">${hdr(f,'Final',11)}<div class="cnt"><div class="sec-label">Step 7 — Safety</div><h2 class="ttl">Safety <span class="hl">Checklist</span></h2><p class="sub">Bookmark this page. Know all the scams targeting crypto users.</p><div class="chk-list"><div class="chk"><div class="chk-mark ok">✓</div><div class="chk-body"><div class="chk-title">Bookmark bingx.com in your browser</div><div class="chk-desc">Don't search "BingX login" on Google — fake sites appear in top ads.</div></div></div><div class="chk"><div class="chk-mark ok">✓</div><div class="chk-body"><div class="chk-title">Enable 2FA (Google Authenticator) — required</div><div class="chk-desc">Settings → Security Center → 2FA. Don't rely on SMS only — SIM swap attacks exist.</div></div></div><div class="chk"><div class="chk-mark ok">✓</div><div class="chk-body"><div class="chk-title">Withdraw to your own wallet for large amounts</div><div class="chk-desc">Trust Wallet, Ledger, or Trezor. Don't leave everything on an exchange. Not your keys, not your coins.</div></div></div><div class="chk"><div class="chk-mark no">✗</div><div class="chk-body"><div class="chk-title">BingX support will NEVER DM you first</div><div class="chk-desc">Anyone messaging via ${f.channels} claiming to be BingX support is 100% a scam.</div></div></div><div class="chk"><div class="chk-mark no">✗</div><div class="chk-body"><div class="chk-title">There are no "guaranteed returns" in crypto</div><div class="chk-desc">Anyone promising fixed monthly returns — scam. No matter what platform they claim.</div></div></div><div class="chk"><div class="chk-mark no">✗</div><div class="chk-body"><div class="chk-title">Never share seed phrase, password, or KYC photos</div><div class="chk-desc">No legitimate entity will ever ask. Not BingX, not any regulator.</div></div></div></div><div class="co info"><div class="co-icon">i</div><div class="co-body"><div class="co-title">Need Help? Official Support Only</div><div class="co-text">Tap <strong>Settings → Customer Service</strong> in the BingX app for 24/7 live chat. Or visit <span class="cd">bingx.com/support</span>. No other channel is official.</div></div></div><div class="closing"><div class="closing-line"></div><div class="closing-center"><div class="closing-title">Trade Smart</div><div class="closing-sub">Welcome to the BingX community.</div></div><div class="closing-line"></div></div></div>${ftr(f,11)}</div>`;
+}
+
+const pages = [pg01,pg02,pg03,pg04,pg05,pg06,pg07,pg08,pg09,pg10,pg11];
+let currentPage = 0;
+let showAll = false;
+
+function render() {
+  const f = F();
+  const container = document.getElementById('pages-container');
+  if(showAll) {
+    container.innerHTML = pages.map((fn,i)=>`<div class="page-frame" style="margin-bottom:24px">${fn(f)}</div>`).join('');
+  } else {
+    container.innerHTML = `<div class="page-frame">${pages[currentPage](f)}</div>`;
+  }
+}
+
+function goPage(i) {
+  currentPage = i;
+  showAll = false;
+  document.querySelectorAll('.page-btn').forEach((b,idx)=>{
+    b.classList.toggle('active', idx===i);
+  });
+  render();
+}
+
+function showAllPages() {
+  showAll = true;
+  render();
+}
+
+function exportPDF() {
+  showAll = true;
+  render();
+  setTimeout(()=>window.print(), 300);
+}
+
+// Initial render
+render();
+</script>
+</body>
+</html>
