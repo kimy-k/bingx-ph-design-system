@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bingo Card · 01 HODL · 1080×1080</title>
+<link rel="stylesheet" href="../../../colors_and_type.css">
+<link rel="stylesheet" href="../_framework/styles.css">
+<style>
+  :root { --canvas-w: 1080px; --canvas-h: 1080px; --preview-scale: 0.6; }
+  .card-export { width: 1080px; height: 1080px; padding: 80px 72px; }
+
+  /* Layout: Bingo center-left, copy right */
+  .bingo-glow { top: 50%; left: 28%; transform: translate(-50%, -50%); width: 700px; height: 700px; }
+  .bingo { top: 50%; left: 6%; transform: translateY(-50%); width: 520px; height: 520px; }
+
+  .copy {
+    position: absolute;
+    top: 50%; right: 72px;
+    transform: translateY(-50%);
+    width: 460px;
+  }
+  .category-badge { font-size: 22px; padding: 12px 22px; margin-bottom: 28px; }
+  .term { font-size: 136px; margin-bottom: 24px; }
+  .definition { font-size: 28px; max-width: 100%; }
+
+  .risk {
+    position: absolute;
+    bottom: 28px; left: 72px; right: 320px;
+    font-size: 18px;
+  }
+</style>
+</head>
+<body class="preview-mode">
+  <div class="card-export bullish">
+    <div class="top-strip"></div>
+    <div class="bingo-glow"></div>
+
+    <img class="bingo" src="../../../assets/bingo/23_green_candle.png" alt="Bingo Green Candle">
+
+    <div class="copy">
+      <div class="category-badge">📈 Bullish</div>
+      <h1 class="term" style="font-size: 112px;">Green Candle</h1>
+      <p class="definition">Green candle = profit! <span class="accent">Umakyat ang presyo</span> sa time period na yan.</p>
+    </div>
+
+    <div class="risk">Crypto trading is risky. Use money you can afford to lose.</div>
+    <img class="watermark" src="../../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

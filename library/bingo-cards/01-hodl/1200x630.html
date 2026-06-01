@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bingo Card · 01 HODL · 1200×630</title>
+<link rel="stylesheet" href="../../../colors_and_type.css">
+<link rel="stylesheet" href="../_framework/styles.css">
+<style>
+  :root { --canvas-w: 1200px; --canvas-h: 630px; --preview-scale: 0.6; }
+  .card-export { width: 1200px; height: 630px; padding: 56px 64px; }
+
+  /* Layout: Bingo left ~40%, copy right ~60% */
+  .bingo-glow { top: 50%; left: 22%; transform: translate(-50%, -50%); width: 480px; height: 480px; }
+  .bingo {
+    top: 50%; left: 36px;
+    transform: translateY(-50%);
+    width: 420px; height: 420px;
+  }
+
+  .copy {
+    position: absolute;
+    top: 50%; right: 64px;
+    transform: translateY(-50%);
+    width: 580px;
+  }
+  .category-badge { font-size: 18px; padding: 8px 16px; margin-bottom: 18px; }
+  .term { font-size: 96px; margin-bottom: 18px; }
+  .definition { font-size: 24px; max-width: 100%; }
+
+  .risk {
+    position: absolute;
+    bottom: 24px; left: 64px; right: 280px;
+    font-size: 14px;
+  }
+  .watermark { bottom: 20px; right: 22px; height: 22px; }
+</style>
+</head>
+<body class="preview-mode">
+  <div class="card-export bullish">
+    <div class="top-strip"></div>
+    <div class="bingo-glow"></div>
+
+    <img class="bingo" src="../../../assets/bingo/01_hodl.png" alt="Bingo holding coin">
+
+    <div class="copy">
+      <div class="category-badge">📈 Bullish</div>
+      <h1 class="term">HODL</h1>
+      <p class="definition">Hawak lang, wag i-benta. <span class="accent">Hold On for Dear Life</span> — tiwala sa long-term.</p>
+    </div>
+
+    <div class="risk">Crypto trading is risky. Use money you can afford to lose.</div>
+    <img class="watermark" src="../../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

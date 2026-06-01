@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bingo Card · 01 HODL · 1080×1350</title>
+<link rel="stylesheet" href="../../../colors_and_type.css">
+<link rel="stylesheet" href="../_framework/styles.css">
+<style>
+  :root { --canvas-w: 1080px; --canvas-h: 1350px; --preview-scale: 0.5; }
+  .card-export { width: 1080px; height: 1350px; padding: 96px 80px 100px; display: flex; flex-direction: column; }
+
+  /* Layout: badge top, large Bingo center, term + definition bottom */
+  .top { text-align: center; }
+  .category-badge { font-size: 26px; padding: 14px 28px; margin: 0 auto; }
+
+  .bingo-zone {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+  }
+  .bingo-glow { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 800px; height: 800px; }
+  .bingo {
+    position: relative;
+    width: 680px; height: 680px;
+    top: auto; left: auto; transform: none;
+  }
+
+  .bottom { text-align: center; }
+  .term { font-size: 160px; margin: 24px 0; }
+  .definition { font-size: 34px; max-width: 90%; margin: 0 auto; }
+
+  .risk {
+    position: absolute;
+    bottom: 36px; left: 80px; right: 360px;
+    font-size: 19px;
+    text-align: left;
+  }
+</style>
+</head>
+<body class="preview-mode">
+  <div class="card-export bullish">
+    <div class="top-strip"></div>
+
+    <div class="top">
+      <div class="category-badge">📈 Bullish</div>
+    </div>
+
+    <div class="bingo-zone">
+      <div class="bingo-glow"></div>
+      <img class="bingo" src="../../../assets/bingo/15_ath.png" alt="Bingo ATH">
+    </div>
+
+    <div class="bottom">
+      <h1 class="term" style="font-size: 160px;">ATH</h1>
+      <p class="definition"><span class="accent">All-Time High</span>. Pinakamataas na presyo ever. New record!</p>
+    </div>
+
+    <div class="risk">Crypto trading is risky. Use money you can afford to lose.</div>
+    <img class="watermark" src="../../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

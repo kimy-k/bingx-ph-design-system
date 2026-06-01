@@ -1,0 +1,108 @@
+/* ============================================================
+   BingX PH · Bingo Crypto Term Cards · shared template styles
+   Used across 4 formats: 1080² / 1080×1350 / 1080×1920 / 1200×630
+   Variables: --accent (category color), --accent-15 (15% tint)
+   ============================================================ */
+
+html, body { margin: 0; padding: 0; }
+body { background: #050811; font-family: 'Inter', sans-serif; color: #FFFFFF; }
+
+body.preview-mode {
+  width: calc(var(--canvas-w, 1080px) * var(--preview-scale, 0.6));
+  height: calc(var(--canvas-h, 1080px) * var(--preview-scale, 0.6));
+  overflow: hidden;
+}
+body.preview-mode .card-export {
+  transform: scale(var(--preview-scale, 0.6));
+  transform-origin: top left;
+}
+
+/* Master export canvas */
+.card-export {
+  background: #0B0E17;
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Category accent system — set --accent per card */
+.card-export {
+  --accent: #0058FB;
+  --accent-15: rgba(0,88,251,0.15);
+}
+.card-export.bullish  { --accent: #059669; --accent-15: rgba(5,150,105,0.15); }
+.card-export.bearish  { --accent: #DC2626; --accent-15: rgba(220,38,38,0.15); }
+.card-export.trading  { --accent: #0058FB; --accent-15: rgba(0,88,251,0.15); }
+.card-export.defi     { --accent: #0058FB; --accent-15: rgba(0,88,251,0.15); }
+.card-export.meme     { --accent: #D97706; --accent-15: rgba(217,119,6,0.15); }
+
+/* Top gradient accent strip */
+.top-strip {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 10px;
+  background: linear-gradient(90deg, var(--accent), #3A7BFC);
+  z-index: 5;
+}
+
+/* Accent radial glow behind sticker */
+.bingo-glow {
+  position: absolute;
+  pointer-events: none;
+  background: radial-gradient(circle, var(--accent-15) 0%, transparent 65%);
+  filter: blur(60px);
+}
+
+/* Category badge */
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  background: var(--accent-15);
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 8px;
+}
+
+/* Term title (large) */
+.term {
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  color: #FFFFFF;
+}
+
+/* Definition body */
+.definition {
+  font-weight: 500;
+  line-height: 1.5;
+  color: #FFFFFF;
+}
+.definition .accent { color: var(--accent); font-weight: 700; }
+
+/* Risk disclaimer */
+.risk {
+  font-weight: 500;
+  color: #9CA3AF;
+  line-height: 1.4;
+}
+
+/* Bingo sticker */
+.bingo {
+  position: absolute;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 36px rgba(0,0,0,0.55));
+}
+
+/* Bottom watermark */
+.watermark {
+  position: absolute;
+  bottom: 24px;
+  right: 28px;
+  height: 28px;
+  opacity: 0.55;
+  z-index: 6;
+}
