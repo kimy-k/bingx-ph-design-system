@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Market Mood · 01 Bullish Day · 1080×1080</title>
+<link rel="stylesheet" href="../../../colors_and_type.css">
+<link rel="stylesheet" href="../_framework/styles.css">
+<style>
+  :root { --canvas-w: 1080px; --canvas-h: 1080px; --preview-scale: 0.6; }
+  .card-export { width: 1080px; height: 1080px; padding: 80px 72px 84px; }
+  .date-pill { font-size: 22px; padding: 12px 24px; }
+  .bingo-glow { top: 52%; left: 26%; transform: translate(-50%, -50%); width: 620px; height: 620px; }
+  .bingo { top: 130px; left: 0; width: 480px; height: 480px; }
+  .copy { position: absolute; top: 150px; right: 72px; width: 440px; }
+  .mood { font-size: 60px; margin-top: 12px; }
+  .mood .small { font-size: 30px; font-weight: 700; color: #9CA3AF; letter-spacing: 0.06em; display: block; margin-bottom: 10px; }
+  .fields { position: absolute; bottom: 130px; left: 72px; right: 72px; }
+  .field { padding: 24px 16px; }
+  .field .f-label { font-size: 18px; margin-bottom: 8px; }
+  .field .f-value { font-size: 40px; }
+  .risk { position: absolute; bottom: 30px; left: 72px; right: 300px; font-size: 17px; }
+  .watermark { bottom: 28px; right: 32px; height: 30px; }
+</style>
+</head>
+<body class="preview-mode">
+  <div class="card-export bullish">
+    <div class="top-strip"></div>
+
+    <div class="date-pill">📅 [DATE]</div>
+
+    <div class="bingo-glow"></div>
+    <img class="bingo" src="../../../assets/bingo/02_to_the_moon.png" alt="Bingo pump">
+
+    <div class="copy">
+      <h1 class="mood"><span class="small">🚀 PUMP</span><span class="accent">ALERT</span></h1>
+    </div>
+
+    <div class="callout" style="position: absolute; bottom: 230px; left: 72px; right: 72px; padding: 30px 36px;">
+      <div class="c-label" style="font-size: 18px;">COIN · 24H CHANGE</div>
+      <div class="c-value" style="font-size: 46px; margin-top: 8px;"><span class="edit">[COIN]</span> &nbsp;<span class="accent edit">+[XX]%</span></div>
+    </div>
+
+    <div class="risk">Not financial advice. DYOR. Crypto is risky.</div>
+    <img class="watermark" src="../../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

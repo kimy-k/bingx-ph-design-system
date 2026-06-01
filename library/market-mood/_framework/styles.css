@@ -1,0 +1,122 @@
+/* ============================================================
+   BingX PH · Bingo Market Mood Templates · Batch 8
+   Daily-use sentiment templates with editable fields.
+   3 formats: 1080² / 1080×1350 / 1080×1920
+   Bingo sticker + mood label + editable date/price fields.
+   ============================================================ */
+
+html, body { margin: 0; padding: 0; }
+body { background: #050811; font-family: 'Inter', sans-serif; color: #FFFFFF; }
+
+body.preview-mode {
+  width: calc(var(--canvas-w, 1080px) * var(--preview-scale, 0.6));
+  height: calc(var(--canvas-h, 1080px) * var(--preview-scale, 0.6));
+  overflow: hidden;
+}
+body.preview-mode .card-export {
+  transform: scale(var(--preview-scale, 0.6));
+  transform-origin: top left;
+}
+
+.card-export {
+  background: #0B0E17;
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  --accent: #059669;
+  --accent-15: rgba(5,150,105,0.15);
+}
+.card-export.bullish { --accent: #059669; --accent-15: rgba(5,150,105,0.15); }
+.card-export.bearish { --accent: #DC2626; --accent-15: rgba(220,38,38,0.15); }
+.card-export.neutral { --accent: #0058FB; --accent-15: rgba(0,88,251,0.15); }
+
+/* Top gradient strip */
+.top-strip {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 12px;
+  background: linear-gradient(90deg, var(--accent), #3A7BFC);
+  z-index: 5;
+}
+
+/* Accent radial glow behind Bingo */
+.bingo-glow {
+  position: absolute;
+  pointer-events: none;
+  background: radial-gradient(circle, var(--accent-15) 0%, transparent 65%);
+  filter: blur(60px);
+}
+
+/* Editable date pill (top) */
+.date-pill {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  background: var(--accent-15);
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  border-radius: 999px;
+}
+
+/* Mood label (the hero) */
+.mood {
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  color: #FFFFFF;
+}
+.mood .accent { color: var(--accent); display: block; }
+
+/* Bingo sticker */
+.bingo {
+  position: absolute;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 36px rgba(0,0,0,0.55));
+}
+
+/* Editable price / data fields row */
+.fields { display: flex; gap: 16px; }
+.field {
+  flex: 1;
+  background: #111827;
+  border: 1px solid #1F2937;
+  border-radius: 12px;
+  text-align: center;
+}
+.field .f-label {
+  color: #9CA3AF;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.field .f-value {
+  color: #FFFFFF;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+.field .f-value.accent { color: var(--accent); }
+/* dashed edit affordance — shows these are fillable slots */
+.field.editable .f-value {
+  border-bottom: 2px dashed var(--accent);
+  display: inline-block;
+  padding-bottom: 2px;
+}
+
+/* Single editable callout (templates 04/05/06 — coin/% or milestone) */
+.callout {
+  background: #111827;
+  border: 1px solid #1F2937;
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+}
+.callout .c-label { color: #9CA3AF; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.callout .c-value { color: #FFFFFF; font-weight: 900; letter-spacing: -0.02em; }
+.callout .c-value .accent { color: var(--accent); }
+.callout .c-value .edit { border-bottom: 2px dashed var(--accent); padding-bottom: 2px; }
+
+/* Risk / watermark */
+.risk { font-weight: 500; color: #9CA3AF; line-height: 1.4; }
+.watermark { position: absolute; opacity: 0.55; z-index: 6; }

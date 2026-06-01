@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Market Mood · 01 Bullish Day · 1080×1350</title>
+<link rel="stylesheet" href="../../../colors_and_type.css">
+<link rel="stylesheet" href="../_framework/styles.css">
+<style>
+  :root { --canvas-w: 1080px; --canvas-h: 1350px; --preview-scale: 0.5; }
+  .card-export { width: 1080px; height: 1350px; padding: 100px 88px 96px; display: flex; flex-direction: column; align-items: center; }
+  .date-pill { font-size: 26px; padding: 14px 28px; }
+  .mood { font-size: 96px; text-align: center; margin-top: 36px; }
+  .mood .small { font-size: 38px; font-weight: 700; color: #9CA3AF; letter-spacing: 0.06em; display: block; margin-bottom: 14px; }
+  .bingo-zone { position: relative; width: 100%; flex: 1; display: flex; align-items: center; justify-content: center; }
+  .bingo-glow { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 760px; height: 760px; }
+  .bingo { position: relative; top: auto; left: auto; width: 600px; height: 600px; }
+  .fields { width: 100%; }
+  .field { padding: 30px 18px; }
+  .field .f-label { font-size: 22px; margin-bottom: 10px; }
+  .field .f-value { font-size: 50px; }
+  .risk { position: absolute; bottom: 38px; left: 88px; right: 88px; text-align: center; font-size: 19px; }
+  .watermark { bottom: 76px; right: 50%; transform: translateX(50%); height: 32px; }
+</style>
+</head>
+<body class="preview-mode">
+  <div class="card-export bearish">
+    <div class="top-strip"></div>
+
+    <div class="date-pill">📅 [DATE]</div>
+    <h1 class="mood"><span class="small">🔴 MARKET TODAY</span><span class="accent">BEARISH</span></h1>
+
+    <div class="bingo-zone">
+      <div class="bingo-glow"></div>
+      <img class="bingo" src="../../../assets/bingo/24_red_candle.png" alt="Bingo bearish">
+    </div>
+
+    <div class="fields">
+      <div class="field editable"><div class="f-label">BTC</div><div class="f-value accent">[price]</div></div>
+      <div class="field editable"><div class="f-label">ETH</div><div class="f-value accent">[price]</div></div>
+    </div>
+
+    <div class="risk">Not financial advice. DYOR. Crypto is risky.</div>
+    <img class="watermark" src="../../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

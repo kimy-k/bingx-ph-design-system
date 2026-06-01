@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Market Mood · 01 Bullish Day · 1080×1920</title>
+<link rel="stylesheet" href="../../../colors_and_type.css">
+<link rel="stylesheet" href="../_framework/styles.css">
+<style>
+  :root { --canvas-w: 1080px; --canvas-h: 1920px; --preview-scale: 0.32; }
+  .card-export { width: 1080px; height: 1920px; padding: 200px 96px 160px; display: flex; flex-direction: column; align-items: center; }
+  .date-pill { font-size: 32px; padding: 16px 34px; }
+  .mood { font-size: 132px; text-align: center; margin-top: 48px; }
+  .mood .small { font-size: 48px; font-weight: 700; color: #9CA3AF; letter-spacing: 0.06em; display: block; margin-bottom: 20px; }
+  .bingo-zone { position: relative; width: 100%; flex: 1; display: flex; align-items: center; justify-content: center; }
+  .bingo-glow { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 880px; height: 880px; }
+  .bingo { position: relative; top: auto; left: auto; width: 700px; height: 700px; }
+  .fields { width: 100%; margin-bottom: 8px; }
+  .field { padding: 40px 20px; }
+  .field .f-label { font-size: 30px; margin-bottom: 14px; }
+  .field .f-value { font-size: 66px; }
+  .risk { position: absolute; bottom: 92px; left: 0; right: 0; text-align: center; font-size: 24px; padding: 0 96px; }
+  .watermark { bottom: 36px; right: 50%; transform: translateX(50%); height: 38px; opacity: 0.6; }
+</style>
+</head>
+<body class="preview-mode">
+  <div class="card-export neutral">
+    <div class="top-strip"></div>
+
+    <div class="date-pill">📅 [DATE]</div>
+    <h1 class="mood"><span class="small">💎 WAGMI</span><span class="accent">DAY</span></h1>
+
+    <div class="bingo-zone">
+      <div class="bingo-glow"></div>
+      <img class="bingo" src="../../../assets/bingo/09_wagmi.png" alt="Bingo WAGMI">
+    </div>
+
+    <div class="callout" style="width: 100%; margin-bottom: 8px; padding: 44px 48px;">
+      <div class="c-label" style="font-size: 30px;">GOOD NEWS · MILESTONE</div>
+      <div class="c-value" style="font-size: 66px; margin-top: 8px;"><span class="accent edit">[YOUR MILESTONE OR GOOD NEWS]</span></div>
+    </div>
+
+    <div class="risk">Not financial advice. DYOR. Crypto is risky.</div>
+    <img class="watermark" src="../../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>
