@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Edu Card · 01 Funding Rate · 1080×1080</title>
+<link rel="stylesheet" href="../../../colors_and_type.css">
+<link rel="stylesheet" href="../_framework/styles.css">
+<style>
+  :root { --canvas-w: 1080px; --canvas-h: 1080px; --preview-scale: 0.6; }
+  .card-export { width: 1080px; height: 1080px; padding: 88px 80px 84px; display: flex; flex-direction: column; }
+  .category-tag { font-size: 22px; padding: 12px 22px; margin-bottom: 36px; }
+  .headline { font-size: 88px; margin-bottom: 36px; }
+  .body-text { font-size: 31px; margin-bottom: 32px; max-width: 98%; }
+  .bullets { display: flex; flex-direction: column; gap: 16px; }
+  .bullets li { font-size: 30px; padding-left: 40px; line-height: 1.35; }
+  .risk { position: absolute; bottom: 30px; left: 80px; right: 320px; font-size: 18px; }
+  .watermark { bottom: 28px; right: 32px; height: 32px; }
+</style>
+</head>
+<body class="preview-mode">
+  <div class="card-export technical">
+    <div class="top-strip"></div>
+
+    <div class="category-tag">📊 TECHNICAL</div>
+    <h1 class="headline" style="font-size: 88px;">Paano Mag-Read ng <span class="accent">Candle Chart</span></h1>
+
+    <p class="body-text">Ito ang foundation ng technical analysis. Bawat candle = price movement sa isang time period.</p>
+
+    <ul class="bullets">
+      <li><span class="accent">Green candle</span> = presyo umakyat</li>
+      <li><span class="accent">Red candle</span> = presyo bumaba</li>
+      <li>Body = open to close range</li>
+      <li>Wick/shadow = high and low ng period</li>
+      <li>Long wick sa baba = buying pressure</li>
+      <li>Long wick sa taas = selling pressure</li>
+    </ul>
+    <div style="margin-top: 24px; display: flex; gap: 56px; align-items: center; justify-content: center;">
+      <svg height="170" viewBox="0 0 120 220" fill="none">
+        <line x1="60" y1="10" x2="60" y2="60" stroke="#059669" stroke-width="3"/>
+        <rect x="38" y="60" width="44" height="90" rx="3" fill="#059669"/>
+        <line x1="60" y1="150" x2="60" y2="200" stroke="#059669" stroke-width="3"/>
+        <text x="60" y="218" text-anchor="middle" font-family="Inter" font-weight="700" font-size="15" fill="#059669">GREEN ↑</text>
+      </svg>
+      <svg height="170" viewBox="0 0 120 220" fill="none">
+        <line x1="60" y1="10" x2="60" y2="55" stroke="#DC2626" stroke-width="3"/>
+        <rect x="38" y="55" width="44" height="95" rx="3" fill="#DC2626"/>
+        <line x1="60" y1="150" x2="60" y2="205" stroke="#DC2626" stroke-width="3"/>
+        <text x="60" y="218" text-anchor="middle" font-family="Inter" font-weight="700" font-size="15" fill="#DC2626">RED ↓</text>
+      </svg>
+      <div style="font-size: 22px; color: #9CA3AF; font-weight: 500; line-height: 1.4; max-width: 280px;">
+        <span style="color:#FFFFFF;font-weight:700;">Wick</span> = high/low<br>
+        <span style="color:#FFFFFF;font-weight:700;">Body</span> = open→close
+      </div>
+    </div>
+
+    <div class="risk">Crypto trading is risky. Use money you can afford to lose.</div>
+    <img class="watermark" src="../../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Edu Card · 01 Funding Rate · 1080×1080</title>
+<link rel="stylesheet" href="../../../colors_and_type.css">
+<link rel="stylesheet" href="../_framework/styles.css">
+<style>
+  :root { --canvas-w: 1080px; --canvas-h: 1080px; --preview-scale: 0.6; }
+  .card-export { width: 1080px; height: 1080px; padding: 88px 80px 84px; display: flex; flex-direction: column; }
+  .category-tag { font-size: 22px; padding: 12px 22px; margin-bottom: 36px; }
+  .headline { font-size: 88px; margin-bottom: 36px; }
+  .body-text { font-size: 31px; margin-bottom: 32px; max-width: 98%; }
+  .bullets { display: flex; flex-direction: column; gap: 16px; }
+  .bullets li { font-size: 30px; padding-left: 40px; line-height: 1.35; }
+  .risk { position: absolute; bottom: 30px; left: 80px; right: 320px; font-size: 18px; }
+  .watermark { bottom: 28px; right: 32px; height: 32px; }
+</style>
+</head>
+<body class="preview-mode">
+  <div class="card-export futures">
+    <div class="top-strip"></div>
+
+    <div class="category-tag">⚡ FUTURES</div>
+    <h1 class="headline">Ano ang <span class="accent">Funding Rate?</span></h1>
+
+    <p class="body-text">Funding rate = bayad ng longs sa shorts (o vice versa) <span class="accent">every 8 hours</span>. Para ma-keep ang perp price malapit sa spot.</p>
+
+    <ul class="bullets">
+      <li><span class="accent">Positive rate</span> = longs pay shorts</li>
+      <li><span class="accent">Negative rate</span> = shorts pay longs</li>
+      <li>Sobrang taas na funding = maraming naka-long — risky</li>
+      <li>Check mo funding bago mag-hold overnight</li>
+    </ul>
+
+    <div class="risk">Crypto trading is risky. Use money you can afford to lose.</div>
+    <img class="watermark" src="../../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Edu Card · 01 Funding Rate · 1080×1920</title>
+<link rel="stylesheet" href="../../../colors_and_type.css">
+<link rel="stylesheet" href="../_framework/styles.css">
+<style>
+  :root { --canvas-w: 1080px; --canvas-h: 1920px; --preview-scale: 0.32; }
+  .card-export { width: 1080px; height: 1920px; padding: 180px 96px 160px; display: flex; flex-direction: column; }
+  .category-tag { font-size: 32px; padding: 16px 32px; margin-bottom: 64px; }
+  .headline { font-size: 128px; margin-bottom: 64px; }
+  .body-text { font-size: 46px; margin-bottom: 64px; max-width: 98%; }
+  .bullets { display: flex; flex-direction: column; gap: 36px; }
+  .bullets li { font-size: 46px; padding-left: 58px; line-height: 1.35; }
+  .cta-cue { position: absolute; bottom: 196px; left: 0; right: 0; text-align: center; font-size: 30px; font-weight: 600; color: #9CA3AF; padding: 0 96px; }
+  .cta-cue .accent { color: var(--accent); font-weight: 700; }
+  .risk { position: absolute; bottom: 92px; left: 0; right: 0; text-align: center; font-size: 22px; padding: 0 96px; }
+  .watermark { bottom: 36px; right: 50%; transform: translateX(50%); height: 38px; opacity: 0.6; }
+</style>
+</head>
+<body class="preview-mode">
+  <div class="card-export futures">
+    <div class="top-strip"></div>
+
+    <div class="category-tag">⚡ FUTURES</div>
+    <h1 class="headline" style="font-size: 128px;"><span class="accent">Perpetual</span> Contracts</h1>
+
+    <p class="body-text">Perps = futures na <span class="accent">walang expiry date</span>. Hindi mo kailangang i-roll over.</p>
+
+    <ul class="bullets">
+      <li>Naka-peg sa spot price via <span class="accent">funding rate</span></li>
+      <li><span class="accent">Long</span> = bet na aakyat</li>
+      <li><span class="accent">Short</span> = bet na bababa</li>
+      <li>Most popular instrument sa crypto trading</li>
+    </ul>
+    <div class="example" style="margin-top: 40px; padding: 28px 32px;">
+      <div class="tag" style="font-size: 24px;">📌 Example</div>
+      <div style="font-size: 38px; margin-top: 8px;">Hindi tulad ng traditional futures, walang expiry ang perps — pwede mong hawakan basta may margin ka.</div>
+    </div>
+
+    <div class="cta-cue">👆 <span class="accent">Tap link in bio</span> — more trading guides</div>
+    <div class="risk">Crypto trading is risky. Use money you can afford to lose.</div>
+    <img class="watermark" src="../../../assets/logos/bingx-wordmark-white.svg" alt="BingX">
+  </div>
+</body>
+</html>

@@ -1,0 +1,103 @@
+/* ============================================================
+   BingX PH · Advanced Education Cards (Level 2) · template styles
+   3 formats: 1080² / 1080×1350 / 1080×1920 · Taglish · no landscape
+   Category tag accent system. Blue ▸ bullets.
+   ============================================================ */
+
+html, body { margin: 0; padding: 0; }
+body { background: #050811; font-family: 'Inter', sans-serif; color: #FFFFFF; }
+
+body.preview-mode {
+  width: calc(var(--canvas-w, 1080px) * var(--preview-scale, 0.6));
+  height: calc(var(--canvas-h, 1080px) * var(--preview-scale, 0.6));
+  overflow: hidden;
+}
+body.preview-mode .card-export {
+  transform: scale(var(--preview-scale, 0.6));
+  transform-origin: top left;
+}
+
+.card-export {
+  background: #0B0E17;
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  --accent: #0058FB;
+  --accent-15: rgba(0,88,251,0.15);
+}
+/* Category tag → accent. FUTURES/RISK/etc all read as the same blue family
+   except RISK (warning orange) and DEFI (profit-tinted blue stays blue). */
+.card-export.futures   { --accent: #0058FB; --accent-15: rgba(0,88,251,0.15); }
+.card-export.risk      { --accent: #D97706; --accent-15: rgba(217,119,6,0.15); }
+.card-export.strategy  { --accent: #059669; --accent-15: rgba(5,150,105,0.15); }
+.card-export.technical { --accent: #0058FB; --accent-15: rgba(0,88,251,0.15); }
+.card-export.basics    { --accent: #0058FB; --accent-15: rgba(0,88,251,0.15); }
+.card-export.defi      { --accent: #0058FB; --accent-15: rgba(0,88,251,0.15); }
+
+/* Top brand strip — 12px brand-blue (education = on-brand, not warning) */
+.top-strip {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 12px;
+  background: var(--accent);
+  z-index: 5;
+}
+
+/* Category tag */
+.category-tag {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  background: var(--accent-15);
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: 8px;
+}
+
+/* Headline (the question) */
+.headline {
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+  color: #FFFFFF;
+}
+.headline .accent { color: var(--accent); }
+
+/* Body / explanation */
+.body-text {
+  font-weight: 500;
+  line-height: 1.5;
+  color: #FFFFFF;
+}
+.body-text .accent { color: var(--accent); font-weight: 700; }
+
+/* Bullet list — blue ▸ markers */
+.bullets { list-style: none; padding: 0; margin: 0; }
+.bullets li {
+  position: relative;
+  color: #E5E7EB;
+  font-weight: 500;
+}
+.bullets li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+.bullets li .accent { color: var(--accent); font-weight: 700; }
+
+/* Example callout box */
+.example {
+  background: var(--accent-15);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  color: #FFFFFF;
+  font-weight: 500;
+  line-height: 1.45;
+}
+.example .tag { color: var(--accent); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+.example .accent { color: var(--accent); font-weight: 700; }
+
+/* Risk disclaimer */
+.risk { font-weight: 500; color: #9CA3AF; line-height: 1.4; }
+
+/* Watermark */
+.watermark { position: absolute; opacity: 0.55; z-index: 6; }
