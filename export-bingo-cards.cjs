@@ -5,7 +5,6 @@ const fs = require('fs');
 const BASE = path.join(__dirname, 'library', 'bingo-cards');
 const OUT = path.join(__dirname, 'library', 'exports', 'bingo-cards');
 
-// Size map: filename → viewport dimensions
 const SIZES = {
   '1080x1080.html': { width: 1080, height: 1080 },
   '1080x1350.html': { width: 1080, height: 1350 },
@@ -14,12 +13,11 @@ const SIZES = {
 };
 
 async function main() {
-  // Collect all HTML files
   const cards = fs.readdirSync(BASE).filter(d => {
     return d !== '_framework' && fs.statSync(path.join(BASE, d)).isDirectory();
   }).sort();
 
-  console.log(`\n🐬 Bingo Card PNG Export`);
+  console.log('\n🐬 Bingo Card PNG Export v2 (full bleed, no preview scale)');
   console.log(`   ${cards.length} cards × ${Object.keys(SIZES).length} formats = ${cards.length * Object.keys(SIZES).length} PNGs\n`);
 
   const browser = await puppeteer.launch({
@@ -59,7 +57,22 @@ async function main() {
           timeout: 15000
         });
 
-        // Wait a bit for images to fully render
+        // Remove preview-mode scaling, force card to fill full viewport
+        await page.evaluate(() => {
+          document.body.classList.remove('preview-mode');
+          document.documentElement.style.cssText = 'margin:0;padding:0;width:100vw;height:100vh;overflow:hidden;';
+          document.body.style.cssText = 'margin:0;padding:0;width:100vw;height:100vh;overflow:hidden;background:#0B0E17;';
+          const card = document.querySelector('.card-export');
+          if (card) {
+            card.style.transform = 'none';
+            card.style.width = '100vw';
+            card.style.height = '100vh';
+            card.style.position = 'fixed';
+            card.style.top = '0';
+            card.style.left = '0';
+          }
+        });
+
         await new Promise(r => setTimeout(r, 500));
 
         await page.screenshot({
@@ -71,7 +84,6 @@ async function main() {
         await page.close();
         exported++;
 
-        // Progress indicator
         if (exported % 10 === 0) {
           console.log(`   ✅ ${exported} / ${cards.length * Object.keys(SIZES).length} exported...`);
         }
@@ -84,11 +96,11 @@ async function main() {
 
   await browser.close();
 
-  console.log(`\n===========================`);
+  console.log('\n===========================');
   console.log(`✅ Exported: ${exported} PNGs`);
   if (errors > 0) console.log(`⚠️  Errors: ${errors}`);
   console.log(`📁 Output: ${OUT}`);
-  console.log(`===========================\n`);
+  console.log('===========================\n');
 }
 
 main().catch(err => {
