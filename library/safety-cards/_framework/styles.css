@@ -1,0 +1,115 @@
+/* ============================================================
+   BingX PH · Safety & Warning Cards · shared template styles
+   "RED FLAG" series · 4 formats: 1080² / 1080×1350 / 1080×1920 / 1200×630
+   Text-focused, no mascot. Warning accents: red (danger) / orange (caution)
+   ============================================================ */
+
+html, body { margin: 0; padding: 0; }
+body { background: #050811; font-family: 'Inter', sans-serif; color: #FFFFFF; }
+
+body.preview-mode {
+  width: calc(var(--canvas-w, 1080px) * var(--preview-scale, 0.6));
+  height: calc(var(--canvas-h, 1080px) * var(--preview-scale, 0.6));
+  overflow: hidden;
+}
+body.preview-mode .card-export {
+  transform: scale(var(--preview-scale, 0.6));
+  transform-origin: top left;
+}
+
+.card-export {
+  background: #0B0E17;
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  --accent: #DC2626;
+  --accent-15: rgba(220,38,38,0.15);
+}
+.card-export.danger  { --accent: #DC2626; --accent-15: rgba(220,38,38,0.15); }
+.card-export.caution { --accent: #D97706; --accent-15: rgba(217,119,6,0.15); }
+
+/* Top accent strip — solid warning color (not gradient — danger reads flat) */
+.top-strip {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 14px;
+  background: var(--accent);
+  z-index: 5;
+}
+
+/* Diagonal hazard stripe accent (subtle, top-corner) */
+.hazard {
+  position: absolute;
+  top: 14px; left: 0; right: 0;
+  height: 12px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--accent) 0, var(--accent) 18px,
+    transparent 18px, transparent 36px
+  );
+  opacity: 0.30;
+  z-index: 4;
+}
+
+/* Series label — "RED FLAG" with warning icon */
+.series-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: max-content;
+  background: var(--accent-15);
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-radius: 8px;
+}
+
+/* Big warning icon */
+.warn-icon {
+  line-height: 1;
+  filter: drop-shadow(0 0 24px var(--accent-15));
+}
+
+/* Headline */
+.headline {
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  color: #FFFFFF;
+}
+.headline .accent { color: var(--accent); }
+
+/* Body / explanation */
+.body-text {
+  font-weight: 500;
+  line-height: 1.5;
+  color: #FFFFFF;
+}
+.body-text .accent { color: var(--accent); font-weight: 700; }
+
+/* Safe-rule callout box (the "do this instead" line) */
+.safe-rule {
+  background: rgba(5,150,105,0.12);
+  border-left: 4px solid #059669;
+  border-radius: 8px;
+  color: #FFFFFF;
+}
+.safe-rule .tag {
+  color: #059669;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Bullet list — blue ▸ markers */
+.bullets { list-style: none; padding: 0; margin: 0; }
+.bullets li { position: relative; color: #E5E7EB; }
+.bullets li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+
+/* Risk / secondary text */
+.risk { font-weight: 500; color: #9CA3AF; line-height: 1.4; }
+
+/* Watermark */
+.watermark { position: absolute; opacity: 0.55; z-index: 6; }
